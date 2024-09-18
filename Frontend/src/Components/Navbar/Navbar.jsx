@@ -113,7 +113,7 @@ const Navbar = () => {
           onMouseLeave={handleMouseLeave}
         >
           <span onClick={() => toggleDropdown("land")}>
-            Land
+            Home Loans
             <span
               className={`dropdown-arrow ${
                 activeDropdown === "land" ? "rotate" : ""
@@ -123,8 +123,28 @@ const Navbar = () => {
             </span>
           </span>
           <div className="dropdown-menu">
-            <a href="#">Land Option 1</a>
-            <a href="#">Land Option 2</a>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  <div style={{ flex: 1, padding: '8px', fontSize:'13px' }}>
+    <h1>Monthly EMI Calculator</h1>
+    <a href="/sbiemi">Sbi EMI Calculator </a><br />
+    <a href="/hdfcemi">Hdfc EMI Calculator</a><br />
+    <a href="kotakemi">Kotak EMI Calculator</a><br />
+    <a href="l&temi">L&T EMI Calculator</a><br />
+    <a href="axisemi">Axis EMI Calculator</a><br />
+    <a href="bajajemi">Bajaj EMI Calculator</a>
+  </div>
+
+  <div style={{ flex: 1, padding: '10px', fontSize:'13px'  }}>
+    <h1>Interest Calculator</h1>
+    <a href="/sbihomeloan">Sbi HomeLoan Interest Calculator </a><br />
+    <a href="hdfchomeloan">Hdfc HomeLoan Interest Calculator</a><br />
+    <a href="kotakhomeloan">Kotak HomeLoan Interest Calculator</a><br />
+    <a href="landthomeloan">L&T HomeLoan Interest Calculator</a><br />
+    <a href="axishomeloan">Axis HomeLoan Interest Calculator</a><br />
+    <a href="bajajhomeloan">Bajaj HomeLoan Interest Calculator</a>
+  </div>
+</div>
+
           </div>
         </div>
 
@@ -237,8 +257,8 @@ const Navbar = () => {
             </span>
           </span>
           <div className="dropdown-menu">
-            <a href="/2dView">2D-Design</a>
-            <a href="/house3d">3D-design</a>
+            <a href="/2dplan">2D-Design</a>
+            <a href="/3dplan">3D-design</a>
           </div>
         </div>
 

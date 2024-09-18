@@ -12,6 +12,7 @@ const CategoryHouse = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
   const navigate = useNavigate();
 
   const houseRoute = `${config.apiURL}/houseRoute/houses`;
@@ -22,6 +23,14 @@ const CategoryHouse = () => {
         setLoading(true);
         const response = await axios.get(houseRoute);
         setData(response.data);
+        const counts = await Promise.all(response.data.map(house =>
+          axios.get(`${config.apiURL}/favourites/count/${house._id}`)
+        ));
+        const likeCountMap = counts.reduce((acc, curr, index) => {
+          acc[response.data[index]._id] = curr.data.count;
+          return acc;
+        }, {});
+        setLikeCounts(likeCountMap);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -29,29 +38,60 @@ const CategoryHouse = () => {
       }
     };
 
+    const fetchFavourites = async () => {
+      const userId = getUserId();
+      try {
+        const response = await axios.get(`${config.apiURL}/favourites/all/${userId}`);
+        setFavourites(response.data);
+      } catch (err) {
+        console.error('Error fetching favourites:', err);
+      }
+    };
+
     fetchData();
+    fetchFavourites();
   }, []);
+
+  const getUserId = () => {
+    return localStorage.getItem('userId');
+  };
 
   const handleArrowClick = () => {
     navigate('/houseall');
   };
 
-  const handleCardClick = (houseId) => {
-    navigate(`/houseview/${houseId}`);
+  const handleCardClick = (productId) => {
+    navigate(`/houseview/${productId}`);
   };
 
-  const handleViewDetailsClick = (houseId) => {
-    navigate(`/houseview/${houseId}`);
+  const handleViewDetailsClick = (productId) => {
+    navigate(`/houseview/${productId}`);
   };
 
-  const handleAddToFavourites = (houseId) => {
-    setFavourites((prevFavourites) => {
-      if (prevFavourites.includes(houseId)) {
-        return prevFavourites.filter((id) => id !== houseId);
+  const handleAddToFavourites = async (houseId) => {
+    const userId = getUserId();
+    const productId = houseId;
+
+    console.log('UserId:', userId);
+    console.log('ProductId:', productId);
+
+    try {
+      if (favourites.includes(productId)) {
+        await axios.delete(`${config.apiURL}/favourites/remove`, { data: { userId, productId } });
+        setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
       } else {
-        return [...prevFavourites, houseId];
+        await axios.post(`${config.apiURL}/favourites/add`, { userId, productId });
+        setFavourites((prevFavourites) => [...prevFavourites, productId]);
       }
-    });
+      // Update like counts
+      const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${productId}`);
+      setLikeCounts((prevCounts) => ({
+        ...prevCounts,
+        [productId]: countData.count
+      }));
+    } catch (err) {
+      console.error('Error updating favourites:', err);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -67,50 +107,55 @@ const CategoryHouse = () => {
       </div>
       
       <div className="card-container">
-        {data.slice(0, 4).map((house, index) => (
-          <div key={index} className="card" onClick={() => handleCardClick(house._id)}>
-            <Carousel
-              showThumbs={false}
-              infiniteLoop
-              autoPlay
-              stopOnHover
-              dynamicHeight
-              className="carousel"
-            >
-              {house.photos.map((photo, idx) => (
-                <div key={idx}>
-                  <img src={`${config.apiURL}/${photo}`} alt={`House ${house.adTitle}`} />
+        {data.slice(0, 4).map((house) => {
+            const productId = house._id;
+
+            return (
+              <div key={productId} className={`card ${favourites.includes(productId) ? 'favourite' : ''}`} onClick={() => handleCardClick(productId)}>
+                <Carousel
+                  showThumbs={false}
+                  infiniteLoop
+                  autoPlay
+                  stopOnHover
+                  dynamicHeight
+                  className="carousel"
+                >
+                  {house.photos.map((photo, idx) => (
+                    <div key={idx}>
+                      <img src={`${config.apiURL}/${photo}`} alt={`House ${house.adTitle}`} />
+                    </div>
+                  ))}
+                </Carousel>
+                <div className="card-content">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToFavourites(productId);
+                    }}
+                    className="favourite-button"
+                  >
+                    {favourites.includes(productId) ? (
+                      <FaHeart className="favourite-icon filled" />
+                    ) : (
+                      <FaRegHeart className="favourite-icon" />
+                    )}
+                    <span className="like-count">{likeCounts[productId] || 0} Likes</span> {/* Display like count */}
+                  </button>
+                  <h3>{house.adTitle}</h3>
+                  <p>{house.projectName}</p>
+                  <p><strong>Location:</strong> {house.location}, {house.cityName}</p>
+                  <p><strong>House:</strong> {house.bedrooms} BHK</p>
+                  <p><strong>Bathrooms:</strong> {house.bathrooms}</p>
+                  <p><strong>Price:</strong> {house.price} RPS</p>
+                  <div className="card-buttons">
+                    <button onClick={() => handleViewDetailsClick(productId)} className="view-details-button">
+                      View Details
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </Carousel>
-            <div className="card-content">
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation(); 
-                  handleAddToFavourites(house._id);
-                }} 
-                className="favourite-button"
-              >
-                {favourites.includes(house._id) ? (
-                  <FaHeart className="favourite-icon filled" />
-                ) : (
-                  <FaRegHeart className="favourite-icon" />
-                )}
-              </button>
-              <h3>{house.adTitle}</h3>
-              <p>{house.projectName}</p>
-              <p><strong>Location:</strong> {house.location}, {house.cityName}</p>
-              <p><strong>House:</strong> {house.bedrooms} BHK</p>
-              <p><strong>Bathrooms:</strong> {house.bathrooms}</p>
-              <p><strong>Price:</strong> {house.price} RPS</p>
-              <div className="card-buttons">
-                <button onClick={() => handleViewDetailsClick(house._id)} className="view-details-button">
-                  View Details
-                </button>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
       </div>
     </div>
   );

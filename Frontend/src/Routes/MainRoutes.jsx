@@ -59,6 +59,7 @@ import CategoryCateringall from "../Components/Categoryitemall/cateringcategory"
 import CategoryCementall from "../Components/Categoryitemall/cementcategory";
 import CategoryHouseall from "../Components/Categoryitemall/housecategory";
 import CategoryInteriorall from "../Components/Categoryitemall/interiorcategory";
+import InteriorCategoryPage from "../Components/Categoryitemall/interiorcat";
 import CategoryPgHostelall from "../Components/Categoryitemall/pgcategory";
 import CategoryPipeWireall from "../Components/Categoryitemall/pipewirecategory";
 import CategorySandall from "../Components/Categoryitemall/sandcategory";
@@ -74,9 +75,21 @@ import LandTLoanCalculator from "../Components/LoanCals/landtcal";
 import AxisLoanCalculator from "../Components/LoanCals/axiscal";
 import BajajLoanCalculator from "../Components/LoanCals/bajajcal";
 
+// Emi calclulator
+import Assign from "../Components/New3DDesign/2D/RoomView";
+import Assigns from "../Components/New3DDesign/3D/RoomViewes";
+import SbiEmi from "../Components/EMICalc/SbiEmi";
+import HdfcEmi from "../Components/EMICalc/HdfcEmi";
+import KotakEmi from "../Components/EMICalc/KotakEmi";
+import LandTEmi from "../Components/EMICalc/L&Temi";
+import AxisEmi from "../Components/EMICalc/AxisEmi";
+import BajajEmi from "../Components/EMICalc/BajajEmi";
+
 // import Create2D from "../Components/HouseBuilding/2DCreate/2DCreate";
 import Loanpost from "../Components/SellingDetails/Loan/Loandealer";
 import LandForm from "../Components/SellingDetails/land/land";
+import MainApp from "../Components/New3DDesign/MainApp";
+
 // import Main3D from "../Components/New3DDesign/Main3Dand2d";
 
 function MainRoutes() {
@@ -138,6 +151,7 @@ function MainRoutes() {
       <Route path="/cementall" element={<CategoryCementall />} />
       <Route path="/houseall" element={<CategoryHouseall />} />
       <Route path="/interiorall" element={<CategoryInteriorall />} />
+      <Route path="/interior/:category" element={<InteriorCategoryPage />} />
       <Route path="/pgall" element={<CategoryPgHostelall />} />
       <Route path="/pipewireall" element={<CategoryPipeWireall />} />
       <Route path="/sandall" element={<CategorySandall />} />
@@ -164,8 +178,20 @@ function MainRoutes() {
       <Route path="/axishomeloan" element={<AxisLoanCalculator />} />
       <Route path="/bajajhomeloan" element={<BajajLoanCalculator />} />
 
+      {/* Design Route */}
+
+      <Route path="/2dplan" element={<Assign />} />
+      <Route path="/3dplan" element={<Assigns />} />
+
+      {/* Emi Route */}
+      <Route path="/sbiemi" element={<SbiEmi />} />
+      <Route path="/hdfcemi" element={<HdfcEmi />} />
+      <Route path="/kotakemi" element={<KotakEmi />} />
+      <Route path="/l&temi" element={<LandTEmi />} />
+      <Route path="/axisemi" element={<AxisEmi />} />
+      <Route path="/bajajemi" element={<BajajEmi />} />
       {/* ================================================ */}
-      {/* <Route path="/Main3D" element={<Main3D />} /> */}
+      <Route path="/Main3D" element={<MainApp />} />
     </Routes>
   );
 }

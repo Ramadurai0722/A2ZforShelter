@@ -14,6 +14,7 @@ const CategoryInteriorall = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
   const navigate = useNavigate();
 
   const interiorRoute = `${config.apiURL}/interiorRoute/interior`;
@@ -24,6 +25,15 @@ const CategoryInteriorall = () => {
         setLoading(true);
         const response = await axios.get(interiorRoute);
         setData(response.data);
+        // Fetch like counts for each item
+        const counts = await Promise.all(response.data.map(interior =>
+          axios.get(`${config.apiURL}/favourites/count/${interior._id}`)
+        ));
+        const likeCountMap = counts.reduce((acc, curr, index) => {
+          acc[response.data[index]._id] = curr.data.count;
+          return acc;
+        }, {});
+        setLikeCounts(likeCountMap);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -31,25 +41,52 @@ const CategoryInteriorall = () => {
       }
     };
 
+    const fetchFavourites = async () => {
+      const userId = getUserId();
+      try {
+        const response = await axios.get(`${config.apiURL}/favourites/all/${userId}`);
+        setFavourites(response.data);
+      } catch (err) {
+        console.error('Error fetching favourites:', err);
+      }
+    };
+
     fetchData();
+    fetchFavourites();
   }, []);
 
+  const getUserId = () => {
+    return localStorage.getItem('userId');
+  };
+
   const handleCardClick = (interiorId) => {
-    navigate(`/interior/${interiorId}`);
+    navigate(`/interiorview/${interiorId}`);
   };
 
   const handleViewDetailsClick = (interiorId) => {
-    navigate(`/interior/${interiorId}`);
+    navigate(`/interiorview/${interiorId}`);
   };
 
-  const handleAddToFavourites = (interiorId) => {
-    setFavourites((prevFavourites) => {
-      if (prevFavourites.includes(interiorId)) {
-        return prevFavourites.filter((id) => id !== interiorId);
+  const handleAddToFavourites = async (interiorId) => {
+    const userId = getUserId();
+
+    try {
+      if (favourites.includes(interiorId)) {
+        await axios.delete(`${config.apiURL}/favourites/remove`, { data: { userId, productId: interiorId } });
+        setFavourites(prevFavourites => prevFavourites.filter(id => id !== interiorId));
       } else {
-        return [...prevFavourites, interiorId];
+        await axios.post(`${config.apiURL}/favourites/add`, { userId, productId: interiorId });
+        setFavourites(prevFavourites => [...prevFavourites, interiorId]);
       }
-    });
+      // Update like counts
+      const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${interiorId}`);
+      setLikeCounts(prevCounts => ({
+        ...prevCounts,
+        [interiorId]: countData.count
+      }));
+    } catch (err) {
+      console.error('Error updating favourites:', err);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -57,56 +94,64 @@ const CategoryInteriorall = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="category-container">
-      <div className="header-container">
-        <h2>Interior Products</h2>
-      </div>
+      <Navbar />
+      <div className="category-container">
+        <div className="header-container">
+          <h2>Interior Products</h2>
+        </div>
 
-      <div className="card-container">
-        {data.map((interior, index) => (
-          <div key={index} className="card" onClick={() => handleCardClick(interior._id)}>
-            <Carousel
-              showThumbs={false}
-              infiniteLoop
-              autoPlay
-              stopOnHover
-              dynamicHeight
-              className="carousel"
-            >
-              {interior.images.map((photo, idx) => (
-                <div key={idx}>
-                  <img src={`${config.apiURL}/${photo}`} alt={`Interior ${interior.name}`} />
+        <div className="card-container">
+          {data.map((interior) => {
+            const interiorId = interior._id;
+
+            return (
+              <div key={interiorId} className={`card ${favourites.includes(interiorId) ? 'favourite' : ''}`} onClick={() => handleCardClick(interiorId)}>
+                <Carousel
+                  showThumbs={false}
+                  infiniteLoop
+                  autoPlay
+                  stopOnHover
+                  dynamicHeight
+                  className="carousel"
+                >
+                  {interior.images.map((photo, idx) => (
+                    <div key={idx}>
+                      <img src={`${config.apiURL}/${photo}`} alt={`Interior ${interior.products}`} />
+                    </div>
+                  ))}
+                </Carousel>
+                <div className="card-content">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToFavourites(interiorId);
+                    }}
+                    className="favourite-button"
+                  >
+                    {favourites.includes(interiorId) ? (
+                      <FaHeart className="favourite-icon filled" />
+                    ) : (
+                      <FaRegHeart className="favourite-icon" />
+                    )}
+                    <span className="like-count">{likeCounts[interiorId] || 0} Likes</span> {/* Display like count */}
+                  </button>
+                  <h3>{interior.products}</h3>
+                  <p><strong>Seller Name:</strong> {interior.name}</p>
+                  <p><strong>Category:</strong> {interior.category}</p>
+                  <p><strong>Description:</strong> {interior.description}</p>
+                  <p><strong>Price:</strong> {interior.price} RPS</p>
+                  <div className="card-buttons">
+                    <button onClick={() => handleViewDetailsClick(interiorId)} className="view-details-button">
+                      View Details
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </Carousel>
-            <div className="card-content">
-              <button 
-                onClick={() => handleAddToFavourites(interior._id)} 
-                className="favourite-button"
-              >
-                {favourites.includes(interior._id) ? (
-                  <FaHeart className="favourite-icon filled" />
-                ) : (
-                  <FaRegHeart className="favourite-icon" />
-                )}
-              </button>
-              <h3>{interior.products}</h3>
-              <p><strong>Seller Name:</strong> {interior.name}</p>
-              <p><strong>Category:</strong> {interior.category}</p>
-              <p><strong>Description:</strong> {interior.description}</p>
-              <p><strong>Price:</strong> {interior.price} RPS</p>
-              <div className="card-buttons">
-                <button onClick={() => handleViewDetailsClick(interior._id)} className="view-details-button">
-                  View Details
-                </button>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 };

@@ -5,6 +5,8 @@ const ShapeControls = () => {
   const { shapes, updateShape } = useContext(ShapeContext);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
   const [shapeProps, setShapeProps] = useState({
+    x: "",
+    y: "",
     width: "",
     height: "",
     elevation: "",
@@ -17,9 +19,11 @@ const ShapeControls = () => {
     if (shape) {
       setSelectedShapeId(shape.id);
       setShapeProps({
-        width: shape.width,
-        height: shape.height,
-        elevation: shape.elevation,
+        x: shape.x || "",
+        y: shape.y || "",
+        width: shape.width || "",
+        height: shape.height || "",
+        elevation: shape.elevation || "",
       });
     }
   };
@@ -27,6 +31,8 @@ const ShapeControls = () => {
   const handleUpdateShape = () => {
     if (selectedShapeId !== null) {
       updateShape(selectedShapeId, {
+        x: parseFloat(shapeProps.x),
+        y: parseFloat(shapeProps.y),
         width: parseFloat(shapeProps.width),
         height: parseFloat(shapeProps.height),
         elevation: parseFloat(shapeProps.elevation),
@@ -54,6 +60,28 @@ const ShapeControls = () => {
 
       {selectedShapeId && (
         <div className="shape-properties">
+          <label className="property-label">
+            X:
+            <input
+              type="number"
+              value={shapeProps.x}
+              onChange={(e) =>
+                setShapeProps({ ...shapeProps, x: e.target.value })
+              }
+              className="property-input"
+            />
+          </label>
+          <label className="property-label">
+            Y:
+            <input
+              type="number"
+              value={shapeProps.y}
+              onChange={(e) =>
+                setShapeProps({ ...shapeProps, y: e.target.value })
+              }
+              className="property-input"
+            />
+          </label>
           <label className="property-label">
             Width:
             <input

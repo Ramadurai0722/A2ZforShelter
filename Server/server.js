@@ -34,6 +34,7 @@ const pgHostelRoutes = require('./routes/pgHostelRoutes')
 const agentRoutes = require('./routes/agentRoute')
 const loanRoutes = require('./routes/loanRoute')
 const landRoutes = require("./routes/landRoutes")
+const favouritesRouter = require('./routes/favouriteRoute');
 
 app.use('/houseRoute', houseRoutes)
 app.use('/cementRoutes', cementRoutes);
@@ -48,6 +49,7 @@ app.use('/pgHostelRoute', pgHostelRoutes)
 app.use('/agentRoute', agentRoutes)
 app.use('/loanRoute', loanRoutes)
 app.use('/landRoute', landRoutes)
+app.use('/favourites', favouritesRouter);
 
 
 const PORT = process.env.PORT || 5000;

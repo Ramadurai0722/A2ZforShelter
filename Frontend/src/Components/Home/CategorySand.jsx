@@ -12,6 +12,7 @@ const CategorySand = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
   const navigate = useNavigate();
 
   const sandRoute = `${config.apiURL}/sandRoute/sand`;
@@ -22,6 +23,16 @@ const CategorySand = () => {
         setLoading(true);
         const response = await axios.get(sandRoute);
         setData(response.data);
+
+        // Fetch like counts for each sand
+        const counts = await Promise.all(response.data.map(sand =>
+          axios.get(`${config.apiURL}/favourites/count/${sand._id}`)
+        ));
+        const likeCountMap = counts.reduce((acc, curr, index) => {
+          acc[response.data[index]._id] = curr.data.count;
+          return acc;
+        }, {});
+        setLikeCounts(likeCountMap);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -29,8 +40,23 @@ const CategorySand = () => {
       }
     };
 
+    const fetchFavourites = async () => {
+      const userId = getUserId();
+      try {
+        const response = await axios.get(`${config.apiURL}/favourites/all/${userId}`);
+        setFavourites(response.data);
+      } catch (err) {
+        console.error('Error fetching favourites:', err);
+      }
+    };
+
     fetchData();
+    fetchFavourites();
   }, []);
+
+  const getUserId = () => {
+    return localStorage.getItem('userId');
+  };
 
   const handleArrowClick = () => {
     navigate('/sandall');
@@ -44,14 +70,26 @@ const CategorySand = () => {
     navigate(`/sandview/${sandId}`);
   };
 
-  const handleAddToFavourites = (sandId) => {
-    setFavourites((prevFavourites) => {
-      if (prevFavourites.includes(sandId)) {
-        return prevFavourites.filter((id) => id !== sandId);
+  const handleAddToFavourites = async (sandId) => {
+    const userId = getUserId();
+
+    try {
+      if (favourites.includes(sandId)) {
+        await axios.delete(`${config.apiURL}/favourites/remove`, { data: { userId, productId: sandId } });
+        setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== sandId));
       } else {
-        return [...prevFavourites, sandId];
+        await axios.post(`${config.apiURL}/favourites/add`, { userId, productId: sandId });
+        setFavourites((prevFavourites) => [...prevFavourites, sandId]);
       }
-    });
+      // Update like counts
+      const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${sandId}`);
+      setLikeCounts((prevCounts) => ({
+        ...prevCounts,
+        [sandId]: countData.count
+      }));
+    } catch (err) {
+      console.error('Error updating favourites:', err);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -67,48 +105,53 @@ const CategorySand = () => {
       </div>
       
       <div className="card-container">
-        {data.slice(0, 4).map((sand, index) => (
-          <div key={index} className="card" onClick={() => handleCardClick(sand._id)}>
-            <Carousel
-              showThumbs={false}
-              infiniteLoop
-              autoPlay
-              stopOnHover
-              dynamicHeight
-              className="carousel"
-            >
-              {sand.images.map((photo, idx) => (
-                <div key={idx}>
-                  <img src={`${config.apiURL}/${photo}`} alt={`Sand ${sand.name}`} />
+        {data.slice(0, 4).map((sand) => {
+            const sandId = sand._id;
+
+            return (
+              <div key={sandId} className={`card ${favourites.includes(sandId) ? 'favourite' : ''}`} onClick={() => handleCardClick(sandId)}>
+                <Carousel
+                  showThumbs={false}
+                  infiniteLoop
+                  autoPlay
+                  stopOnHover
+                  dynamicHeight
+                  className="carousel"
+                >
+                  {sand.images.map((photo, idx) => (
+                    <div key={idx}>
+                      <img src={`${config.apiURL}/${photo}`} alt={`Sand ${sand.sandType}`} />
+                    </div>
+                  ))}
+                </Carousel>
+                <div className="card-content">
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation(); 
+                      handleAddToFavourites(sandId);
+                    }} 
+                    className="favourite-button"
+                  >
+                    {favourites.includes(sandId) ? (
+                      <FaHeart className="favourite-icon filled" />
+                    ) : (
+                      <FaRegHeart className="favourite-icon" />
+                    )}
+                    <span className="like-count">{likeCounts[sandId] || 0} Likes</span> {/* Display like count */}
+                  </button>
+                  <h3>{sand.sandType}</h3>
+                  <p><strong>Seller Name:</strong> {sand.name}</p>
+                  <p><strong>Quantity:</strong> {sand.quantity}</p>
+                  <p><strong>Price:</strong> {sand.price} RPS</p>
+                  <div className="card-buttons">
+                    <button onClick={() => handleViewDetailsClick(sandId)} className="view-details-button">
+                      View Details
+                    </button>
+                  </div>
                 </div>
-              ))}
-            </Carousel>
-            <div className="card-content">
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation(); 
-                  handleAddToFavourites(sand._id);
-                }} 
-                className="favourite-button"
-              >
-                {favourites.includes(sand._id) ? (
-                  <FaHeart className="favourite-icon filled" />
-                ) : (
-                  <FaRegHeart className="favourite-icon" />
-                )}
-              </button>
-              <h3>{sand.sandType}</h3>
-              <p><strong>Seller Name:</strong> {sand.name}</p>
-              <p><strong>Quantity:</strong> {sand.quantity}</p>
-              <p><strong>Price:</strong> {sand.price} RPS</p>
-              <div className="card-buttons">
-                <button onClick={() => handleViewDetailsClick(sand._id)} className="view-details-button">
-                  View Details
-                </button>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
       </div>
     </div>
   );

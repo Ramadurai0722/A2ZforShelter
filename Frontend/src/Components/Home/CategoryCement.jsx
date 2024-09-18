@@ -12,6 +12,7 @@ const CategoryCement = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
   const navigate = useNavigate();
 
   const cementRoute = `${config.apiURL}/cementRoutes/cement`;
@@ -22,6 +23,14 @@ const CategoryCement = () => {
         setLoading(true);
         const response = await axios.get(cementRoute);
         setData(response.data);
+        const counts = await Promise.all(response.data.map(cement =>
+          axios.get(`${config.apiURL}/favourites/count/${cement._id}`)
+        ));
+        const likeCountMap = counts.reduce((acc, curr, index) => {
+          acc[response.data[index]._id] = curr.data.count;
+          return acc;
+        }, {});
+        setLikeCounts(likeCountMap);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -29,8 +38,24 @@ const CategoryCement = () => {
       }
     };
 
+    const fetchFavourites = async () => {
+      const userId = getUserId();
+      try {
+        const response = await axios.get(`${config.apiURL}/favourites/all/${userId}`);
+        setFavourites(response.data);
+      } catch (err) {
+        console.error('Error fetching favourites:', err);
+      }
+    };
+
     fetchData();
+    fetchFavourites();
   }, []);
+
+  const getUserId = () => {
+    return localStorage.getItem('userId');
+  };
+
 
   const handleArrowClick = () => {
     navigate("/cementall");
@@ -44,14 +69,26 @@ const CategoryCement = () => {
     navigate(`/cementview/${cementId}`);
   };
 
-  const handleAddToFavourites = (cementId) => {
-    setFavourites((prevFavourites) => {
-      if (prevFavourites.includes(cementId)) {
-        return prevFavourites.filter((id) => id !== cementId);
+  const handleAddToFavourites = async (cementId) => {
+    const userId = getUserId();
+    const productId = cementId;
+
+    try {
+      if (favourites.includes(productId)) {
+        await axios.delete(`${config.apiURL}/favourites/remove`, { data: { userId, productId } });
+        setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
       } else {
-        return [...prevFavourites, cementId];
+        await axios.post(`${config.apiURL}/favourites/add`, { userId, productId });
+        setFavourites((prevFavourites) => [...prevFavourites, productId]);
       }
-    });
+      const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${productId}`);
+      setLikeCounts((prevCounts) => ({
+        ...prevCounts,
+        [productId]: countData.count
+      }));
+    } catch (err) {
+      console.error('Error updating favourites:', err);
+    }
   };
 
   if (loading) return <p>Loading...</p>;
@@ -67,66 +104,54 @@ const CategoryCement = () => {
       </div>
 
       <div className="card-container">
-        {data.slice(0, 4).map((cement, index) => (
-          <div
-            key={index}
-            className="card"
-            onClick={() => handleCardClick(cement._id)}
-          >
-            <div key={index} className="card">
-              <Carousel
-                showThumbs={false}
-                infiniteLoop
-                autoPlay
-                stopOnHover
-                dynamicHeight
-                className="carousel"
-              >
-                {cement.images.map((photo, idx) => (
-                  <div key={idx}>
-                    <img
-                      src={`${config.apiURL}/${photo}`}
-                      alt={`Cement ${cement.name}`}
-                    />
-                  </div>
-                ))}
-              </Carousel>
-              <div className="card-content">
-                <button
-                  onClick={() => handleAddToFavourites(cement._id)}
-                  className="favourite-button"
+        {data.slice(0, 4).map((cement) => {
+            const cementId = cement._id;
+
+            return (
+              <div key={cementId} className={`card ${favourites.includes(cementId) ? 'favourite' : ''}`} onClick={() => handleCardClick(cementId)}>
+                <Carousel
+                  showThumbs={false}
+                  infiniteLoop
+                  autoPlay
+                  stopOnHover
+                  dynamicHeight
+                  className="carousel"
                 >
-                  {favourites.includes(cement._id) ? (
-                    <FaHeart className="favourite-icon filled" />
-                  ) : (
-                    <FaRegHeart className="favourite-icon" />
-                  )}
-                </button>
-                <h3>{cement.brand}</h3>
-                <p>
-                  <strong>Seller Name:</strong> {cement.name}
-                </p>
-                <p>
-                  <strong>Type:</strong> {cement.cementType}
-                </p>
-                <p>
-                  <strong>Quantity:</strong> {cement.quantity} <span>Kg</span>
-                </p>
-                <p>
-                  <strong>Price:</strong> {cement.price} RPS
-                </p>
-                <div className="card-buttons">
+                  {cement.images.map((photo, idx) => (
+                    <div key={idx}>
+                      <img src={`${config.apiURL}/${photo}`} alt={`Cement ${cement.name}`} />
+                    </div>
+                  ))}
+                </Carousel>
+                <div className="card-content">
                   <button
-                    onClick={() => handleViewDetailsClick(cement._id)}
-                    className="view-details-button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddToFavourites(cementId);
+                    }}
+                    className="favourite-button"
                   >
-                    View Details
+                    {favourites.includes(cementId) ? (
+                      <FaHeart className="favourite-icon filled" />
+                    ) : (
+                      <FaRegHeart className="favourite-icon" />
+                    )}
+                    <span className="like-count">{likeCounts[cementId] || 0} Likes</span> {/* Display like count */}
                   </button>
+                  <h3>{cement.brand}</h3>
+                  <p><strong>Seller Name:</strong> {cement.name}</p>
+                  <p><strong>Type:</strong> {cement.cementType}</p>
+                  <p><strong>Quantity:</strong> {cement.quantity} <span>Kg</span></p>
+                  <p><strong>Price:</strong> {cement.price} RPS</p>
+                  <div className="card-buttons">
+                    <button onClick={() => handleViewDetailsClick(cementId)} className="view-details-button">
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
       </div>
     </div>
   );

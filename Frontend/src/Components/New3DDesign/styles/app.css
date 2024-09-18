@@ -1,4 +1,4 @@
-.app-container {
+/* .app-container {
     display: flex;
     height: 100vh;
   }
@@ -102,5 +102,46 @@
   .control-button:disabled {
     background-color: #c0c0c0;
     cursor: not-allowed;
+  } */
+  
+  /* =========================================== */
+
+
+  .mode-toggle {
+    margin-bottom: 10px;
   }
   
+  .mode-toggle button {
+    margin-right: 5px;
+    padding: 5px 10px;
+  }
+  
+  .mode-toggle .active {
+    font-weight: bold;
+    background-color: #ddd;
+  }
+  
+
+
+  /* ============== */
+  .plan-controls {
+    margin-bottom: 10px;
+  }
+  
+  .control-btn {
+    margin-right: 5px;
+    padding: 5px 10px;
+  }
+  
+  .control-btn:hover {
+    background-color: #ddd;
+  }
+  /* =================== */
+
+
+  
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
