@@ -123,32 +123,41 @@ const Navbar = () => {
             </span>
           </span>
           <div className="dropdown-menu">
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-  <div style={{ flex: 1, padding: '8px', fontSize:'13px' }}>
-    <h1>Monthly EMI Calculator</h1>
-    <a href="/sbiemi">Sbi EMI Calculator </a><br />
-    <a href="/hdfcemi">Hdfc EMI Calculator</a><br />
-    <a href="kotakemi">Kotak EMI Calculator</a><br />
-    <a href="l&temi">L&T EMI Calculator</a><br />
-    <a href="axisemi">Axis EMI Calculator</a><br />
-    <a href="bajajemi">Bajaj EMI Calculator</a>
-  </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ flex: 1, padding: "8px", fontSize: "13px" }}>
+                <h1>Monthly EMI Calculator</h1>
+                <a href="/sbiemi">Sbi EMI Calculator </a>
+                <br />
+                <a href="/hdfcemi">Hdfc EMI Calculator</a>
+                <br />
+                <a href="kotakemi">Kotak EMI Calculator</a>
+                <br />
+                <a href="l&temi">L&T EMI Calculator</a>
+                <br />
+                <a href="axisemi">Axis EMI Calculator</a>
+                <br />
+                <a href="bajajemi">Bajaj EMI Calculator</a>
+              </div>
 
-  <div style={{ flex: 1, padding: '10px', fontSize:'13px'  }}>
-    <h1>Interest Calculator</h1>
-    <a href="/sbihomeloan">Sbi HomeLoan Interest Calculator </a><br />
-    <a href="hdfchomeloan">Hdfc HomeLoan Interest Calculator</a><br />
-    <a href="kotakhomeloan">Kotak HomeLoan Interest Calculator</a><br />
-    <a href="landthomeloan">L&T HomeLoan Interest Calculator</a><br />
-    <a href="axishomeloan">Axis HomeLoan Interest Calculator</a><br />
-    <a href="bajajhomeloan">Bajaj HomeLoan Interest Calculator</a>
-  </div>
-</div>
-
+              <div style={{ flex: 1, padding: "10px", fontSize: "13px" }}>
+                <h1>Interest Calculator</h1>
+                <a href="/sbihomeloan">Sbi HomeLoan Interest Calculator </a>
+                <br />
+                <a href="hdfchomeloan">Hdfc HomeLoan Interest Calculator</a>
+                <br />
+                <a href="kotakhomeloan">Kotak HomeLoan Interest Calculator</a>
+                <br />
+                <a href="landthomeloan">L&T HomeLoan Interest Calculator</a>
+                <br />
+                <a href="axishomeloan">Axis HomeLoan Interest Calculator</a>
+                <br />
+                <a href="bajajhomeloan">Bajaj HomeLoan Interest Calculator</a>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* <div
+        <div
           className={`navbar-dropdown ${
             activeDropdown === "interiors" ? "active" : ""
           }`}
@@ -166,20 +175,28 @@ const Navbar = () => {
             </span>
           </span>
           <div className="dropdown-menu">
-            <a href="#">Wall & Table Decor</a>
-            <a href="#">Soft Furnishings</a>
-            <a href="#">Furniture</a>
-            <a href="#">Storage & Organization</a>
-            <a href="#">Lighting</a>
-            <a href="#">Plants & Natural Elements</a>
-            <a href="#">Textiles & Accessories</a>
-            <a href="#">Tiles</a>
-            <a href="#">Paints</a>
-            <a href="#">False Ceiling (Parceiling) Products</a>
-            <a href="#">Bathroom Products</a>
-            <a href="#">Kitchen Products</a>
+            <a href="/interior/Wall & Table Decor">Wall & Table Decor</a>
+            <a href="/interior/Soft Furnishings">Soft Furnishings</a>
+            <a href="/interior/Furniture">Furniture</a>
+            <a href="/interior/Storage & Organization">
+              Storage & Organization
+            </a>
+            <a href="/interior/Lighting">Lighting</a>
+            <a href="/interior/Plants & Natural Elements">
+              Plants & Natural Elements
+            </a>
+            <a href="/interior/Textiles & Accessories">
+              Textiles & Accessories
+            </a>
+            <a href="/interior/Tiles">Tiles</a>
+            <a href="/interior/Paints">Paints</a>
+            <a href="/interior/False Ceiling (Parceiling) Products">
+              False Ceiling (Parceiling) Products
+            </a>
+            <a href="/interior/Bathroom Products">Bathroom Products</a>
+            <a href="/interior/Kitchen Products">Kitchen Products</a>
           </div>
-        </div> */}
+        </div>
 
         <div
           className={`navbar-dropdown ${
