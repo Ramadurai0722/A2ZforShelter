@@ -85,6 +85,26 @@ import LandTEmi from "../Components/EMICalc/L&Temi";
 import AxisEmi from "../Components/EMICalc/AxisEmi";
 import BajajEmi from "../Components/EMICalc/BajajEmi";
 
+//favourites
+import FavCategories from "../Components/favourites/favdash";
+import CateringWithFavourites from "../Components/favourites/Cateringfav";
+import CementWithFavourites from "../Components/favourites/Cementfav";
+import HouseWithFavourites from "../Components/favourites/housefav";
+import InteriorWithFavourites from "../Components/favourites/interiorfav";
+import PgHostelWithFavourites from "../Components/favourites/pgfav";
+import PipeWireWithFavourites from "../Components/favourites/pipewire";
+import SandWithFavourites from "../Components/favourites/sandfav";
+import SteelWithFavourites from "../Components/favourites/steelfav";
+import StoneWithFavourites from "../Components/favourites/stonefav";
+import WoodWithFavourites from "../Components/favourites/woodfav";
+
+// sp
+
+import BoreWell from "../Components/SellingDetails/Borewell/BoreWell";
+import CivilEngineer from "../Components/SellingDetails/CivilEnginee/CivilEngineer";
+import House3DView from "../Components/house3d/House";
+
+
 // import Create2D from "../Components/HouseBuilding/2DCreate/2DCreate";
 import Loanpost from "../Components/SellingDetails/Loan/Loandealer";
 import LandForm from "../Components/SellingDetails/land/land";
@@ -190,6 +210,26 @@ function MainRoutes() {
       <Route path="/l&temi" element={<LandTEmi />} />
       <Route path="/axisemi" element={<AxisEmi />} />
       <Route path="/bajajemi" element={<BajajEmi />} />
+
+      {/* favourites */}
+      <Route path="/favcategory" element={<FavCategories />} />
+      <Route path="/favcat" element={<CateringWithFavourites />} />
+      <Route path="/favcement" element={<CementWithFavourites />} />
+      <Route path="/favhouse" element={<HouseWithFavourites />} />
+      <Route path="/favinterior" element={<InteriorWithFavourites />} />
+      <Route path="/favpg" element={<PgHostelWithFavourites />} />
+      <Route path="/favpipe&wire" element={<PipeWireWithFavourites />} />
+      <Route path="/favsand" element={<SandWithFavourites />} />
+      <Route path="/favsteel" element={<SteelWithFavourites />} />
+      <Route path="/favstone" element={<StoneWithFavourites />} />
+      <Route path="/favwood" element={<WoodWithFavourites />} />
+
+
+      {/* sp */}
+      <Route path="/borewell" element={<BoreWell />} />
+      <Route path="/civil" element={<CivilEngineer />} />
+      <Route path="/home3d" element={<House3DView />} />
+      
       {/* ================================================ */}
       <Route path="/Main3D" element={<MainApp />} />
     </Routes>

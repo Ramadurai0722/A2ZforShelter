@@ -26,7 +26,6 @@ const CategoryCateringall = () => {
         const response = await axios.get(cateringRoute);
         setData(response.data);
 
-        // Fetch like counts after fetching catering data
         const counts = await Promise.all(response.data.map(catering =>
           axios.get(`${config.apiURL}/favourites/count/${catering._id}`)
         ));
@@ -122,7 +121,7 @@ const CategoryCateringall = () => {
                 >
                   {catering.images.map((photo, idx) => (
                     <div key={idx}>
-                      <img src={`${config.apiURL}/${photo}`} alt={`Catering ${catering.name}`} />
+                    <img src={`${config.apiURL}/${photo}`} alt={`Catering ${catering.name}`} />
                     </div>
                   ))}
                 </Carousel>

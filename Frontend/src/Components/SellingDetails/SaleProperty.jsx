@@ -68,6 +68,9 @@ const SaleHouse = () => {
       Agents: "/agents",
       "Loan Dialer": "/Loan",
       "Lands & Plots": "/Land",
+      "BoreWell Details":"/borewell",
+      "Civil Engineering Details":"/civil",
+    
     };
 
     if (routes[subcategory]) {

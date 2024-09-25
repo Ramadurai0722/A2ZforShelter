@@ -275,7 +275,8 @@ const Navbar = () => {
           </span>
           <div className="dropdown-menu">
             <a href="/2dplan">2D-Design</a>
-            <a href="/3dplan">3D-design</a>
+            {/* <a href="/home3d">3D-design</a> */}
+            <a href="https://a2z-home-planner-design.netlify.app/" target="_self">3D-Planner</a>
           </div>
         </div>
 
