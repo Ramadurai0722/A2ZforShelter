@@ -1,29 +1,28 @@
 import React from "react";
 import { Container } from "@mui/material";
 import Navbar from "../Navbar/Navbar";
-import HeroSection from "./HeroSection";
+import HeroSection from "./Hero/HeroSection";
 import PropertyGrid from "./PropertyGrid";
-import Footer from "../Footer";
+import Footer from "../Footer/Footer";
 import AgentsSection from "./AgentsSection";
-import CategoryHouse from "./CategoryHouse";
-import CategoryCement from "./CategoryCement";
-import CategoryStone from "./CategoryStone";
-import CategorySand from "./CategorySand";
-import CategoryWood from "./CategoryWood";
-import CategoryPipeWire from "./CategoryPipewire";
-import CategorySteel from "./CategorySteel";
-import CategoryInterior from "./Categoryinterior";
-import CategoryCatering from "./Categorycaterings";
-import CategoryPgHostel from "./Categorypgs";
+import CategoryHouse from "./House/CategoryHouse";
+import CategoryCement from "./Cement/CategoryCement";
+import CategoryStone from "./Stone/CategoryStone";
+import CategorySand from "./Sand/CategorySand";
+import CategoryWood from "./Wood/CategoryWood";
+import CategoryPipeWire from "./Pipe&Wire/CategoryPipewire";
+import CategorySteel from "./Steel/CategorySteel";
+import CategoryInterior from "./Interior/Categoryinterior";
+import CategoryCatering from "./Catering/Categorycaterings";
+import CategoryPgHostel from "./PgHostel/Categorypgs";
 
 function HomePage() {
   return (
     <>
       <Navbar />
-   
         <HeroSection />
         <PropertyGrid />
-
+        
         <CategoryHouse />
         <CategoryPgHostel />
         <CategoryInterior />
@@ -36,6 +35,7 @@ function HomePage() {
         <CategoryCatering />
 
         <AgentsSection />
+
       <Footer />
     </>
   );

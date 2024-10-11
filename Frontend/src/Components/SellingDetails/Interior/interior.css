@@ -1,0 +1,31 @@
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.ant-form-item {
+    margin-bottom: 16px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .ant-row {
+        display: block; /* Stack all rows vertically */
+    }
+
+    .ant-col {
+        width: 100%; /* Full width for each input */
+    }
+
+    .ant-form-item {
+        margin-bottom: 12px;
+    }
+}

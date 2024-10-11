@@ -5,7 +5,7 @@ import { Table } from 'antd';
 import { toWords } from 'number-to-words';
 import './Loancal.css';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer';
+import Footer from '../Footer/Footer';
 
 const AxisLoanCalculator = () => {
     const [loanAmount, setLoanAmount] = useState(0);

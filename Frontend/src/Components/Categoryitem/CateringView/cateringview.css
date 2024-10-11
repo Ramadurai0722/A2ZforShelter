@@ -1,0 +1,242 @@
+.cateringview-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .cateringview-card {
+    background: #f1ecec;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+  }
+  
+  .cateringview-images-section,
+  .cateringview-details-section {
+    flex: 1;
+  }
+  
+  .cateringview-images-section {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  .cateringview-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .cateringview-image-item {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s; 
+  }
+  
+  .cateringview-image-item:hover {
+    transform: scale(1.05); 
+  }
+  
+  .cateringview-details-section {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cateringview-title {
+    margin: 0 0 20px 0;
+    font-size: 28px; 
+    color: #333; 
+  }
+  
+  .cateringview-details-section p {
+    margin: 10px 0;
+    line-height: 1.6; 
+  }
+  
+  .cateringview-contact-details-button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+  }
+  
+  .cateringview-contact-details-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cateringview-contact-details {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cateringview-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .cateringview-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px; 
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .cateringview-modal-image {
+    width: 480px;
+    height: 380px;
+    border-radius: 1px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cateringview-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 10px; 
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s; 
+  }
+  
+  .cateringview-close-button:hover {
+    background-color: darkred;
+  }
+  
+  @media (max-width: 768px) {
+    .cateringview-card {
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    .cateringview-images-section,
+    .cateringview-details-section {
+      max-width: 100%;
+    }
+  
+    .cateringview-image-grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 5px;
+    }
+  
+    .cateringview-image-item {
+      height: 150px;
+    }
+  
+    .cateringview-title {
+      font-size: 24px;
+    }
+  
+    .cateringview-details-section p {
+      margin: 8px 0;
+    }
+  
+    .cateringview-contact-details-button {
+      width: 100%;
+      padding: 8px 0;
+      font-size: 16px;
+    }
+  
+    .cateringview-modal-content {
+      max-width: 95%;
+      max-height: 85%;
+      padding: 15px;
+    }
+  
+    .cateringview-close-button {
+      font-size: 16px;
+      padding: 4px 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cateringview-card {
+      padding: 10px;
+    }
+  
+    .cateringview-image-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  
+    .cateringview-image-item {
+      height: 120px;
+    }
+  
+    .cateringview-title {
+      font-size: 20px;
+    }
+  
+    .cateringview-details-section p {
+      font-size: 10px;
+    }
+  
+    .cateringview-contact-details-button {
+      padding: 6px 0;
+      font-size: 14px;
+    }
+  
+    .cateringview-modal-content {
+      padding: 5px;
+    }
+  
+    .cateringview-close-button {
+      font-size: 14px;
+      padding: 3px 7px;
+    }
+  
+    .cateringview-modal-content {
+      max-width: 90%;
+      max-height: 75%;
+      padding: 10px;
+      border-radius: 6px;
+    }
+  
+    .cateringview-modal-image {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  
+    .cateringview-close-button {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
+  }
+  

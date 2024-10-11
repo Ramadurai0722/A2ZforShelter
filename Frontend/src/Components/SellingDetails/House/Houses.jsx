@@ -86,13 +86,3 @@ function AdList() {
 }
 
 export default AdList;
-
-
-// `${config.apiURL}/houseRoute/houses`
-// `${config.apiURL}/cementRoute/cement`
-// `${config.apiURL}/sandRoute/sand`
-// `${config.apiURL}/steelRoute/steel`
-// `${config.apiURL}/stoneRoute/stone`
-// `${config.apiURL}/woodRoute/wood`
-// `${config.apiURL}/cateringRoute/catering`
-// `${config.apiURL}/interiorRoute/interior`

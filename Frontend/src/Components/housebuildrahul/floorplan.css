@@ -1,0 +1,193 @@
+.floor-plan-generator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+}
+
+.main-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+}
+
+.summary-container {
+    display: flex;
+    flex: 1;
+}
+
+.room-dimensions-container {
+    flex: 1;
+    max-height: 600px;
+    overflow-y: auto;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.room-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.room-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    width: 300px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.room-card:hover {
+    transform: scale(1.02);
+}
+
+.floor-plan {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.75rem;
+    color: #555;
+    margin: 15px 0;
+}
+
+.label {
+    display: block;
+    margin: 5px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.remove {
+    display: block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ff4d4d; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.remove:hover {
+    background-color: #e60000; 
+}
+
+.generate-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dimension-summary {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+svg {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+@media screen and (max-width: 768px) {
+    .main-container {
+        flex-direction: column; 
+    }
+
+    .summary-container,
+    .room-dimensions-container,
+    .floor-plan {
+        flex: 1 0 100%; 
+        margin-right: 0; 
+        margin-bottom: 20px; 
+    }
+
+    .room-cards {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .room-card {
+        width: 100%; 
+    }
+
+    h1 {
+        font-size: 2rem; 
+    }
+
+    h2 {
+        font-size: 1.5rem; 
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button,
+    .remove {
+        font-size: 1rem; 
+    }
+}

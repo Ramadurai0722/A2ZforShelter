@@ -35,6 +35,10 @@ const agentRoutes = require('./routes/agentRoute')
 const loanRoutes = require('./routes/loanRoute')
 const landRoutes = require("./routes/landRoutes")
 const favouritesRouter = require('./routes/favouriteRoute');
+const BoreWellRoute = require('./routes/borewellRoute');
+
+const CivilRoute = require('./routes/civilRoute');
+app.use('/civil', CivilRoute);
 
 app.use('/houseRoute', houseRoutes)
 app.use('/cementRoutes', cementRoutes);
@@ -50,7 +54,7 @@ app.use('/agentRoute', agentRoutes)
 app.use('/loanRoute', loanRoutes)
 app.use('/landRoute', landRoutes)
 app.use('/favourites', favouritesRouter);
-
+app.use('/borewell',BoreWellRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

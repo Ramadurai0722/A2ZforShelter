@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import './Loancal.css';
 import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer';
+import Footer from '../Footer/Footer';
 
 const BajajLoanCalculator = () => {
     const [loanAmount, setLoanAmount] = useState(0);

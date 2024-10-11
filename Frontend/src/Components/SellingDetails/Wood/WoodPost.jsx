@@ -15,7 +15,9 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import config from "../../../config";
-import "../SalePost.css"; // Your custom CSS, if needed
+import "../SalePost.css";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -29,9 +31,9 @@ const WoodpostForm = () => {
     email: "",
     phoneNumber: "",
     sellerAddress: "",
-    wood: "Plywood", // Default wood type
+    wood: "Plywood", 
     thickness: "",
-    quantityType: "Piece", // Default quantity type
+    quantityType: "Piece", 
     quantity: "1 Piece",
     price: "",
     images: [],
@@ -142,22 +144,6 @@ const WoodpostForm = () => {
       setSnackbarMessage("Form submitted successfully!");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
-
-      // Reset form after successful submission
-      setFormData({
-        userId,
-        name: "",
-        email: "",
-        phoneNumber: "",
-        sellerAddress: "",
-        wood: "Plywood",
-        thickness: "",
-        quantityType: "Piece",
-        quantity: "1 Piece",
-        price: "",
-        images: [],
-        description: "",
-      });
       setFileList([]);
     } catch (error) {
       setSnackbarMessage("Error submitting form.");
@@ -174,12 +160,14 @@ const WoodpostForm = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const inputStyle = { height: "50px" }; // Adjust the height if needed
+  const inputStyle = { height: "50px" };
 
   return (
+    <>
+    <Navbar />
     <div
       className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
+      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto",marginTop:"100px",marginBottom:"50px" }}
     >
       <Title
         level={1}
@@ -397,6 +385,8 @@ const WoodpostForm = () => {
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

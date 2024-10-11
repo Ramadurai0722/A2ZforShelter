@@ -1,0 +1,162 @@
+.hero-container {
+  position: relative;
+  padding: 0;
+  color: #fff; 
+  overflow: hidden;
+}
+
+.hero-container img {
+  width: 100%;
+  height: 60vh; 
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  filter: brightness(70%);
+  transition: filter 0.3s ease-in-out;
+}
+
+.hero-container img:hover {
+  filter: brightness(80%);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 2;
+}
+
+.hero-container .MuiTypography-root {
+  color: #ece0e0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  text-align: center; 
+  margin-bottom: 20px; 
+}
+
+.search-box {
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  margin-top: 20px; 
+  position: relative;
+  z-index: 3;
+  transition: box-shadow 0.4s ease;
+}
+
+.search-box:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px; 
+  font-weight: bold; 
+  color: #1e3c72;
+}
+
+select,
+input[type="text"] {
+  width: 100%; 
+  padding: 12px; 
+  border-radius: 8px; 
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus,
+input[type="text"]:focus {
+  border-color: #1e3c72; 
+  box-shadow: 0 0 4px rgba(30, 60, 114, 0.5);
+}
+
+input[type="text"] {
+  margin-top: 5px;
+  height: 43px;
+}
+
+.search-location {
+  height: 50px; 
+}
+
+.search-box .MuiButton-root {
+  background-color: #1e3c72;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+  margin-top: 10px; 
+}
+
+.search-box .MuiButton-root:hover {
+  background-color: #2a5298;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .search-box {
+    padding: 15px; 
+  }
+}
+
+.map-container {
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  position: relative;
+  margin-top: 85px; 
+}
+
+.map-container, .leaflet-container {
+  border-radius: 10px; 
+  width: 100%; 
+}
+
+.leaflet-control-zoom {
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+  z-index: 1000; 
+}
+
+.leaflet-control {
+  display: none; 
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 20px; 
+  z-index: 1000; 
+}
+
+
+@media (max-width: 768px) {
+  .hero-container .MuiTypography-h3 {
+    font-size: 2.5rem; 
+  }
+
+  .hero-container .MuiTypography-subtitle1 {
+    font-size: 1.2rem; 
+  }
+
+  .search-box {
+    padding: 15px; 
+  }
+  .map-container {
+    padding: 0;
+    width: 150%;
+    margin-left: 20px;
+  }
+
+  .map-container .leaflet-container {
+    height: 300px;
+    
+  }
+}

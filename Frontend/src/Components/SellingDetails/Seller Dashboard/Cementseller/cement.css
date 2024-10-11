@@ -1,0 +1,62 @@
+.cement21-category-container {
+  padding: 20px;
+  margin-top: 70px;
+}
+
+.cement21-header-container {
+  margin-bottom: 20px;
+}
+
+.cement21-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.cement21-card {
+  background: #e7e3e3;
+  height: 430px;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s;
+  
+}
+
+.cement21-card:hover {
+  transform: scale(1.02);
+}
+
+.cement21-carousel {
+  max-height: 200px; 
+}
+
+.cement21-carousel-image {
+  width: 100%; 
+  height: auto; 
+  object-fit: cover; 
+}
+
+.cement21-card-content {
+  padding: 15px;
+}
+
+.cement21-card-buttons {
+  margin-top: 10px;
+}
+
+.cement21-view-details-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cement21-view-details-button:hover {
+  background-color: #0056b3;
+}

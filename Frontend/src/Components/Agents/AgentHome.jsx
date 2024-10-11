@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer";
+import Footer from "../Footer/Footer";
 import { Snackbar, Alert } from "@mui/material";
 import axios from "axios"; // Import axios to send token to backend
 

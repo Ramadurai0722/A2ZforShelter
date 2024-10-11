@@ -15,7 +15,9 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import config from "../../../config";
-import "../SalePost.css"; // Custom CSS if needed
+import "../SalePost.css"; 
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -135,21 +137,6 @@ const StonepostForm = () => {
       setSnackbarMessage("Form submitted successfully!");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
-
-      // Reset the form after submission
-      setFormData({
-        userId,
-        name: "",
-        email: "",
-        phoneNumber: "",
-        sellerAddress: "",
-        stoneCategory: "Granite",
-        stoneType: "Whole",
-        quantity: "1 Tonne",
-        price: "",
-        images: [],
-        description: "",
-      });
       setFileList([]);
     } catch (error) {
       setSnackbarMessage("Error submitting form.");
@@ -166,12 +153,14 @@ const StonepostForm = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const inputStyle = { height: "50px" }; // Adjust height if needed
+  const inputStyle = { height: "50px" }; 
 
   return (
+    <>
+    <Navbar />
     <div
       className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
+      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto",marginBottom:"50px",marginTop:"100px" }}
     >
       <Title
         level={1}
@@ -364,6 +353,8 @@ const StonepostForm = () => {
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

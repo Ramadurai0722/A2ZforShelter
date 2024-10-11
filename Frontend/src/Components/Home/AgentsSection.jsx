@@ -9,13 +9,12 @@ function AgentsSection() {
   ];
 
   return (
-    <Box style={{ backgroundColor: '#fff', padding: '40px 0' }}>
+    <Box style={{ padding: '40px 0' }}>
       <Container maxWidth="lg">
         <Typography variant="h5" gutterBottom>
           1000K+ Exclusive Agents
         </Typography>
-        {/* Adjust spacing prop to add space between grid items */}
-        <Grid container spacing={6}> {/* Increased spacing to 6 (48px) */}
+        <Grid container spacing={6}> 
           {agents.map((agent) => (
             <Grid item xs={12} sm={4} key={agent.id}>
               <Box display="flex" alignItems="center" flexDirection="column">

@@ -1,0 +1,227 @@
+.woodview2-product-view-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.woodview2-product-card {
+    background: #f1ecec;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.woodview2-product-images-section,
+.woodview2-product-details-section {
+    flex: 1;
+}
+
+.woodview2-product-images-section {
+    max-width: 400px;
+    display: flex;
+    flex-direction: row;
+}
+
+.woodview2-product-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.woodview2-product-image-item {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.woodview2-product-details-section {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.woodview2-product-title {
+    margin: 0 0 20px 0;
+}
+
+.woodview2-product-details-section p {
+    margin: 10px 0;
+}
+
+.woodview2-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.woodview2-save-button,
+.woodview2-edit-button,
+.woodview2-delete-button,
+.woodview2-cancel-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.woodview2-save-button:hover,
+.woodview2-edit-button:hover,
+.woodview2-delete-button:hover,
+.woodview2-cancel-button:hover {
+    background-color: #0056b3;
+}
+
+.woodview2-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.woodview2-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.woodview2-modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.woodview2-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.woodview2-close-button:hover {
+    background-color: darkred;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .woodview2-product-card {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .woodview2-product-images-section,
+    .woodview2-product-details-section {
+        max-width: 100%;
+    }
+
+    .woodview2-product-image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 5px;
+    }
+
+    .woodview2-product-image-item {
+        height: 150px;
+    }
+
+    .woodview2-product-title {
+        font-size: 24px;
+    }
+
+    .woodview2-product-details-section p {
+        margin: 8px 0;
+    }
+
+    .woodview2-action-buttons {
+        flex-direction: column;
+    }
+
+    .woodview2-save-button,
+    .woodview2-edit-button,
+    .woodview2-delete-button,
+    .woodview2-cancel-button {
+        width: 100%;
+        padding: 8px 0;
+        font-size: 16px;
+    }
+
+    .woodview2-modal-content {
+        max-width: 95%;
+        max-height: 85%;
+        padding: 15px;
+    }
+
+    .woodview2-close-button {
+        font-size: 16px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .woodview2-product-card {
+        padding: 10px;
+    }
+
+    .woodview2-product-image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .woodview2-product-image-item {
+        height: 120px;
+    }
+
+    .woodview2-product-title {
+        font-size: 20px;
+    }
+
+    .woodview2-product-details-section p {
+        font-size: 14px;
+    }
+
+    .woodview2-save-button,
+    .woodview2-edit-button,
+    .woodview2-delete-button,
+    .woodview2-cancel-button {
+        padding: 6px 0;
+        font-size: 14px;
+    }
+
+    .woodview2-modal-content {
+        padding: 5px;
+    }
+
+    .woodview2-close-button {
+        font-size: 14px;
+        padding: 3px 7px;
+    }
+}

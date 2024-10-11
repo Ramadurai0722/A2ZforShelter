@@ -15,7 +15,8 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import config from "../../../config";
-import "../SalePost.css"; // Custom CSS
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -29,7 +30,7 @@ const Pipe_wires = () => {
     email: "",
     phoneNumber: "",
     sellerAddress: "",
-    Type: "Pipes", // Default Type
+    Type: "Pipes",
     pipeType: "Metalic Pipe",
     pipeBrand: "",
     pipeDiameter: "",
@@ -118,25 +119,37 @@ const Pipe_wires = () => {
   };
 
   const handleSubmit = async () => {
+    // Default values for formData
+    const defaultFormData = {
+      pipeDiameter: "",
+      pipeLength: "",
+      wireDiameter: "",
+      wireLength: "",
+      quantity: "",
+      price: "",
+      images: [],
+      description: "",
+    };
+  
     let updatedPipeDiameter = formData.pipeDiameter;
     let updatedPipeLength = formData.pipeLength;
     let updatedWireDiameter = formData.wireDiameter;
     let updatedWireLength = formData.wireLength;
-
+  
     // Ensure proper units
     if (!updatedPipeDiameter.endsWith("Inch")) {
-      formData.pipeDiameter = `${updatedPipeDiameter} Inch`;
+      updatedPipeDiameter = `${updatedPipeDiameter} Inch`;
     }
     if (!updatedPipeLength.endsWith("Meter")) {
-      formData.pipeLength = `${updatedPipeLength} Meter`;
+      updatedPipeLength = `${updatedPipeLength} Meter`;
     }
     if (!updatedWireDiameter.endsWith("mm")) {
-      formData.wireDiameter = `${updatedWireDiameter} mm`;
+      updatedWireDiameter = `${updatedWireDiameter} mm`;
     }
     if (!updatedWireLength.endsWith("Meter")) {
-      formData.wireLength = `${updatedWireLength} Meter`;
+      updatedWireLength = `${updatedWireLength} Meter`;
     }
-
+  
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       if (key === "images") {
@@ -147,7 +160,7 @@ const Pipe_wires = () => {
         formDataToSend.append(key, formData[key]);
       }
     });
-
+  
     try {
       const response = await axios.post(
         `${config.apiURL}/pipeWiresRoute/pipewires`,
@@ -158,40 +171,19 @@ const Pipe_wires = () => {
           },
         }
       );
-
+  
+      // Resetting formData to its default values
+      setFormData(defaultFormData);
       setSnackbarMessage("Form submitted successfully!");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
-
-      // Reset the form after submission
-      setFormData({
-        userId,
-        name: "",
-        email: "",
-        phoneNumber: "",
-        sellerAddress: "",
-        Type: "Pipes",
-        pipeType: "Metalic Pipe",
-        pipeBrand: "",
-        pipeDiameter: "",
-        pipeLength: "",
-        wireBrand: "",
-        wireType: "Electrical Wire",
-        wireDiameter: "",
-        wireLength: "",
-        quantity: "1 Piece",
-        price: "",
-        images: [],
-        description: "",
-      });
-      setFileList([]);
     } catch (error) {
       setSnackbarMessage("Error submitting form.");
       setSnackbarSeverity("error");
       setSnackbarOpen(true);
     }
   };
-
+  
   const getBase64 = (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -200,16 +192,33 @@ const Pipe_wires = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const inputStyle = { height: "50px" }; // Adjust the height for input fields
+  const inputStyle = { height: "50px" }; 
 
   return (
+    <>
+    <Navbar />
     <div
       className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
+      style={{
+        width: "80%",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "20px",
+        backgroundColor: "#f9f9f9",
+        borderRadius: "8px",
+        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+        marginTop:"100px",
+        marginBottom:"50px",
+      }}
     >
       <Title
         level={1}
-        style={{ textAlign: "center", marginBottom: "20px", fontWeight: "700" }}
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          fontWeight: "700",
+          color: "#333",
+        }}
       >
         Pipe & Wire Seller
       </Title>
@@ -258,9 +267,7 @@ const Pipe_wires = () => {
             <Form.Item
               label="Seller Address"
               name="sellerAddress"
-              rules={[
-                { required: true, message: "Please input your address!" },
-              ]}
+              rules={[{ required: true, message: "Please input your address!" }]}
             >
               <Input.TextArea style={inputStyle} />
             </Form.Item>
@@ -332,30 +339,24 @@ const Pipe_wires = () => {
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
-                  label="Pipe Diameter (Inch)"
+                  label="Pipe Diameter"
                   name="pipeDiameter"
                   rules={[
-                    {
-                      required: true,
-                      message: "Please input the pipe diameter!",
-                    },
+                    { required: true, message: "Please input the pipe diameter!" },
                   ]}
                 >
-                  <Input type="number" style={inputStyle} />
+                  <Input style={inputStyle} />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="Pipe Length (Meter)"
+                  label="Pipe Length"
                   name="pipeLength"
                   rules={[
-                    {
-                      required: true,
-                      message: "Please input the pipe length!",
-                    },
+                    { required: true, message: "Please input the pipe length!" },
                   ]}
                 >
-                  <Input type="number" style={inputStyle} />
+                  <Input style={inputStyle} />
                 </Form.Item>
               </Col>
             </Row>
@@ -379,17 +380,7 @@ const Pipe_wires = () => {
                     onChange={(value) => handleChange({ wireType: value })}
                     style={inputStyle}
                   >
-                    {[
-                      "Electrical Wire",
-                      "NM Cable",
-                      "UF Cable",
-                      "THHN/THWN Wire",
-                      "Low-Voltage Wire",
-                      "Phone and Data Wire",
-                      "Coaxial Cable",
-                      "Speaker Wire",
-                      "Armored Cable",
-                    ].map((type) => (
+                    {["Electrical Wire", "Communication Wire"].map((type) => (
                       <Option key={type} value={type}>
                         {type}
                       </Option>
@@ -413,100 +404,136 @@ const Pipe_wires = () => {
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
-                  label="Wire Diameter (mm)"
+                  label="Wire Diameter"
                   name="wireDiameter"
                   rules={[
-                    {
-                      required: true,
-                      message: "Please input the wire diameter!",
-                    },
+                    { required: true, message: "Please input the wire diameter!" },
                   ]}
                 >
-                  <Input type="number" style={inputStyle} />
+                  <Input style={inputStyle} />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label="Wire Length (Meter)"
+                  label="Wire Length"
                   name="wireLength"
                   rules={[
-                    {
-                      required: true,
-                      message: "Please input the wire length!",
-                    },
+                    { required: true, message: "Please input the wire length!" },
                   ]}
                 >
-                  <Input type="number" style={inputStyle} />
+                  <Input style={inputStyle} />
                 </Form.Item>
               </Col>
             </Row>
           </>
         )}
 
-        <Form.Item
-          label="Price"
-          name="price"
-          rules={[{ required: true, message: "Please input the price!" }]}
-        >
-          <Input type="number" min={1} style={inputStyle} />
-        </Form.Item>
+        <Row gutter={16}>
+          <Col span={12}>
+            <Form.Item
+              label="Quantity"
+              name="quantity"
+              rules={[{ required: true, message: "Please select quantity!" }]}
+            >
+              <Select
+                value={formData.quantity}
+                onChange={(value) => handleChange({ quantity: value })}
+                style={inputStyle}
+              >
+                {["1 Piece", "2 Pieces", "3 Pieces", "4 Pieces", "5 Pieces"].map(
+                  (quantity) => (
+                    <Option key={quantity} value={quantity}>
+                      {quantity}
+                    </Option>
+                  )
+                )}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="Price"
+              name="price"
+              rules={[{ required: true, message: "Please input the price!" }]}
+            >
+              <Input style={inputStyle} />
+            </Form.Item>
+          </Col>
+        </Row>
 
-        <Form.Item
-          label="Upload Images"
-          rules={[
-            { required: true, message: "Please upload at least one image!" },
-          ]}
-        >
-          <Upload
-            listType="picture-card"
-            fileList={fileList}
-            onChange={handleUploadChange}
-            onPreview={handlePreview}
-            beforeUpload={() => false}
-            multiple
-          >
-            {fileList.length >= 8 ? null : (
-              <Button icon={<UploadOutlined />}>Upload</Button>
-            )}
-          </Upload>
-        </Form.Item>
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item
+              label="Images"
+              name="images"
+              rules={[{ required: true, message: "Please upload images!" }]}
+            >
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                onChange={handleUploadChange}
+                onPreview={handlePreview}
+                beforeUpload={() => false}
+              >
+                <div>
+                  <UploadOutlined />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </div>
+              </Upload>
+            </Form.Item>
+          </Col>
+        </Row>
 
-        <Form.Item
-          label="Description"
-          name="description"
-          rules={[{ required: true, message: "Please provide a description!" }]}
-        >
-          <Input.TextArea style={inputStyle} />
-        </Form.Item>
+        <Row gutter={16}>
+          <Col span={24}>
+            <Form.Item
+              label="Description"
+              name="description"
+              rules={[
+                { required: true, message: "Please input the description!" },
+              ]}
+            >
+              <Input.TextArea style={inputStyle} rows={4} />
+            </Form.Item>
+          </Col>
+        </Row>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" block>
+          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
             Submit
           </Button>
         </Form.Item>
       </Form>
 
-      {/* Modal for Image Preview */}
       <Modal
-        open={previewVisible}
+        visible={previewVisible}
         title={previewTitle}
         footer={null}
         onCancel={() => setPreviewVisible(false)}
       >
-        <img alt="preview" style={{ width: "100%" }} src={previewImage} />
+        <img
+          alt="example"
+          style={{ width: "100%" }}
+          src={previewImage}
+        />
       </Modal>
 
-      {/* Snackbar for feedback */}
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleSnackbarClose}
       >
-        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity}>
+        <Alert
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
           {snackbarMessage}
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

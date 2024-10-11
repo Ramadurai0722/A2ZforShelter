@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PostHouse.css";
 import config from "../../../config";
-import { TextField, MenuItem, Grid, Snackbar, Alert } from "@mui/material";
+import { TextField, MenuItem, Grid, Snackbar, Alert,Button } from "@mui/material";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 function PostHouse() {
   const userId = localStorage.getItem("userId");
@@ -254,6 +256,7 @@ function PostHouse() {
 
   return (
     <>
+    <Navbar />
    <h2>Post House Details</h2>
     <div className="ad-form-container">
       <form className="ad-form" onSubmit={handleSubmit}>
@@ -638,26 +641,25 @@ function PostHouse() {
           />
         </div>
 
-        {/* Photos */}
         <div className="form-group">
-          <label>Photos</label>
-          <input
-            type="file"
-            multiple
-            onChange={handleFileChange}
-            accept="image/*"
-          />
-          <div className="photo-previews">
-            {photoPreviews.map((preview, index) => (
-              <div key={index} className="photo-preview">
-                <img src={preview} alt={`Preview ${index}`} />
-                <button type="button" onClick={() => handleRemoveImage(index)}>
-                  Remove
-                </button>
-              </div>
-            ))}
+            <label>Photos *</label>
+            <input
+              type="file"
+              multiple
+              onChange={handleFileChange}
+              accept="image/*"
+            />
+            <div className="photo-previews">
+              {photoPreviews.map((preview, index) => (
+                <div key={index} className="photo-preview">
+                  <img src={preview} alt={`Preview ${index}`} />
+                  <Button variant="contained" color="secondary" onClick={() => handleRemoveImage(index)}>
+                    Remove
+                  </Button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
         {/* Submit Button */}
         <div className="submit-button-container">
@@ -682,6 +684,7 @@ function PostHouse() {
         </Snackbar>
       </form>
     </div>
+    <Footer />
     </>
   );
 }

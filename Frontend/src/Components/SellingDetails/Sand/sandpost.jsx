@@ -16,6 +16,8 @@ import { UploadOutlined } from "@ant-design/icons";
 import config from "../../../config";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -123,15 +125,14 @@ const SandpostForm = () => {
     const formDataToSend = new FormData();
     Object.keys(formData).forEach((key) => {
       if (key === "images") {
-        formData.images.forEach((file) =>
-          formDataToSend.append("images", file)
-        );
+        formData.images.forEach((file) => formDataToSend.append("images", file));
       } else {
         formDataToSend.append(key, formData[key]);
       }
     });
-
+  
     try {
+      // Use formData.userId to access the userId
       const response = await axios.post(
         `${config.apiURL}/sandRoute/sand`,
         formDataToSend,
@@ -144,8 +145,10 @@ const SandpostForm = () => {
       setSnackbarMessage("Form submitted successfully!");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
+      
+      // Reset form data after submission
       setFormData({
-        userId,
+        userId: formData.userId, // Use formData.userId here
         name: "",
         email: "",
         phoneNumber: "",
@@ -164,6 +167,7 @@ const SandpostForm = () => {
       console.error("Error submitting form: ", error);
     }
   };
+  
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
@@ -178,9 +182,11 @@ const SandpostForm = () => {
     });
   const inputStyle = { height: "50px" };
   return (
+    <>
+    <Navbar />
     <div
       className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
+      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto",marginTop:"100px",marginBottom:"50px" }}
     >
       <Title
         level={1}
@@ -361,6 +367,8 @@ const SandpostForm = () => {
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

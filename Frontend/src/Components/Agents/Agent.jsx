@@ -3,7 +3,7 @@ import { Form, Input, Button, Upload, Modal, Row, Col, Typography } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Snackbar, Alert } from "@mui/material";
 import axios from "axios";
-import config from "../../config"; // Assuming you have a config file for API URL
+import config from "../../config"; 
 
 const { Title } = Typography;
 
@@ -143,12 +143,11 @@ const Agent = () => {
       });
       setFileList([]);
     } catch (error) {
-      // Error feedback
       setSnackbarMessage("Registration Failed. Please try again.");
       setSnackbarSeverity("error");
       setSnackbarOpen(true);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
   const inputStyle = { height: "50px" };

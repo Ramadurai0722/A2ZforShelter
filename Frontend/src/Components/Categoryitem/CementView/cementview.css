@@ -1,0 +1,243 @@
+.cementview-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .cementview-card {
+    background: #f1ecec;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+  }
+  
+  .cementview-images-section,
+  .cementview-details-section {
+    flex: 1;
+  }
+  
+  .cementview-images-section {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  .cementview-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .cementview-image-item {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s; 
+  }
+  
+  .cementview-image-item:hover {
+    transform: scale(1.05); 
+  }
+  
+  .cementview-details-section {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cementview-title {
+    margin: 0 0 20px 0;
+    font-size: 28px; 
+    color: #333; 
+  }
+  
+  .cementview-details-section p {
+    margin: 10px 0;
+    line-height: 1.6; 
+  }
+  
+  .cementview-contact-details-button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+  }
+  
+  .cementview-contact-details-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .cementview-contact-details {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cementview-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .cementview-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px; 
+    width: 500px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .cementview-modal-image {
+    width: 480px;
+    height: 380px;
+    border-radius: 1px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cementview-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 10px; 
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s; 
+  }
+  
+  .cementview-close-button:hover {
+    background-color: darkred;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .cementview-card {
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    .cementview-images-section,
+    .cementview-details-section {
+      max-width: 100%;
+    }
+  
+    .cementview-image-grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 5px;
+    }
+  
+    .cementview-image-item {
+      height: 150px;
+    }
+  
+    .cementview-title {
+      font-size: 24px;
+    }
+  
+    .cementview-details-section p {
+      margin: 8px 0;
+    }
+  
+    .cementview-contact-details-button {
+      width: 100%;
+      padding: 8px 0;
+      font-size: 16px;
+    }
+  
+    .cementview-modal-content {
+      max-width: 95%;
+      max-height: 85%;
+      padding: 15px;
+    }
+  
+    .cementview-close-button {
+      font-size: 16px;
+      padding: 4px 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cementview-card {
+      padding: 8px;
+    }
+  
+    .cementview-image-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+  
+    .cementview-image-item {
+      height: 120px;
+    }
+  
+    .cementview-title {
+      font-size: 20px;
+    }
+  
+    .cementview-details-section p {
+      font-size: 10px;
+    }
+  
+    .cementview-contact-details-button {
+      padding: 6px 0;
+      font-size: 14px;
+    }
+  
+    .cementview-modal-content {
+      padding: 5px;
+    }
+  
+    .cementview-close-button {
+      font-size: 14px;
+      padding: 3px 7px;
+    }
+  
+    .cementview-modal-content {
+      max-width: 90%;
+      max-height: 75%;
+      padding: 10px;
+      border-radius: 6px;
+    }
+  
+    .cementview-modal-image {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  
+    .cementview-close-button {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
+  }
+  

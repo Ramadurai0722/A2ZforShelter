@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import config from "../../config";
 import "./profile.css";
 import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer";
+import Footer from "../Footer/Footer";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
@@ -71,6 +71,10 @@ const Profile = () => {
     navigate("/sellDashBoard");
   };
 
+  const handleFav = () => {
+    navigate("/favcategory");
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     navigate("/Login", { replace: true });
@@ -129,7 +133,7 @@ const Profile = () => {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false); // Reset loading state when done
+      setLoading(false); 
     }
   };
 
@@ -145,9 +149,6 @@ const Profile = () => {
       <Navbar />
       <div className="profile-card-container">
         <div className="profile-card">
-          <button className="logout-button" onClick={handleLogout}>
-            Log out
-          </button>
           <h2>{isEditing ? "Edit Profile" : "Profile"}</h2>
           {loading ? (
             <div className="loading-indicator">
@@ -284,6 +285,10 @@ const Profile = () => {
                 </button>
                 <button className="dashboard-button" onClick={handleDashBaord}>
                   DashBoard
+                </button>
+
+                <button className="dashboard-button" onClick={handleFav}>
+                  My Favourites
                 </button>
               </div>
             </div>

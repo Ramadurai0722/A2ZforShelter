@@ -1,11 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
+//auth
 import Home from "../Components/Home/HomePage";
 import LoginRegister from "../Components/Pages/LoginRegister";
 import Profile from "../Components/Pages/profile";
-// import MapComponent from "../Components/Menu";
-// import House3DView from "../Components/HouseBuilding/House";
-// import House2D from "../Components/HouseBuilding/House2D";
+
+// Post Forms
 import SaleProperty from "../Components/SellingDetails/SaleProperty";
 import PostHouse from "../Components/SellingDetails/House/PostHouse";
 import AdList from "../Components/SellingDetails/House/Houses";
@@ -14,58 +15,72 @@ import SandPostForm from "../Components/SellingDetails/Sand/sandpost";
 import SteelPostForm from "../Components/SellingDetails/Steel/SteelPost";
 import StonePostForm from "../Components/SellingDetails/Stone/StonePost";
 import WoodPostForm from "../Components/SellingDetails/Wood/WoodPost";
-import CateringpostForm from "../Components/SellingDetails/catering/Cateringpost";
+import CateringpostForm from "../Components/SellingDetails/Catering/Cateringpost";
 import InteriorpostForm from "../Components/SellingDetails/Interior/Interiorpost";
 import Pipe_wires from "../Components/SellingDetails/Pipe&wire/Pipe&wires";
-import SellerDashboard from "../Components/SellingDetails/Seller Dashboard/DashBoard";
+import SellerDashboard from "../Components/SellingDetails/Seller Dashboard/Seller/DashBoard";
 import Pgpost from "../Components/SellingDetails/PGHostel/PgHostel";
-import Agent from "../Components/Agents/Agent";
-import AgentDashboard from "../Components/Agents/AgentHome";
 
-import SellerCateringView from "../Components/SellingDetails/SellerViewDetails/CateringDetails";
-import SellerPipeWireView from "../Components/SellingDetails/SellerViewDetails/Pipe&wireDeatils";
-import SellerPGView from "../Components/SellingDetails/SellerViewDetails/PgDetails";
-import SellerHouseView from "../Components/SellingDetails/SellerViewDetails/HouseDetails";
-import SellerCementView from "../Components/SellingDetails/SellerViewDetails/CementDetails";
-import SellerSandView from "../Components/SellingDetails/SellerViewDetails/SandDetails";
-import SellerSteelView from "../Components/SellingDetails/SellerViewDetails/SteelDetails";
-import SellerStoneView from "../Components/SellingDetails/SellerViewDetails/StoneDetails";
-import SellerWoodView from "../Components/SellingDetails/SellerViewDetails/WoodDetails";
+// Home view Categories
+import CategoryHouse from "../Components/Home/House/CategoryHouse";
+import CategoryCement from "../Components/Home/Cement/CategoryCement";
+import CategoryStone from "../Components/Home/Stone/CategoryStone";
+import CategorySand from "../Components/Home/Sand/CategorySand";
+import CategoryWood from "../Components/Home/Wood/CategoryWood";
+import CategoryPipeWire from "../Components/Home/Pipe&Wire/CategoryPipewire";
+import CategorySteel from "../Components/Home/Steel/CategorySteel";
+import CategoryInterior from "../Components/Home/Interior/Categoryinterior";
+import CategoryCatering from "../Components/Home/Catering/Categorycaterings";
+import CategoryPgHostel from "../Components/Home/PgHostel/Categorypgs";
 
-import CategoryHouse from "../Components/Home/CategoryHouse";
-import CategoryCement from "../Components/Home/CategoryCement";
-import CategoryStone from "../Components/Home/CategoryStone";
-import CategorySand from "../Components/Home/CategorySand";
-import CategoryWood from "../Components/Home/CategoryWood";
-import CategoryPipeWire from "../Components/Home/CategoryPipewire";
-import CategorySteel from "../Components/Home/CategorySteel";
-import CategoryInterior from "../Components/Home/Categoryinterior";
-import CategoryCatering from "../Components/Home/Categorycaterings";
-import CategoryPgHostel from "../Components/Home/Categorypgs";
+//Veiw Category Products with id(specific products)
+import ProductViewpg from "../Components/Categoryitem/PgView/pgview";
+import HouseView from "../Components/Categoryitem/HouseView/houseview";
+import CementView from "../Components/Categoryitem/CementView/cementview";
+import InteriorView from "../Components/Categoryitem/InteriorView/interiorview";
+import CateringView from "../Components/Categoryitem/CateringView/cateringview";
+import PipeWireView from "../Components/Categoryitem/PipeWireView/pipe&wireview";
+import SandView from "../Components/Categoryitem/SandView/sandview";
+import SteelView from "../Components/Categoryitem/SteelView/steelview";
+import StoneView from "../Components/Categoryitem/StoneView/stoneview";
+import WoodView from "../Components/Categoryitem/WoodView/woodview";
 
-import ProductViewpg from "../Components/Categoryitem/pgview";
-import HouseView from "../Components/Categoryitem/houseview";
-import CementView from "../Components/Categoryitem/cementview";
-import InteriorView from "../Components/Categoryitem/interiorview";
-import CateringView from "../Components/Categoryitem/cateringview";
-import PipeWireView from "../Components/Categoryitem/pipe&wireview";
-import SandView from "../Components/Categoryitem/sandview";
-import SteelView from "../Components/Categoryitem/steelview";
-import StoneView from "../Components/Categoryitem/stoneview";
-import WoodView from "../Components/Categoryitem/woodview";
+// view all products categorywise
+import CategoryWoodall from "../Components/Cat-itemall/WoodAll/woodcategory";
+import CategoryCateringall from "../Components/Cat-itemall/CateringAll/cateringcategory";
+import CategoryCementall from "../Components/Cat-itemall/CementAll/cementcategory";
+import CategoryHouseall from "../Components/Cat-itemall/HouseAll/housecategory";
+import CategoryInteriorall from "../Components/Cat-itemall/InteriorAll/interiorcategory";
+import InteriorCategoryPage from "../Components/Cat-itemall/InteriorAll/interiorcat";
+import CategoryPgHostelall from "../Components/Cat-itemall/PgAll/pgcategory";
+import CategoryPipeWireall from "../Components/Cat-itemall/PipeWireAll/pipewirecategory";
+import CategorySandall from "../Components/Cat-itemall/SandAll/sandcategory";
+import CategorySteelall from "../Components/Cat-itemall/SteelAll/steelcategory";
+import CategoryStoneall from "../Components/Cat-itemall/StoneAll/stonecategory";
+import SellerInteriorView from "../Components/SellingDetails/SellerViewDetails/Interiorview/InteriorDetails";
 
-import CategoryWoodall from "../Components/Categoryitemall/woodcategory";
-import CategoryCateringall from "../Components/Categoryitemall/cateringcategory";
-import CategoryCementall from "../Components/Categoryitemall/cementcategory";
-import CategoryHouseall from "../Components/Categoryitemall/housecategory";
-import CategoryInteriorall from "../Components/Categoryitemall/interiorcategory";
-import InteriorCategoryPage from "../Components/Categoryitemall/interiorcat";
-import CategoryPgHostelall from "../Components/Categoryitemall/pgcategory";
-import CategoryPipeWireall from "../Components/Categoryitemall/pipewirecategory";
-import CategorySandall from "../Components/Categoryitemall/sandcategory";
-import CategorySteelall from "../Components/Categoryitemall/steelcategory";
-import CategoryStoneall from "../Components/Categoryitemall/stonecategory";
-import SellerInteriorView from "../Components/SellingDetails/SellerViewDetails/InteriorDetails";
+// seller category
+import CategoryHouse1 from "../Components/SellingDetails/Seller Dashboard/Houseseller/House";
+import CategoryCement1 from "../Components/SellingDetails/Seller Dashboard/Cementseller/Cement";
+import CategoryStone1 from "../Components/SellingDetails/Seller Dashboard/Stoneseller/Stone";
+import CategorySand1 from "../Components/SellingDetails/Seller Dashboard/Sandseller/Sand";
+import CategoryWood1 from "../Components/SellingDetails/Seller Dashboard/Woodseller/Wood";
+import CategoryPipeWires1 from "../Components/SellingDetails/Seller Dashboard/PipeWireseller/Pipewires";
+import CategorySteel1 from "../Components/SellingDetails/Seller Dashboard/Steelseller/Steel";
+import CategoryInterior1 from "../Components/SellingDetails/Seller Dashboard/Interiorseller/Interior";
+import CategoryCatering1 from "../Components/SellingDetails/Seller Dashboard/Cateringseller/Catering";
+import CategoryPgHostel1 from "../Components/SellingDetails/Seller Dashboard/Pgseller/PGHostel";
+
+//Seller Pages
+import SellerCateringView from "../Components/SellingDetails/SellerViewDetails/Cateringview/CateringDetails";
+import SellerPipeWireView from "../Components/SellingDetails/SellerViewDetails/PipeWireView/Pipe&wireDeatils";
+import SellerPGView from "../Components/SellingDetails/SellerViewDetails/PgView/PgDetails";
+import SellerHouseView from "../Components/SellingDetails/SellerViewDetails/Houseview/HouseDetails";
+import SellerCementView from "../Components/SellingDetails/SellerViewDetails/CementView/CementDetails";
+import SellerSandView from "../Components/SellingDetails/SellerViewDetails/SandView/SandDetails";
+import SellerSteelView from "../Components/SellingDetails/SellerViewDetails/SteelView/SteelDetails";
+import SellerStoneView from "../Components/SellingDetails/SellerViewDetails/StoneView/StoneDetails";
+import SellerWoodView from "../Components/SellingDetails/SellerViewDetails/WoodView/WoodDetails";
 
 //Intrest routes
 import SBILoanCalculator from "../Components/LoanCals/sbiloan";
@@ -76,8 +91,6 @@ import AxisLoanCalculator from "../Components/LoanCals/axiscal";
 import BajajLoanCalculator from "../Components/LoanCals/bajajcal";
 
 // Emi calclulator
-import Assign from "../Components/New3DDesign/2D/RoomView";
-import Assigns from "../Components/New3DDesign/3D/RoomViewes";
 import SbiEmi from "../Components/EMICalc/SbiEmi";
 import HdfcEmi from "../Components/EMICalc/HdfcEmi";
 import KotakEmi from "../Components/EMICalc/KotakEmi";
@@ -98,30 +111,44 @@ import SteelWithFavourites from "../Components/favourites/steelfav";
 import StoneWithFavourites from "../Components/favourites/stonefav";
 import WoodWithFavourites from "../Components/favourites/woodfav";
 
-// sp
+// 2d design
+import FloorPlanGenerator from "../Components/housebuildrahul/floorplan";
 
-import BoreWell from "../Components/SellingDetails/Borewell/BoreWell";
-import CivilEngineer from "../Components/SellingDetails/CivilEnginee/CivilEngineer";
-import House3DView from "../Components/house3d/House";
+// pricing
+import PricingTable from "../Components/pricing/pricingtable";
 
-
-// import Create2D from "../Components/HouseBuilding/2DCreate/2DCreate";
+// loan
 import Loanpost from "../Components/SellingDetails/Loan/Loandealer";
-import LandForm from "../Components/SellingDetails/land/land";
-import MainApp from "../Components/New3DDesign/MainApp";
+import CategoryLoanAll from "../Components/loandeal/loanall";
 
-// import Main3D from "../Components/New3DDesign/Main3Dand2d";
+// land
+import LandForm from "../Components/SellingDetails/land/land";
+import LandList from "../Components/Landdeal/landall";
+import LandView from "../Components/Landdeal/landviewid";
+
+// agents (ui)
+import Agent from "../Components/Agents/Agent";
+import AgentDashboard from "../Components/Agents/AgentHome";
+
+// Borewell
+import BoreWell from "../Components/SellingDetails/Borewell/BoreWell";
+import BorewellList from "../Components/Borewell/borewellall";
+
+//civil
+import CivilEngineer from "../Components/SellingDetails/CivilEnginee/CivilEngineer";
+import CivilEngineerList from "../Components/Civil/civilall";
 
 function MainRoutes() {
   return (
     <Routes>
+
+      {/* Auth */}
       <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/login" element={<LoginRegister />} />
       <Route path="/profile" element={<Profile />} />
 
-      {/* <Route path="/menu" element={<MapComponent />} /> */}
-      {/* <Route path="/2dView" element={<Create2D />} /> */}
-      {/* <Route path="/house3d" element={<House3DView />} /> */}
+      {/* Post Properties */}
       <Route path="/post" element={<SaleProperty />} />
       <Route path="/posthouse" element={<PostHouse />} />
       <Route path="/pgHostel" element={<Pgpost />} />
@@ -135,11 +162,6 @@ function MainRoutes() {
       <Route path="/interiorpost" element={<InteriorpostForm />} />
       <Route path="/Pipe&wires" element={<Pipe_wires />} />
       <Route path="/sellDashBoard" element={<SellerDashboard />} />
-      <Route path="/agents" element={<Agent />} />
-      <Route path="/agentsList" element={<AgentDashboard />} />
-
-      <Route path="/Loan" element={<Loanpost />} />
-      <Route path="/Land" element={<LandForm />}></Route>
 
       {/* Home page Content */}
       <Route path="/categoryhouse" element={<CategoryHouse />} />
@@ -153,7 +175,7 @@ function MainRoutes() {
       <Route path="/categorycatering" element={<CategoryCatering />} />
       <Route path="/categorypghostel" element={<CategoryPgHostel />} />
 
-      {/* Buyer Viewdetails */}
+      {/* Buyer view product(specific) */}
       <Route path="/productviewpg/:id" element={<ProductViewpg />} />
       <Route path="/houseview/:id" element={<HouseView />} />
       <Route path="/cementview/:id" element={<CementView />} />
@@ -165,7 +187,7 @@ function MainRoutes() {
       <Route path="/stoneview/:id" element={<StoneView />} />
       <Route path="/woodview/:id" element={<WoodView />} />
 
-      {/* Buyer ViewAllItems */}
+      {/* Buyer ViewAll properties categorywise */}
       <Route path="/woodall" element={<CategoryWoodall />} />
       <Route path="/cateringall" element={<CategoryCateringall />} />
       <Route path="/cementall" element={<CategoryCementall />} />
@@ -178,8 +200,21 @@ function MainRoutes() {
       <Route path="/steelall" element={<CategorySteelall />} />
       <Route path="/stoneall" element={<CategoryStoneall />} />
 
+      {/* seller */}
+
+      <Route path="/categoryhouseseller" element={<CategoryHouse1 />} />
+      <Route path="/categorycementseller" element={<CategoryCement1 />} />
+      <Route path="/categorystoneseller" element={<CategoryStone1 />} />
+      <Route path="/categorysandseller" element={<CategorySand1/>} />
+      <Route path="/categorywoodseller" element={<CategoryWood1 />} />
+      <Route path="/categorypipewireseller" element={<CategoryPipeWires1 />} />
+      <Route path="/categorysteelseller" element={<CategorySteel1 />} />
+      <Route path="/categoryinteriorseller" element={<CategoryInterior1 />} />
+      <Route path="/categorycateringseller" element={<CategoryCatering1 />} />
+      <Route path="/categorypghostelseller" element={<CategoryPgHostel1 />} />
+
       {/* SellerViewDetails */}
-      <Route path="SellerCateringView/:id" element={<SellerCateringView />} />
+      <Route path="/SellerCateringView/:id" element={<SellerCateringView />} />
       <Route path="/SellerPgView/:id" element={<SellerPGView />} />
       <Route path="/Sellerhouseview/:id" element={<SellerHouseView />} />
       <Route path="/Sellerinteriorview/:id" element={<SellerInteriorView />} />
@@ -197,11 +232,6 @@ function MainRoutes() {
       <Route path="/landthomeloan" element={<LandTLoanCalculator />} />
       <Route path="/axishomeloan" element={<AxisLoanCalculator />} />
       <Route path="/bajajhomeloan" element={<BajajLoanCalculator />} />
-
-      {/* Design Route */}
-
-      <Route path="/2dplan" element={<Assign />} />
-      <Route path="/3dplan" element={<Assigns />} />
 
       {/* Emi Route */}
       <Route path="/sbiemi" element={<SbiEmi />} />
@@ -224,14 +254,32 @@ function MainRoutes() {
       <Route path="/favstone" element={<StoneWithFavourites />} />
       <Route path="/favwood" element={<WoodWithFavourites />} />
 
+      {/* 2d plan */}
+      <Route path="/floorplan" element={<FloorPlanGenerator />} />
 
-      {/* sp */}
-      <Route path="/borewell" element={<BoreWell />} />
-      <Route path="/civil" element={<CivilEngineer />} />
-      <Route path="/home3d" element={<House3DView />} />
-      
-      {/* ================================================ */}
-      <Route path="/Main3D" element={<MainApp />} />
+      {/* pricing */}
+      <Route path="/pricetable" element={<PricingTable />} />
+
+      {/* agent ui design*/}
+      <Route path="/agents" element={<Agent />} />
+      <Route path="/agentsList" element={<AgentDashboard />} />
+
+      {/* Loan*/}
+      <Route path="/Loanpost" element={<Loanpost />} />
+      <Route path="/Loanall" element={<CategoryLoanAll />} />
+
+      {/* land */}
+      <Route path="/Landpost" element={<LandForm />} />
+      <Route path="/Landall" element={<LandList />} />
+      <Route path="/landview/:id" element={<LandView />} />
+
+      {/*Borewell*/}
+      <Route path="/borewellpost" element={<BoreWell />} />
+      <Route path="/borewellall" element={<BorewellList />} />
+
+      {/* civil */}
+      <Route path="/civilpost" element={<CivilEngineer />} />
+      <Route path="/civilall" element={<CivilEngineerList />} />
     </Routes>
   );
 }

@@ -15,7 +15,9 @@ import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import config from "../../../config";
 import { Snackbar, Alert } from "@mui/material";
-import "./steelPost.css"; // Import your custom CSS if needed
+import "./steelPost.css"; 
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -29,7 +31,7 @@ const SteelpostForm = () => {
     email: "",
     phoneNumber: "",
     shopAddress: "",
-    brand: "Tata Steel", // Default brand
+    brand: "Tata Steel", 
     steelCategory: "Steel",
     steelType: "Sheet",
     steelThickness: "6 mm",
@@ -138,22 +140,6 @@ const SteelpostForm = () => {
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
 
-      // Reset form data after submission
-      setFormData({
-        userId,
-        name: "",
-        email: "",
-        phoneNumber: "",
-        shopAddress: "",
-        brand: "Tata Steel",
-        steelCategory: "Steel",
-        steelType: "Sheet",
-        steelThickness: "6 mm",
-        meter: "1 Meter",
-        price: "",
-        images: [],
-        description: "",
-      });
       setFileList([]);
     } catch (error) {
       setSnackbarMessage("Error submitting form.");
@@ -170,12 +156,14 @@ const SteelpostForm = () => {
       reader.onerror = (error) => reject(error);
     });
 
-  const inputStyle = { height: "50px" }; // Adjust the height for input fields
+  const inputStyle = { height: "50px" }; 
 
   return (
+    <>
+    <Navbar />
     <div
       className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
+      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto",marginTop:"100px",marginBottom:"50px" }}
     >
       <Title
         level={1}
@@ -442,6 +430,8 @@ const SteelpostForm = () => {
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

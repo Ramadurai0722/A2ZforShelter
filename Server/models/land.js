@@ -1,4 +1,3 @@
-// models/landModel.js
 const mongoose = require("mongoose");
 
 const landSchema = new mongoose.Schema({
@@ -20,9 +19,9 @@ const landSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    facing: {
+   facing: {
         type: String,
-        enum: ["East", "West", "North", "South"],
+        enum: ['North', 'South', 'East', 'West'], 
         required: true,
     },
     projectName: {
@@ -55,7 +54,7 @@ const landSchema = new mongoose.Schema({
         required: true,
     },
     facilities: {
-        type: [String], // Array of strings for facilities
+        type: [String], 
     },
     stateName: {
         type: String,
@@ -67,7 +66,7 @@ const landSchema = new mongoose.Schema({
         type: String,
     },
     photos: {
-        type: [String], // Array of image paths/URLs
+        type: [String], 
     },
 });
 

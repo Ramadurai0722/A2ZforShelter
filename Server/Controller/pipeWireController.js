@@ -48,7 +48,7 @@ exports.createPipeWirePost = async (req, res) => {
     });
 
     const savedPost = await pipeWirePost.save();
-    res.status(201).json(savedPost);
+    res.status(200).json(savedPost);
   } catch (error) {
     res.status(500).json({ message: 'Error creating pipe & wire post', error });
   }

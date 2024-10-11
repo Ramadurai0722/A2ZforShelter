@@ -1,8 +1,5 @@
 const SandPost = require("../models/Sand");
 
-// @desc    Create a new sand post
-// @route   POST /api/sandPosts
-// @access  Public
 exports.createSandPost = async (req, res) => {
   try {
     const {
@@ -50,10 +47,8 @@ exports.getAllSand = async (req, res) => {
 };
 
 exports.getUserSandData = async (req, res) => {
-  // console.log("getuserdata");
 
   try {
-    // Fetch Sand based on the extracted userId
     const userId = req.userId
 
     const sand = await SandPost.find({ userId: userId });
@@ -78,7 +73,6 @@ exports.getSandById = async (req, res) => {
   }
 };
 
-// update Itme
 exports.updateSand = async (req, res) => {
   const { id } = req.params;
   try {
@@ -92,7 +86,6 @@ exports.updateSand = async (req, res) => {
   }
 };
 
-// Delete  Item
 exports.deleteSand = async (req, res) => {
   const { id } = req.params;
   try {

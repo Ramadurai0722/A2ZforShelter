@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer";
+import Footer from "../Footer/Footer";
 import CateringWithFavourites from "./Cateringfav";
 import CementWithFavourites from "./Cementfav";
 import HouseWithFavourites from "./housefav";
@@ -15,7 +15,6 @@ import WoodWithFavourites from "./woodfav";
 import { Snackbar, Alert } from "@mui/material";
 import axios from "axios";
 import config from "../../config";
-// import "./main.css";
 
 function FavCategories() {
   const [tokenValid, setTokenValid] = useState(true);

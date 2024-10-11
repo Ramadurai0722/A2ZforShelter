@@ -5,14 +5,13 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
   font-family: 'Roboto', sans-serif;
   padding: 20px;
-  
+  margin-top: 100px;
 }
 
 .profile-card {
-  background: #ffffff;
+  background: #e7e3e3;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding: 30px;
@@ -91,7 +90,6 @@ label {
   color: #333;
   text-align: left;
 }
-
 .form-input,
 .form-select,
 .form-textarea {

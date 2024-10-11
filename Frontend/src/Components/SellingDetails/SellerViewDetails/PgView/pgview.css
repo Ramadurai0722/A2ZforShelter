@@ -1,0 +1,227 @@
+.pgview2-product-view-container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.pgview2-product-card {
+    background: #f1ecec;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.pgview2-product-images-section,
+.pgview2-product-details-section {
+    flex: 1;
+}
+
+.pgview2-product-images-section {
+    max-width: 400px;
+    display: flex;
+    flex-direction: row;
+}
+
+.pgview2-product-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.pgview2-product-image-item {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.pgview2-product-details-section {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pgview2-product-title {
+    margin: 0 0 20px 0;
+}
+
+.pgview2-product-details-section p {
+    margin: 10px 0;
+}
+
+.pgview2-action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pgview2-save-button,
+.pgview2-edit-button,
+.pgview2-delete-button,
+.pgview2-cancel-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pgview2-save-button:hover,
+.pgview2-edit-button:hover,
+.pgview2-delete-button:hover,
+.pgview2-cancel-button:hover {
+    background-color: #0056b3;
+}
+
+.pgview2-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pgview2-modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pgview2-modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.pgview2-close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.pgview2-close-button:hover {
+    background-color: darkred;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .pgview2-product-card {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .pgview2-product-images-section,
+    .pgview2-product-details-section {
+        max-width: 100%;
+    }
+
+    .pgview2-product-image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 5px;
+    }
+
+    .pgview2-product-image-item {
+        height: 150px;
+    }
+
+    .pgview2-product-title {
+        font-size: 24px;
+    }
+
+    .pgview2-product-details-section p {
+        margin: 8px 0;
+    }
+
+    .pgview2-action-buttons {
+        flex-direction: column;
+    }
+
+    .pgview2-save-button,
+    .pgview2-edit-button,
+    .pgview2-delete-button,
+    .pgview2-cancel-button {
+        width: 100%;
+        padding: 8px 0;
+        font-size: 16px;
+    }
+
+    .pgview2-modal-content {
+        max-width: 95%;
+        max-height: 85%;
+        padding: 15px;
+    }
+
+    .pgview2-close-button {
+        font-size: 16px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pgview2-product-card {
+        padding: 10px;
+    }
+
+    .pgview2-product-image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+
+    .pgview2-product-image-item {
+        height: 120px;
+    }
+
+    .pgview2-product-title {
+        font-size: 20px;
+    }
+
+    .pgview2-product-details-section p {
+        font-size: 14px;
+    }
+
+    .pgview2-save-button,
+    .pgview2-edit-button,
+    .pgview2-delete-button,
+    .pgview2-cancel-button {
+        padding: 6px 0;
+        font-size: 14px;
+    }
+
+    .pgview2-modal-content {
+        padding: 5px;
+    }
+
+    .pgview2-close-button {
+        font-size: 14px;
+        padding: 3px 7px;
+    }
+}

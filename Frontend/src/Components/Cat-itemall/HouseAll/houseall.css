@@ -1,0 +1,161 @@
+.houseall-category-container {
+    padding: 20px;
+    margin-bottom: 40px;
+    margin-top: 70px;
+}
+
+.houseall-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.houseall-header-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.houseall-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start; 
+    position: relative;
+}
+
+.houseall-card {
+    width: 300px;
+    height: 650px;
+    background: #e7e3e3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.houseall-card:hover {
+    transform: translateY(-10px);
+}
+
+.houseall-carousel {
+    margin-bottom: 15px;
+}
+
+.houseall-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    overflow: hidden;
+}
+
+.houseall-card-content h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.houseall-card-content p {
+    margin: 5px 0;
+    color: #555;
+    word-wrap: break-word;
+}
+
+.houseall-card-content p strong {
+    color: #000;
+}
+
+.houseall-card-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.houseall-view-details-button,
+.houseall-favourite-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.houseall-favourite-button {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.houseall-view-details-button:hover,
+.houseall-favourite-button:hover {
+    background-color: transparent;
+    color: #0056b3;
+}
+
+.houseall-favourite-icon {
+    font-size: 24px;
+}
+
+.houseall-favourite-icon.filled {
+    color: red;
+}
+
+.houseall-like-count {
+    margin-left: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Media Queries */
+@media screen and (max-width: 600px) {
+    .houseall-card {
+        width: 80%;
+        height: auto; 
+    }
+
+    .houseall-header-container h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 900px) and (min-width:600px){
+    .houseall-card {
+        width: 40%;
+        height: auto;
+    }
+    .houseall-card-content p{
+        font-size: 13px;
+    }
+    .houseall-header h2 {
+        font-size: 25px;
+    }
+}
+@media (max-width: 1200px) and (min-width:900px){
+    .houseall-card {
+        width: 23%;
+        height: 620px;
+    }
+    .houseall-card-content p{
+        font-size: 13px;
+    }
+    .houseall-header h2 {
+        font-size: 25px;
+    }
+}

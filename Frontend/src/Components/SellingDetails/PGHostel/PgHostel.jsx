@@ -3,10 +3,11 @@ import axios from "axios";
 import "../House/PostHouse.css";
 import config from "../../../config";
 import { TextField, MenuItem, Grid, Snackbar, Alert } from "@mui/material";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 function PGHostel() {
   const userId = localStorage.getItem("userId");
-  console.log(userId);
 
   const [formData, setFormData] = useState({
     userId,
@@ -249,6 +250,8 @@ function PGHostel() {
 
 
   return (
+    <>
+    <Navbar />
     <div className="ad-form-container">
       <form className="ad-form" onSubmit={handleSubmit}>
         <h3>Include some details</h3>
@@ -557,6 +560,8 @@ function PGHostel() {
         </Snackbar>
       </form>
     </div>
+    <Footer />
+    </>
   );
 }
 

@@ -15,12 +15,15 @@ import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import config from "../../../config";
+import './interior.css'; 
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 const { Option } = Select;
 
 const InteriorpostForm = () => {
-  const [form] = Form.useForm(); // Use Ant Design form instance
+  const [form] = Form.useForm();
   const [formData, setFormData] = useState({
     userId: "",
     name: "",
@@ -54,7 +57,6 @@ const InteriorpostForm = () => {
         })
         .then((response) => {
           const { username, email, phoneNumber, _id } = response.data;
-          // Update form data
           setFormData((prevData) => ({
             ...prevData,
             userId: _id,
@@ -62,7 +64,6 @@ const InteriorpostForm = () => {
             email,
             phoneNumber,
           }));
-          // Set values in the form inputs
           form.setFieldsValue({
             name: username,
             email,
@@ -75,151 +76,151 @@ const InteriorpostForm = () => {
     }
   }, [form]);
 
-  // Full categories and products map
-  const categoryProductsMap = {
-    "Wall & Table Decor": [
-      "Wall prints",
-      "Clocks",
-      "Table lamps",
-      "Art",
-      "Mirrors",
-      "Photo frames",
-      "Books",
-      "Crystals",
-      "Glass sculptures",
-      "Records",
-      "Magazines",
-      "Marble trivets",
-      "Game board",
-      "Decorative bowl or plate",
-      "Juju hat",
-      "Globe",
-      "Cloche",
-      "Coasters",
-    ],
-    "Soft Furnishings": [
-      "Cushions",
-      "Rugs",
-      "Sheepskins",
-      "Throw rugs",
-      "Floor runner",
-    ],
-    Furniture: ["Stool", "Side tables", "Occasional chairs", "Timber decor"],
-    "Storage & Organization": [
-      "Baskets",
-      "Hooks",
-      "Pinboards",
-      "Canisters",
-      "Trays",
-      "Box",
-    ],
-    Lighting: ["Floor lamps", "Candles", "Oil burners", "Candle sticks"],
-    "Plants & Natural Elements": [
-      "Indoor plants",
-      "Dried flowers",
-      "Coral",
-      "Pot stand",
-      "Watering can",
-    ],
-    "Textiles & Accessories": [
-      "Vases",
-      "Macrame",
-      "Cowhide",
-      "Hourglass",
-      "Wick trimmer",
-    ],
-    Tiles: [
-      "Ceramic tiles",
-      "Porcelain tiles",
-      "Mosaic tiles",
-      "Subway tiles",
-      "Terrazzo tiles",
-      "Marble tiles",
-      "Glass tiles",
-      "Patterned tiles",
-      "Encaustic cement tiles",
-      "Hexagonal tiles",
-      "Wood-look tiles",
-      "Natural stone tiles",
-      "Metallic tiles",
-      "3D tiles",
-    ],
-    Paints: [
-      "Matte paint",
-      "Satin paint",
-      "Gloss paint",
-      "Eggshell paint",
-      "Chalk paint",
-      "Textured paint",
-      "Metallic paint",
-      "Eco-friendly paint",
-      "Accent wall paint",
-      "Pastel paint",
-      "Ombre paint",
-      "Magnetic paint",
-      "Chalkboard paint",
-      "Ceiling paint",
-      "Glow-in-the-dark paint",
-    ],
-    "False Ceiling (Parceiling) Products": [
-      "Gypsum ceiling",
-      "POP ceiling",
-      "Wooden ceiling panels",
-      "PVC ceiling panels",
-      "Metal ceiling panels",
-      "Glass ceiling panels",
-      "Fabric ceilings",
-      "Coffered ceilings",
-      "Acoustic ceiling tiles",
-      "Stretch ceiling",
-      "Plastic ceilings",
-      "Mineral fiber ceilings",
-      "LED light ceiling panels",
-      "Tin ceiling tiles",
-      "Mirror ceiling panels",
-    ],
-    "Bathroom Products": [
-      "Wash basin",
-      "Bathtub",
-      "Shower head",
-      "Toilet",
-      "Bathroom vanity",
-      "Towel rack",
-      "Soap dispenser",
-      "Toilet paper holder",
-      "Bathroom mirror",
-      "Shower curtain",
-      "Bath mat",
-      "Shower caddy",
-      "Towel hooks",
-      "Toothbrush holder",
-      "Bathroom storage cabinet",
-    ],
-    "Kitchen Products": [
-      "Kitchen sink",
-      "Cookware",
-      "Cutlery",
-      "Dinnerware",
-      "Kitchen cabinets",
-      "Chopping board",
-      "Dish rack",
-      "Spice rack",
-      "Oven",
-      "Microwave",
-      "Refrigerator",
-      "Kitchen island",
-      "Range hood",
-      "Blender",
-      "Coffee maker",
-      "Toaster",
-      "Utensil holder",
-      "Kitchen towels",
-      "Pantry storage jars",
-      "Knife set",
-      "Measuring cups",
-      "Mixing bowls",
-    ],
-  };
+// Full categories and products map
+const categoryProductsMap = {
+  "Wall & Table Decor": [
+    "Wall prints",
+    "Clocks",
+    "Table lamps",
+    "Art",
+    "Mirrors",
+    "Photo frames",
+    "Books",
+    "Crystals",
+    "Glass sculptures",
+    "Records",
+    "Magazines",
+    "Marble trivets",
+    "Game board",
+    "Decorative bowl or plate",
+    "Juju hat",
+    "Globe",
+    "Cloche",
+    "Coasters",
+  ],
+  "Soft Furnishings": [
+    "Cushions",
+    "Rugs",
+    "Sheepskins",
+    "Throw rugs",
+    "Floor runner",
+  ],
+  Furniture: ["Stool", "Side tables", "Occasional chairs", "Timber decor"],
+  "Storage & Organization": [
+    "Baskets",
+    "Hooks",
+    "Pinboards",
+    "Canisters",
+    "Trays",
+    "Box",
+  ],
+  Lighting: ["Floor lamps", "Candles", "Oil burners", "Candle sticks"],
+  "Plants & Natural Elements": [
+    "Indoor plants",
+    "Dried flowers",
+    "Coral",
+    "Pot stand",
+    "Watering can",
+  ],
+  "Textiles & Accessories": [
+    "Vases",
+    "Macrame",
+    "Cowhide",
+    "Hourglass",
+    "Wick trimmer",
+  ],
+  Tiles: [
+    "Ceramic tiles",
+    "Porcelain tiles",
+    "Mosaic tiles",
+    "Subway tiles",
+    "Terrazzo tiles",
+    "Marble tiles",
+    "Glass tiles",
+    "Patterned tiles",
+    "Encaustic cement tiles",
+    "Hexagonal tiles",
+    "Wood-look tiles",
+    "Natural stone tiles",
+    "Metallic tiles",
+    "3D tiles",
+  ],
+  Paints: [
+    "Matte paint",
+    "Satin paint",
+    "Gloss paint",
+    "Eggshell paint",
+    "Chalk paint",
+    "Textured paint",
+    "Metallic paint",
+    "Eco-friendly paint",
+    "Accent wall paint",
+    "Pastel paint",
+    "Ombre paint",
+    "Magnetic paint",
+    "Chalkboard paint",
+    "Ceiling paint",
+    "Glow-in-the-dark paint",
+  ],
+  "False Ceiling (Parceiling) Products": [
+    "Gypsum ceiling",
+    "POP ceiling",
+    "Wooden ceiling panels",
+    "PVC ceiling panels",
+    "Metal ceiling panels",
+    "Glass ceiling panels",
+    "Fabric ceilings",
+    "Coffered ceilings",
+    "Acoustic ceiling tiles",
+    "Stretch ceiling",
+    "Plastic ceilings",
+    "Mineral fiber ceilings",
+    "LED light ceiling panels",
+    "Tin ceiling tiles",
+    "Mirror ceiling panels",
+  ],
+  "Bathroom Products": [
+    "Wash basin",
+    "Bathtub",
+    "Shower head",
+    "Toilet",
+    "Bathroom vanity",
+    "Towel rack",
+    "Soap dispenser",
+    "Toilet paper holder",
+    "Bathroom mirror",
+    "Shower curtain",
+    "Bath mat",
+    "Shower caddy",
+    "Towel hooks",
+    "Toothbrush holder",
+    "Bathroom storage cabinet",
+  ],
+  "Kitchen Products": [
+    "Kitchen sink",
+    "Cookware",
+    "Cutlery",
+    "Dinnerware",
+    "Kitchen cabinets",
+    "Chopping board",
+    "Dish rack",
+    "Spice rack",
+    "Oven",
+    "Microwave",
+    "Refrigerator",
+    "Kitchen island",
+    "Range hood",
+    "Blender",
+    "Coffee maker",
+    "Toaster",
+    "Utensil holder",
+    "Kitchen towels",
+    "Pantry storage jars",
+    "Knife set",
+    "Measuring cups",
+    "Mixing bowls",
+  ],
+};
 
   const handleChange = (changedValues) => {
     setFormData((prevData) => ({
@@ -240,27 +241,24 @@ const InteriorpostForm = () => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-
     setPreviewImage(file.url || file.preview);
     setPreviewVisible(true);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
+    setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
   };
 
   const handleSubmit = async () => {
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (key === "images") {
-        formData.images.forEach((file) =>
-          formDataToSend.append("images", file)
-        );
-      } else {
-        formDataToSend.append(key, formData[key]);
-      }
-    });
-
     try {
+      await form.validateFields(); // Validate fields before submission
+      const formDataToSend = new FormData();
+      
+      Object.keys(formData).forEach((key) => {
+        if (key === "images") {
+          formData.images.forEach((file) => formDataToSend.append("images", file));
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
+
       const response = await axios.post(
         `${config.apiURL}/interiorRoute/interior`,
         formDataToSend,
@@ -270,17 +268,45 @@ const InteriorpostForm = () => {
           },
         }
       );
+
       setSnackbarMessage("Form submitted successfully!");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
+      
+      // Reset form fields
+      form.resetFields(); 
+      setFormData({
+        userId: "",
+        name: "",
+        email: "",
+        phoneNumber: "",
+        sellerAddress: "",
+        category: "",
+        products: "",
+        price: "",
+        images: [],
+        description: "",
+      }); 
+      setFileList([]); 
 
-      // Reset the form
-      form.resetFields();
-      setFileList([]);
+      form.setFieldsValue({
+        userId: "",
+        name: "",
+        email: "",
+        phoneNumber: "",
+        sellerAddress: "",
+        category: "",
+        products: "",
+        price: "",
+        description: "",
+      });
+
     } catch (error) {
-      setSnackbarMessage("Error submitting form. Please try again.");
-      setSnackbarSeverity("error");
-      setSnackbarOpen(true);
+      if (error.response) {
+        setSnackbarMessage("Error submitting form. Please try again.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
+      }
     }
   };
 
@@ -295,18 +321,10 @@ const InteriorpostForm = () => {
   const inputStyle = { height: "50px" };
 
   return (
-    <div
-      className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
-    >
-      <Title
-        level={1}
-        style={{
-          textAlign: "center",
-          marginBottom: "20px",
-          fontWeight: "700",
-        }}
-      >
+    <>
+      <Navbar />
+    <div className="container" style={{marginTop:"100px",marginBottom:"50px"}}>
+      <Title className="title" level={1}>
         Interior Products Seller
       </Title>
       <Form
@@ -316,67 +334,38 @@ const InteriorpostForm = () => {
         onValuesChange={handleChange}
         initialValues={formData}
       >
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Name"
-              name="name"
-              rules={[{ required: true, message: "Please input your name!" }]}
-            >
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12}>
+            <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please input your name!" }]}>
               <Input style={inputStyle} readOnly />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Email ID"
-              name="email"
-              rules={[{ required: true, message: "Please input your email!" }]}
-            >
+          <Col xs={24} sm={12}>
+            <Form.Item label="Email ID" name="email" rules={[{ required: true, message: "Please input your email!" }]}>
               <Input type="email" style={inputStyle} readOnly />
             </Form.Item>
           </Col>
         </Row>
 
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Phone Number"
-              name="phoneNumber"
-              rules={[
-                { required: true, message: "Please input your phone number!" },
-              ]}
-            >
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12}>
+            <Form.Item label="Phone Number" name="phoneNumber" rules={[{ required: true, message: "Please input your phone number!" }]}>
               <Input type="tel" style={inputStyle} readOnly />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Seller Address"
-              name="sellerAddress"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your seller address!",
-                },
-              ]}
-            >
+          <Col xs={24} sm={12}>
+            <Form.Item label="Seller Address" name="sellerAddress" rules={[{ required: true, message: "Please input your seller address!" }]}>
               <Input.TextArea style={inputStyle} />
             </Form.Item>
           </Col>
         </Row>
 
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Category"
-              name="category"
-              rules={[{ required: true, message: "Please select a category!" }]}
-            >
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12}>
+            <Form.Item label="Category" name="category" rules={[{ required: true, message: "Please select a category!" }]}>
               <Select
                 value={formData.category}
-                onChange={(value) =>
-                  handleChange({ category: value, products: "" })
-                }
+                onChange={(value) => handleChange({ category: value, products: "" })}
                 style={inputStyle}
               >
                 {Object.keys(categoryProductsMap).map((category) => (
@@ -387,36 +376,26 @@ const InteriorpostForm = () => {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Products"
-              name="products"
-              rules={[{ required: true, message: "Please select a product!" }]}
-            >
+          <Col xs={24} sm={12}>
+            <Form.Item label="Products" name="products" rules={[{ required: true, message: "Please select a product!" }]}>
               <Select
                 value={formData.products}
                 onChange={(value) => handleChange({ products: value })}
                 style={inputStyle}
               >
-                {(categoryProductsMap[formData.category] || []).map(
-                  (product) => (
-                    <Option key={product} value={product}>
-                      {product}
-                    </Option>
-                  )
-                )}
+                {(categoryProductsMap[formData.category] || []).map((product) => (
+                  <Option key={product} value={product}>
+                    {product}
+                  </Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
         </Row>
 
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Price"
-              name="price"
-              rules={[{ required: true, message: "Please input the price!" }]}
-            >
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12}>
+            <Form.Item label="Price" name="price" rules={[{ required: true, message: "Please input the price!" }]}>
               <Input type="number" min={1} style={inputStyle} />
             </Form.Item>
           </Col>
@@ -424,9 +403,7 @@ const InteriorpostForm = () => {
 
         <Form.Item
           label="Upload Images"
-          rules={[
-            { required: true, message: "Please upload at least one image!" },
-          ]}
+          rules={[{ required: true, message: "Please upload at least one image!" }]}
         >
           <Upload
             listType="picture-card"
@@ -457,7 +434,6 @@ const InteriorpostForm = () => {
         </Form.Item>
       </Form>
 
-      {/* Modal for Image Preview */}
       <Modal
         open={previewVisible}
         title={previewTitle}
@@ -467,7 +443,6 @@ const InteriorpostForm = () => {
         <img alt="preview" style={{ width: "100%" }} src={previewImage} />
       </Modal>
 
-      {/* Snackbar for feedback messages */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
@@ -482,6 +457,8 @@ const InteriorpostForm = () => {
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

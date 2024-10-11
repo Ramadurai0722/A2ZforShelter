@@ -1,0 +1,62 @@
+.catering21-container {
+  padding: 20px;
+  margin-top: 70px;
+}
+
+.catering21-header {
+  margin-bottom: 20px;
+}
+
+.catering21-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.catering21-card {
+  background: #e7e3e3;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s;
+  height: 430px;
+  width: 300px;
+}
+
+.catering21-card:hover {
+  transform: scale(1.02);
+}
+
+.catering21-carousel {
+  max-height: 200px; 
+  overflow: hidden; 
+}
+
+.catering21-carousel img {
+  width: 100%;
+  height: auto; 
+  object-fit: cover; 
+}
+
+.catering21-card-content {
+  padding: 15px;
+}
+
+.catering21-card-buttons {
+  margin-top: 10px;
+}
+
+.catering21-view-details-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.catering21-view-details-button:hover {
+  background-color: #0056b3;
+}

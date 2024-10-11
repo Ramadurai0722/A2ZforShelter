@@ -11,11 +11,11 @@ const cateringSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true },
   shopAddress: { type: String, required: true },
   meals: { type: String, required: true },
-  menuCatlogues: { type: String, required: true },
+  menuCatalogues: { type: String, required: true },
   numberOfPeople: { type: Number, required: true },
   price: { type: Number, required: true },
   description: { type: String, required: true },
-  images: [{ type: String, required: true }], // Store paths to uploaded images
+  images: [{ type: String, required: true }], 
 }, { timestamps: true });
 
 const Catering = mongoose.model('Catering', cateringSchema);

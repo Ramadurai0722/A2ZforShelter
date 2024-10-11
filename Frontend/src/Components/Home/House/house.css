@@ -1,0 +1,222 @@
+.house-category-container {
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.house-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.house-header-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.house-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start; 
+    position: relative;
+}
+
+.house-card {
+    width: 300px;
+    height: 630px;
+    background: #e7e3e3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.house-card:hover {
+    transform: translateY(-10px);
+}
+
+.house-carousel {
+    margin-bottom: 15px;
+}
+
+.house-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    overflow: hidden;
+}
+
+.house-card-content h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.house-card-content p {
+    margin: 5px 0;
+    color: #555;
+    word-wrap: break-word;
+}
+
+.house-card-content p strong {
+    color: #000;
+}
+
+.house-favourite-container {
+    display: flex;
+    align-items: center; 
+    margin-top: 10px;
+}
+
+.house-card-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.house-favourite-button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    font-size: 23px;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 8px;
+}
+
+.house-favourite-icon {
+    color: #aaa;
+}
+
+.house-favourite-icon.filled {
+    color: red;
+}
+
+.house-like-count {
+    font-size: 14px;
+    color: #333;
+    margin-left: 5px;
+}
+
+.house-view-details-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.house-view-details-button:hover {
+    background-color: transparent;
+    color: #0056b3;
+}
+
+.house-favourite-button:hover .house-favourite-icon {
+    color: #e60000;
+}
+
+.house-arrow-container {
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.house-arrow:hover {
+    transform: translateX(5px);
+}
+
+.carousel .slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Media Queries */
+@media screen and (max-width: 600px) {
+    .house-card-container {
+        display: flex;              
+        flex-direction: column;      
+        align-items: center;         
+        justify-content: center;    
+        width: 100%;                 
+        padding: 0 10px;           
+    }
+
+    .house-card {
+        width: 80%;                
+        height: auto; 
+        margin: 0 auto;            
+    }
+
+    .house-header-container h2 {
+        font-size: 18px;         
+        text-align: center;      
+    }
+
+    .house-favourite-button {
+        font-size: 18px;          
+        margin: 10px 0;        
+    }
+}
+
+@media (max-width: 900px) and (min-width:600px) {
+    .house-card {
+        width: 40%;
+        height: auto;
+    }
+    .house-card-content p {
+        font-size: 13px;
+    }
+    .house-header h2 {
+        font-size: 25px;
+    }
+
+    .house-favourite-button {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1200px) and (min-width:900px) {
+    .house-card {
+        width: 23%;
+        height: 620px;
+    }
+    .house-card-content p {
+        font-size: 13px;
+    }
+    .house-header h2 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1300px) and (min-width:1200px) {
+    .house-card {
+        width: 23%;
+        height: 620px;
+    }
+    .house-card-content p {
+        font-size: 13px;
+    }
+    .house-header h2 {
+        font-size: 25px;
+    }
+}

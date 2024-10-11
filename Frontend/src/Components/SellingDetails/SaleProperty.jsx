@@ -66,10 +66,10 @@ const SaleHouse = () => {
       "Sale: Interior Items": "/interiorpost",
       "Sale: Pipes and Wires": "/Pipe&wires",
       Agents: "/agents",
-      "Loan Dialer": "/Loan",
-      "Lands & Plots": "/Land",
-      "BoreWell Details":"/borewell",
-      "Civil Engineering Details":"/civil",
+      "Loan Dialer": "/Loanpost",
+      "Lands & Plots": "/Landpost",
+      "BoreWell Details":"/borewellpost",
+      "Civil Engineering Details":"/civilpost",
     
     };
 

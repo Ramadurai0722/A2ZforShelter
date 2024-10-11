@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    padding: 80px;
+    background-color: #f7f7f7;
+    font-family: 'Poppins', sans-serif;
+}
+
+.plans-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: center;
+    max-width: 1200px;
+    width: 100%;
+    align-items: start;
+}
+
+.plan {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.plan:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.plan-header {
+    background-color: #003366; 
+    color: #ffffff; 
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.best-seller-tag,
+.recommended-tag {
+    position: absolute;
+    top: -18px;
+    right: -10px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.best-seller-tag {
+    background-color: #ffcc00; 
+}
+
+.recommended-tag {
+    background-color: #1abc9c; 
+}
+
+.plan-header h3 {
+    margin: 0;
+    color: #ffffff;
+}
+
+.plan .price {
+    font-size: 28px;
+    color: #2ecc71;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.plan-details {
+    margin: 30px 0;
+}
+
+.plan-details p {
+    text-align: left;
+    font-size: 16px;
+    color: #555555;
+    margin: 10px 0;
+}
+
+.plan-details p strong {
+    font-weight: 600;
+    color: #2e2e2e;
+}
+
+.cross {
+    color: red;
+    font-size: 18px;
+}
+
+.check {
+    color: green;
+    font-size: 18px;
+}
+
+.buy-now {
+    background-color: #1a1a2e; 
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.buy-now:hover {
+    background-color: #162447; 
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.buy-now.disabled {
+    background-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    width: 600px;
+    height: auto; 
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.3s ease;
+    position: relative; 
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 28px;
+    color: #aaa;
+}
+
+.close:hover {
+    color: #ff4d4d;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    color: #1a1a2e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 18px;
+    color: #555;
+    margin: 10px 0;
+    text-align: center;
+}
+
+h3 {
+    font-size: 20px;
+    margin: 15px 0 10px;
+    text-align: center;
+}
+
+.payment-methods {
+    display: flex;
+    width: 100%;
+    margin-top: 20px; 
+}
+
+.payment-buttons {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.selected-content {
+    flex: 1; 
+    padding-left: 20px; 
+    text-align: center; 
+}
+
+.modal-content button {
+    margin: 10px 0;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #1a1a2e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #162447;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px; 
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #1a1a2e; 
+    outline: none; 
+}
+
+.confirm-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #1a1a2e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
+    width: 100%; 
+}
+
+.confirm-button:hover {
+    background-color: #162447;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-container {
+        padding: 40px; 
+    }
+
+    .plans-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .plan {
+        padding: 20px;
+        min-height: auto; 
+    }
+
+    .modal-content {
+        width: 100%; 
+        padding: 20px; 
+        margin-left: 60px;
+    }
+
+    .modal-content h2 {
+        font-size: 20px; 
+    }
+
+    .modal-content p {
+        font-size: 16px; 
+    }
+
+    .input-field {
+        padding: 10px; 
+        font-size: 14px; 
+    }
+
+    .buy-now, .confirm-button {
+        padding: 10px;
+        font-size: 16px;
+    }
+}
