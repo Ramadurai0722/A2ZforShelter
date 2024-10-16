@@ -1,93 +1,108 @@
 .pgview-container {
     display: flex;
     padding: 20px;
-    gap: 20px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     margin-top: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .pgview-card {
-    background: #f1ecec;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
-    padding: 20px;
+    background: #ffffff;
+    border: 2px solid #e0e0e0; 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
     width: 100%;
     max-width: 1200px;
     display: flex;
     gap: 20px;
-    flex-direction: row;
-}
-
-.pgview-images-section,
-.pgview-details-section {
-    flex: 1;
 }
 
 .pgview-images-section {
-    max-width: 400px;
+    flex: 1;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
-.pgview-image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-}
-
-.pgview-image-item {
+.pgview-main-image {
     width: 100%;
-    height: 200px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border: 3px solid #ff6f61; 
+}
+
+.pgview-main-image:hover {
+    transform: scale(1.05);
+}
+
+.pgview-thumbnail-carousel {
+    display: flex;
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.pgview-thumbnail {
+    width: 90px; 
+    height: 90px; 
     object-fit: cover;
     border-radius: 8px;
-    transition: transform 0.3s; 
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, border 0.3s;
 }
 
-.pgview-image-item:hover {
-    transform: scale(1.05); 
+.pgview-thumbnail:hover {
+    transform: scale(1.05);
+    border: 2px solid #ff6f61; 
 }
 
 .pgview-details-section {
-    max-width: 600px;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .pgview-title {
-    margin: 0 0 20px 0;
     font-size: 28px; 
-    color: #333; 
+    color: #2c3e50; 
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); 
 }
 
 .pgview-details-section p {
-    margin: 10px 0;
+    margin: 8px 0;
     line-height: 1.6; 
+    color: #555; 
 }
 
 .pgview-contact-details-button {
     margin: 20px 0;
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 12px;
+    background-color: #007bff; 
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s; 
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s; 
 }
 
 .pgview-contact-details-button:hover {
     background-color: #0056b3;
+    transform: scale(1.02);
 }
 
 .pgview-contact-details {
     margin-top: 20px;
-    padding: 10px;
+    padding: 15px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .pgview-modal-overlay {
@@ -106,32 +121,30 @@
 .pgview-modal-content {
     position: relative;
     background-color: white;
-    padding: 10px;
+    padding: 15px;
     border-radius: 12px; 
     width: 500px;
-    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .pgview-modal-image {
-    width: 480px;
-    height: 380px;
-    border-radius: 1px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
 
 .pgview-close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: red;
+    background: #ff6f61; 
     color: white;
     border: none;
-    padding: 10px 10px; 
-    font-size: 18px;
+    padding: 10px; 
+    font-size: 20px;
     cursor: pointer;
     border-radius: 50%;
     transition: background-color 0.3s; 
@@ -141,101 +154,31 @@
     background-color: darkred;
 }
 
+/* Media Queries */
 @media (max-width: 768px) {
     .pgview-card {
         flex-direction: column;
         padding: 15px;
     }
 
-    .pgview-images-section,
-    .pgview-details-section {
-        max-width: 100%;
-    }
-
-    .pgview-image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 5px;
-    }
-
-    .pgview-image-item {
-        height: 150px;
-    }
-
-    .pgview-title {
-        font-size: 24px;
-    }
-
-    .pgview-details-section p {
-        margin: 8px 0;
-    }
-
-    .pgview-contact-details-button {
-        width: 100%;
-        padding: 8px 0;
-        font-size: 16px;
-    }
-
-    .pgview-modal-content {
-        max-width: 95%;
-        max-height: 85%;
-        padding: 15px;
-    }
-
-    .pgview-close-button {
-        font-size: 16px;
-        padding: 4px 8px;
+    .pgview-thumbnail {
+        width: 70px; 
+        height: 70px; 
     }
 }
 
 @media (max-width: 480px) {
-    .pgview-card {
-        padding: 10px;
-    }
-
-    .pgview-image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    }
-
-    .pgview-image-item {
-        height: 120px;
+    .pgview-thumbnail {
+        width: 60px; 
+        height: 60px; 
     }
 
     .pgview-title {
-        font-size: 20px;
-    }
-
-    .pgview-details-section p {
-        font-size: 10px;
+        font-size: 24px; 
     }
 
     .pgview-contact-details-button {
-        padding: 6px 0;
-        font-size: 14px;
-    }
-
-    .pgview-modal-content {
-        padding: 5px;
-    }
-
-    .pgview-close-button {
-        font-size: 14px;
-        padding: 3px 7px;
-    }
-
-    .pgview-modal-content {
-        max-width: 90%;
-        max-height: 75%;
         padding: 10px;
-        border-radius: 6px;
-    }
-
-    .pgview-modal-image {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    .pgview-close-button {
         font-size: 14px;
-        padding: 5px 10px;
     }
 }

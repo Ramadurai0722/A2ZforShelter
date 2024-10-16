@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
+import { Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Table } from 'antd';
-import './Loancal.css';
+import './Loancal.css'; // Make sure to include your CSS styles
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 
@@ -11,13 +10,14 @@ const BajajLoanCalculator = () => {
     const [interestRate, setInterestRate] = useState(8.05);
     const [loanTenure, setLoanTenure] = useState(12);
     const [result, setResult] = useState(null);
+
     const convertNumberToWords = (num) => {
         const a = [
-            '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
+            '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+            'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen',
+            'eighteen', 'nineteen',
         ];
-        const b = [
-            '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
-        ];
+        const b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
         const n = (num) => {
             if (num === 0) return 'zero';
@@ -31,8 +31,9 @@ const BajajLoanCalculator = () => {
 
         return n(num);
     };
+
     const loanAmountInWords = loanAmount ? convertNumberToWords(parseInt(loanAmount, 10)) : '';
-    
+
     const calculateEMI = () => {
         const principal = parseFloat(loanAmount);
         const monthlyInterestRate = parseFloat(interestRate) / 12 / 100;
@@ -82,38 +83,17 @@ const BajajLoanCalculator = () => {
         { key: '4', highlight: 'Processing Charges', details: '0.50% onwards' },
     ];
 
-    const columns = {
-        bajajHousingFinance: [
-            { title: 'Highlight', dataIndex: 'highlight', key: 'highlight' },
-            { title: 'Details', dataIndex: 'details', key: 'details' },
-        ],
-    };
-
     const loanTypes = [
         { key: '1', loanType: 'Home Loan', interestRate: '8.45% to 14.00%' },
         { key: '2', loanType: 'Home Loan Balance Transfer', interestRate: '8.45% to 14.00%' },
         { key: '3', loanType: 'Top-up', interestRate: '9.20% to 15.00%' },
     ];
 
-    const column1 = {
-        loanTypes: [
-            { title: 'Loan Type', dataIndex: 'loanType', key: 'loanType' },
-            { title: 'Interest Rate (p.a.)', dataIndex: 'interestRate', key: 'interestRate' },
-        ],
-    };
-
     const selfEmployedNonProfessionals = [
         { key: '1', loanType: 'Home Loan', interestRate: '8.45% to 14.00%' },
         { key: '2', loanType: 'Home Loan Balance Transfer', interestRate: '8.45% to 14.00%' },
         { key: '3', loanType: 'Top-up', interestRate: '9.40% to 15.00%' },
     ];
-
-    const column2 = {
-        selfEmployedNonProfessionals: [
-            { title: 'Loan Type', dataIndex: 'loanType', key: 'loanType' },
-            { title: 'Interest Rate (p.a.)', dataIndex: 'interestRate', key: 'interestRate' },
-        ],
-    };
 
     const processingFees = [
         { key: '1', feeType: 'Processing Fees', details: 'Up to 0.50% of your home loan account' },
@@ -124,13 +104,6 @@ const BajajLoanCalculator = () => {
         { key: '6', feeType: 'Secure Fee', details: 'One-time charges (Up to Rs. 4,999)' },
         { key: '7', feeType: 'Part Prepayment and Foreclosure Charges', details: 'NIL' },
     ];
-
-    const column3 = {
-        processingFees: [
-            { title: 'Fee Type', dataIndex: 'feeType', key: 'feeType' },
-            { title: 'Details', dataIndex: 'details', key: 'details' },
-        ],
-    };
 
     return (
         <>
@@ -150,41 +123,43 @@ const BajajLoanCalculator = () => {
                 <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: 'auto', padding: 2 }}>
                     <CardContent>
                         <Typography variant="h4" component="h2" textAlign="center" gutterBottom className="typography-heading">
-                            Bajaj Housing Loan Interest Calculator
+                            Bajaj Home Loan Calculator
                         </Typography>
 
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Amount (₹)"
+                                <label htmlFor="loanAmount">Loan Amount (₹)</label>
+                                <input
+                                    id="loanAmount"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(e.target.value)}
-                                    variant="outlined"
                                     type="number"
                                 />
                                 <Typography variant="body2" color="textSecondary" style={{ marginTop: 10 }}>
                                     {loanAmountInWords}
                                 </Typography>
                             </Grid>
-                            
+
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Interest Rate (%)"
+                                <label htmlFor="interestRate">Interest Rate (%)</label>
+                                <input
+                                    id="interestRate"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                     step="0.01"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Tenure (Months)"
+                                <label htmlFor="loanTenure">Loan Tenure (Months)</label>
+                                <input
+                                    id="loanTenure"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={loanTenure}
                                     onChange={(e) => setLoanTenure(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                 />
                             </Grid>
                         </Grid>
@@ -199,7 +174,7 @@ const BajajLoanCalculator = () => {
                         </Button>
 
                         {result && result.loanDetails && (
-                            <Card className="loan-summary-card">
+                            <Card className="loan-summary-card" style={{ marginTop: '20px' }}>
                                 <CardContent>
                                     <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
                                         Loan Summary
@@ -212,52 +187,64 @@ const BajajLoanCalculator = () => {
                                     <Typography variant="h6" component="h4" gutterBottom>
                                         Detailed Breakdown:
                                     </Typography>
-                                    <Table
-                                        columns={[
-                                            { title: 'Month', dataIndex: 'month', key: 'month' },
-                                            { title: 'Monthly EMI', dataIndex: 'emi', key: 'emi' },
-                                            { title: 'Interest Payment', dataIndex: 'interest', key: 'interest' },
-                                            { title: 'Principal Repayment', dataIndex: 'principal', key: 'principal' }
-                                        ]}
-                                        dataSource={result.monthlyInterestPayment.map((interest, index) => ({
-                                            key: index + 1,
-                                            month: index + 1,
-                                            emi: result.emi,
-                                            interest: interest,
-                                            principal: result.principalRepayment[index]
-                                        }))}
-                                        pagination={false}
-                                    />
+                                    <div className="table-container"> {/* Add the table-container class here */}
+                                        <table className="table-responsive"> {/* Use table-responsive class */}
+                                            <thead className="table-header"> {/* Add table-header class */}
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Monthly EMI</th>
+                                                    <th>Interest Payment</th>
+                                                    <th>Principal Repayment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-body"> {/* Add table-body class */}
+                                                {result.monthlyInterestPayment.map((interest, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>₹{result.emi}</td>
+                                                        <td>₹{interest}</td>
+                                                        <td>₹{result.principalRepayment[index]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </CardContent>
                             </Card>
                         )}
 
-                        <div className="loan-details">
 
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                Bajaj Housing Finance Home Loan Highlights 2022
-                            </Typography>
-                            <Table columns={columns.bajajHousingFinance} dataSource={bajajHousingFinance} pagination={false} />
+                        <Typography variant="h6" style={{ marginTop: 20 }}>Bajaj Housing Finance Offerings</Typography>
+                        {bajajHousingFinance.map(item => (
+                            <div key={item.key}>
+                                <Typography variant="body1"><strong>{item.highlight}:</strong> {item.details}</Typography>
+                            </div>
+                        ))}
 
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                            For Salaried and Self-employed Professionals
-                            </Typography>
-                            <Table columns={column1.loanTypes} dataSource={loanTypes} pagination={false} />
+                        <Typography variant="h6" style={{ marginTop: 20 }}>Loan Types</Typography>
+                        {loanTypes.map(item => (
+                            <div key={item.key}>
+                                <Typography variant="body1"><strong>{item.loanType}:</strong> {item.interestRate}</Typography>
+                            </div>
+                        ))}
 
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                            For Self-employed Non-Professionals
-                            </Typography>
-                            <Table columns={column2.selfEmployedNonProfessionals} dataSource={selfEmployedNonProfessionals} pagination={false} />
+                        <Typography variant="h6" style={{ marginTop: 20 }}>Self Employed Non-Professionals</Typography>
+                        {selfEmployedNonProfessionals.map(item => (
+                            <div key={item.key}>
+                                <Typography variant="body1"><strong>{item.loanType}:</strong> {item.interestRate}</Typography>
+                            </div>
+                        ))}
 
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                Processing Fees and Charges
-                            </Typography>
-                            <Table columns={column3.processingFees} dataSource={processingFees} pagination={false} />
-
-                        </div>
-                        <p>Last Updated 17-September-2024</p>
+                        <Typography variant="h6" style={{ marginTop: 20 }}>Processing Fees</Typography>
+                        {processingFees.map(item => (
+                            <div key={item.key}>
+                                <Typography variant="body1"><strong>{item.feeType}:</strong> {item.details}</Typography>
+                            </div>
+                        ))}
                     </CardContent>
                 </Card>
+                <br />
+                <p>Last Updated 14-October-2024</p>
             </div>
             <Footer />
         </>

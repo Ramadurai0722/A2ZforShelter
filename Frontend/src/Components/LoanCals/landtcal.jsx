@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
+import { Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Table } from 'antd';
 import './Loancal.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
@@ -32,8 +31,8 @@ const LandtLoanCalculator = () => {
 
         return n(num);
     };
-    const loanAmountInWords = loanAmount ? convertNumberToWords(parseInt(loanAmount, 10)) : '';
 
+    const loanAmountInWords = loanAmount ? convertNumberToWords(parseInt(loanAmount, 10)) : '';
 
     const calculateEMI = () => {
         const principal = parseFloat(loanAmount);
@@ -44,6 +43,7 @@ const LandtLoanCalculator = () => {
             setResult(null);
             return;
         }
+
         const emi = (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths)) /
             (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
 
@@ -77,43 +77,13 @@ const LandtLoanCalculator = () => {
         });
     };
 
-    const ltHfl = [
-        { key: '1', scheme: 'L&T Home Loan', salariedRate: '8.40%', selfEmployedRate: '8.60%' },
-        { key: '2', scheme: 'L&T Balance Transfer', salariedRate: '8.40%', selfEmployedRate: '8.60%' },
-        { key: '3', scheme: 'Top Up Loan', rate: '1% more than existing loan' },
-        { key: '4', scheme: 'L&T Loan Against Property', rate: '9.40%' },
-    ];
-
-    const columns = {
-        ltHfl: [
-            { title: 'Scheme', dataIndex: 'scheme', key: 'scheme' },
-            { title: 'Salaried Interest Rate (% p.a.)', dataIndex: 'salariedRate', key: 'salariedRate', render: (text) => text || '-' },
-            { title: 'Self-Employed Interest Rate (% p.a.)', dataIndex: 'selfEmployedRate', key: 'selfEmployedRate', render: (text) => text || '-' },
-            { title: 'Additional Rate/Notes', dataIndex: 'rate', key: 'rate', render: (text) => text || '-' },
-        ],
-    };
-
-    const loanFees = [
-        { key: '1', feeType: 'Processing Fees', details: 'Up to 3% on Sanctioned Amount + applicable taxes' },
-        { key: '2', feeType: 'Interest on Late Payment', details: '3% per month on overdue EMI' },
-        { key: '3', feeType: 'Foreclosure or Prepayment Charges', details: 'NIL on floating rate of interest' },
-        { key: '4', feeType: 'Penal Interest Rate', details: '3% on outstanding installment' },
-    ];
-
-    const column = {
-        loanFees: [
-            { title: 'Fee Type', dataIndex: 'feeType', key: 'feeType' },
-            { title: 'Details', dataIndex: 'details', key: 'details' },
-        ],
-    };
-
     return (
         <>
             <Navbar />
             <div className="container">
                 <AppBar position="static" className="app-bar">
                     <Toolbar>
-                    <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
+                        <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
                         <Button component={Link} to="/hdfchomeloan" color="inherit" className="nav-button">HDFC</Button>
                         <Button component={Link} to="/kotakhomeloan" color="inherit" className="nav-button">Kotak</Button>
                         <Button component={Link} to="/landthomeloan" color="inherit" className="nav-button">L&T</Button>
@@ -121,49 +91,53 @@ const LandtLoanCalculator = () => {
                         <Button component={Link} to="/bajajhomeloan" color="inherit" className="nav-button">Bajaj</Button>
                     </Toolbar>
                 </AppBar>
-
+    
                 <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: 'auto', padding: 2 }}>
                     <CardContent>
                         <Typography variant="h4" component="h2" textAlign="center" gutterBottom className="typography-heading">
                             L&T Home Loan Interest Calculator
                         </Typography>
-
+    
                         <Grid container spacing={3}>
-                        <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Amount (₹)"
+                            <Grid item xs={12} sm={4}>
+                                <label htmlFor="loanAmount">Loan Amount (₹)</label>
+                                <input
+                                    id="loanAmount"
+                                    className="input-field"
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(e.target.value)}
-                                    variant="outlined"
                                     type="number"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                                 <Typography variant="body2" color="textSecondary" style={{ marginTop: 10 }}>
                                     {loanAmountInWords}
                                 </Typography>
                             </Grid>
-                            
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Interest Rate (%)"
+                                <label htmlFor="interestRate">Interest Rate (%)</label>
+                                <input
+                                    id="interestRate"
+                                    className="input-field"
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                     step="0.01"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Tenure (Months)"
+                                <label htmlFor="loanTenure">Loan Tenure (Months)</label>
+                                <input
+                                    id="loanTenure"
+                                    className="input-field"
                                     value={loanTenure}
                                     onChange={(e) => setLoanTenure(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                             </Grid>
                         </Grid>
-
+    
                         <Button
                             fullWidth
                             variant="contained"
@@ -172,9 +146,9 @@ const LandtLoanCalculator = () => {
                             onClick={calculateEMI}>
                             Calculate Loan Details
                         </Button>
-
+    
                         {result && result.loanDetails && (
-                            <Card className="loan-summary-card">
+                            <Card className="loan-summary-card" style={{ marginTop: '20px' }}>
                                 <CardContent>
                                     <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
                                         Loan Summary
@@ -187,46 +161,60 @@ const LandtLoanCalculator = () => {
                                     <Typography variant="h6" component="h4" gutterBottom>
                                         Detailed Breakdown:
                                     </Typography>
-                                    <Table
-                                        columns={[
-                                            { title: 'Month', dataIndex: 'month', key: 'month' },
-                                            { title: 'Monthly EMI', dataIndex: 'emi', key: 'emi' },
-                                            { title: 'Interest Payment', dataIndex: 'interest', key: 'interest' },
-                                            { title: 'Principal Repayment', dataIndex: 'principal', key: 'principal' }
-                                        ]}
-                                        dataSource={result.monthlyInterestPayment.map((interest, index) => ({
-                                            key: index + 1,
-                                            month: index + 1,
-                                            emi: result.emi,
-                                            interest: interest,
-                                            principal: result.principalRepayment[index]
-                                        }))}
-                                        pagination={false}
-                                    />
+                                    <div className="table-container"> 
+                                        <table className="table-responsive"> 
+                                            <thead className="table-header"> 
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Monthly EMI</th>
+                                                    <th>Interest Payment</th>
+                                                    <th>Principal Repayment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-body"> 
+                                                {result.monthlyInterestPayment.map((interest, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>₹{result.emi}</td>
+                                                        <td>₹{interest}</td>
+                                                        <td>₹{result.principalRepayment[index]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </CardContent>
                             </Card>
                         )}
-
-                        <div className="loan-details">
-
+    
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
                             <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
                                 L&T HFL Home Loan Schemes
                             </Typography>
-                            <Table columns={columns.ltHfl} dataSource={ltHfl} pagination={false} />
-
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
+                            <Typography variant="body1"><strong>1. L&T Home Loan:</strong> 8.40% p.a. (Salaried), 8.60% p.a. (Self-Employed)</Typography>
+                            <Typography variant="body1"><strong>2. L&T Balance Transfer:</strong> 8.40% p.a. (Salaried), 8.60% p.a. (Self-Employed)</Typography>
+                            <Typography variant="body1"><strong>3. Top Up Loan:</strong> 1% more than existing loan</Typography>
+                            <Typography variant="body1"><strong>4. L&T Loan Against Property:</strong> 9.40%</Typography>
+    
+                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading" style={{ marginTop: '20px' }}>
                                 Loan Fees and Charges
                             </Typography>
-                            <Table columns={column.loanFees} dataSource={loanFees} pagination={false} />
-
+                            <Typography variant="body1"><strong>Processing Fees:</strong> Up to 3% on Sanctioned Amount + applicable taxes</Typography>
+                            <Typography variant="body1"><strong>Interest on Late Payment:</strong> 3% per month on overdue EMI</Typography>
+                            <Typography variant="body1"><strong>Foreclosure or Prepayment Charges:</strong> NIL on floating rate of interest</Typography>
+                            <Typography variant="body1"><strong>Penal Interest Rate:</strong> 3% on outstanding installment</Typography>
                         </div>
-                        <p>Last Updated 17-September-2024</p>
+    
+                        <Typography variant="body2" textAlign="center" style={{ marginTop: '20px' }}>
+                            Last Updated 17-September-2024
+                        </Typography>
                     </CardContent>
                 </Card>
             </div>
             <Footer />
         </>
     );
+    
 };
 
 export default LandtLoanCalculator;

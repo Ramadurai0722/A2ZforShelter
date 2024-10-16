@@ -76,32 +76,16 @@ const KotakLoanCalculator = () => {
         });
     };
 
-    const kotakMahindra = [
-        { key: '1', category: 'Salaried', homeLoanRate: '8.30% - 9.00% p.a.', balanceTransferRate: '8.30% onwards' },
-        { key: '2', category: 'Self-Employed', homeLoanRate: '8.40% - 9.10% p.a.', balanceTransferRate: '8.40% onwards' },
+    const kotakMahindraRates = [
+        { category: 'Salaried', homeLoanRate: '8.30% - 9.00% p.a.', balanceTransferRate: '8.30% onwards' },
+        { category: 'Self-Employed', homeLoanRate: '8.40% - 9.10% p.a.', balanceTransferRate: '8.40% onwards' },
     ];
 
-    const kotakMahindra1 = [
-        { key: '1', loanslap: 'Age', termLoan: '- Salaried Applicants: 18 to 60 years,-Self-Employed Applicants: 18 to 65 years' },
-        { key: '2', loanslap: 'Minimum Income', termLoan: `- Residents of Delhi, Bangalore, Mumbai, Pune, Chennai: Rs. 20,000 per month,
-            - Residents of other cities: Rs. 15,000 per month` },
-        { key: '3', loanslap: 'Educational Qualification', termLoan: `Should hold a Bachelor's degree (if employed with a private limited company)` },
+    const eligibilityCriteria = [
+        { criteria: 'Age', details: 'Salaried Applicants: 18 to 60 years, Self-Employed Applicants: 18 to 65 years' },
+        { criteria: 'Minimum Income', details: 'Residents of Delhi, Bangalore, Mumbai, Pune, Chennai: Rs. 20,000 per month, Residents of other cities: Rs. 15,000 per month' },
+        { criteria: 'Educational Qualification', details: 'Should hold a Bachelor\'s degree (if employed with a private limited company)' },
     ];
-    
-    const columns = {
-        kotakMahindra: [
-            { title: 'Category', dataIndex: 'category', key: 'category' },
-            { title: 'Home Loan Interest Rates (% p.a.)', dataIndex: 'homeLoanRate', key: 'homeLoanRate' },
-            { title: 'Home Loan Balance Transfer Rates', dataIndex: 'balanceTransferRate', key: 'balanceTransferRate' },
-        ],
-    };
-
-    const column = {
-        kotakMahindra1: [
-            { title: 'Criteria', dataIndex: 'loanslap', key: 'loanslap' },
-            { title: 'Details', dataIndex: 'termLoan', key: 'termLoan' },
-        ],
-    };
 
     return (
         <>
@@ -109,7 +93,7 @@ const KotakLoanCalculator = () => {
             <div className="container">
                 <AppBar position="static" className="app-bar">
                     <Toolbar>
-                    <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
+                        <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
                         <Button component={Link} to="/hdfchomeloan" color="inherit" className="nav-button">HDFC</Button>
                         <Button component={Link} to="/kotakhomeloan" color="inherit" className="nav-button">Kotak</Button>
                         <Button component={Link} to="/landthomeloan" color="inherit" className="nav-button">L&T</Button>
@@ -117,49 +101,53 @@ const KotakLoanCalculator = () => {
                         <Button component={Link} to="/bajajhomeloan" color="inherit" className="nav-button">Bajaj</Button>
                     </Toolbar>
                 </AppBar>
-
+    
                 <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: 'auto', padding: 2 }}>
                     <CardContent>
                         <Typography variant="h4" component="h2" textAlign="center" gutterBottom className="typography-heading">
                             Kotak Mahindra Home Loan Interest Calculator
                         </Typography>
-
+    
                         <Grid container spacing={3}>
-                        <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Amount (₹)"
+                            <Grid item xs={12} sm={4}>
+                                <label htmlFor="loanAmount">Loan Amount (₹)</label>
+                                <input
+                                    id="loanAmount"
+                                    className="input-field"
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(e.target.value)}
-                                    variant="outlined"
                                     type="number"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                                 <Typography variant="body2" color="textSecondary" style={{ marginTop: 10 }}>
                                     {loanAmountInWords}
                                 </Typography>
                             </Grid>
-                            
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Interest Rate (%)"
+                                <label htmlFor="interestRate">Interest Rate (%)</label>
+                                <input
+                                    id="interestRate"
+                                    className="input-field"
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                     step="0.01"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Tenure (Months)"
+                                <label htmlFor="loanTenure">Loan Tenure (Months)</label>
+                                <input
+                                    id="loanTenure"
+                                    className="input-field"
                                     value={loanTenure}
                                     onChange={(e) => setLoanTenure(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                             </Grid>
                         </Grid>
-
+    
                         <Button
                             fullWidth
                             variant="contained"
@@ -168,9 +156,9 @@ const KotakLoanCalculator = () => {
                             onClick={calculateEMI}>
                             Calculate Loan Details
                         </Button>
-
+    
                         {result && result.loanDetails && (
-                            <Card className="loan-summary-card">
+                            <Card className="loan-summary-card" style={{ marginTop: '20px' }}>
                                 <CardContent>
                                     <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
                                         Loan Summary
@@ -183,39 +171,55 @@ const KotakLoanCalculator = () => {
                                     <Typography variant="h6" component="h4" gutterBottom>
                                         Detailed Breakdown:
                                     </Typography>
-                                    <Table
-                                        columns={[
-                                            { title: 'Month', dataIndex: 'month', key: 'month' },
-                                            { title: 'Monthly EMI', dataIndex: 'emi', key: 'emi' },
-                                            { title: 'Interest Payment', dataIndex: 'interest', key: 'interest' },
-                                            { title: 'Principal Repayment', dataIndex: 'principal', key: 'principal' }
-                                        ]}
-                                        dataSource={result.monthlyInterestPayment.map((interest, index) => ({
-                                            key: index + 1,
-                                            month: index + 1,
-                                            emi: result.emi,
-                                            interest: interest,
-                                            principal: result.principalRepayment[index]
-                                        }))}
-                                        pagination={false}
-                                    />
+                                    <div className="table-container">
+                                        <table className="table-responsive">
+                                            <thead className="table-header">
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Monthly EMI</th>
+                                                    <th>Interest Payment</th>
+                                                    <th>Principal Repayment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-body">
+                                                {result.monthlyInterestPayment.map((interest, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>₹{result.emi}</td>
+                                                        <td>₹{interest}</td>
+                                                        <td>₹{result.principalRepayment[index]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </CardContent>
                             </Card>
                         )}
-
-                        <div className="loan-details">
+    
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
                             <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
                                 Kotak Mahindra Bank Home Loan Interest Rates
                             </Typography>
-                            <Table columns={columns.kotakMahindra} dataSource={kotakMahindra} pagination={false} />
-
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                What are the Eliginility?
+                            {kotakMahindraRates.map(rate => (
+                                <Typography key={rate.category} variant="body1">
+                                    <strong>{rate.category}:</strong> Home Loan Rate: {rate.homeLoanRate}, Balance Transfer Rate: {rate.balanceTransferRate}
+                                </Typography>
+                            ))}
+    
+                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading" style={{ marginTop: '20px' }}>
+                                Eligibility Criteria
                             </Typography>
-                            <Table columns={column.kotakMahindra1} dataSource={kotakMahindra1} pagination={false} />
-
+                            {eligibilityCriteria.map(item => (
+                                <Typography key={item.criteria} variant="body1">
+                                    <strong>{item.criteria}:</strong> {item.details}
+                                </Typography>
+                            ))}
                         </div>
-                        <p>Last Updated 17-September-2024</p>
+    
+                        <Typography variant="body2" textAlign="center" style={{ marginTop: '20px' }}>
+                            Last Updated 17-September-2024
+                        </Typography>
                     </CardContent>
                 </Card>
             </div>

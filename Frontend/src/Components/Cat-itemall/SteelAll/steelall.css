@@ -23,25 +23,26 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: flex-start;
     position: relative;
 }
 
 .steeleall-card {
     width: 300px;
-    height: 660px;
-    background: #e7e3e3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 570px; 
+    background: #f8f9fa; 
+    border: 1px solid #dee2e6; 
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
 }
 
 .steeleall-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
 }
 
 .steeleall-carousel {
@@ -49,29 +50,38 @@
 }
 
 .steeleall-card-content {
-    padding: 15px;
+    padding: 20px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
     overflow: hidden;
 }
 
-.steeleall-card-content h3 {
+.steeleall-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
+    margin-bottom: 15px;
+}
+
+.steeleall-header h3 {
+    font-size: 20px;
+    color: #190ede;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+.steeleall-header p {
+    font-size: 20px; 
+    font-weight: bold;
+}
+
 .steeleall-card-content p {
     margin: 5px 0;
-    color: #555;
+    color: #495057;
     word-wrap: break-word;
 }
 
@@ -96,11 +106,25 @@
     transition: color 0.3s, background-color 0.3s;
 }
 
+.steeleall-like-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+}
+
 .steeleall-favourite-button {
     font-size: 20px;
-    display: flex;
-    align-items: center;
     cursor: pointer;
+    width: auto; 
+    background: transparent; 
+    border: none; 
+    margin: 0 0 5px 0; 
+}
+
+.steeleall-like-count {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 .steeleall-view-details-button:hover,
@@ -117,17 +141,11 @@
     color: red;
 }
 
-.steeleall-like-count {
-    margin-left: 5px;
-    font-size: 14px;
-    color: #333;
-}
-
 /* Media Queries */
 @media screen and (max-width: 600px) {
     .steeleall-card {
         width: 80%;
-        height: auto; 
+        height: auto;
     }
 
     .steeleall-header-container h2 {
@@ -135,28 +153,41 @@
     }
 }
 
-@media (max-width: 900px) and (min-width:600px){
+@media (max-width: 900px) and (min-width: 600px) {
     .steeleall-card {
         width: 40%;
-        height: auto;
+        height: auto; 
     }
-    .steeleall-card-content p{
+    .steeleall-card-content p {
         font-size: 13px;
     }
-    .steeleall-header h2 {
+    .steeleall-header-container h2 {
         font-size: 25px;
     }
 }
 
-@media (max-width: 1200px) and (min-width:900px){
+@media (max-width: 1200px) and (min-width: 900px) {
     .steeleall-card {
         width: 23%;
-        height: 620px;
+        height: auto; 
     }
-    .steeleall-card-content p{
+    .steeleall-card-content p {
         font-size: 13px;
     }
-    .steeleall-header h2 {
+    .steeleall-header-container h2 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 1200px) {
+    .steeleall-card {
+        width: 23%;
+        height: auto; 
+    }
+    .steeleall-card-content p {
+        font-size: 13px;
+    }
+    .steeleall-header-container h2 {
         font-size: 25px;
     }
 }

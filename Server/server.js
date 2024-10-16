@@ -40,6 +40,9 @@ const BoreWellRoute = require('./routes/borewellRoute');
 const CivilRoute = require('./routes/civilRoute');
 app.use('/civil', CivilRoute);
 
+const FeedbackRoute = require('./routes/feedbackRoute');
+app.use('/feedback', FeedbackRoute);
+
 app.use('/houseRoute', houseRoutes)
 app.use('/cementRoutes', cementRoutes);
 app.use('/sandRoute', sandRoutes)

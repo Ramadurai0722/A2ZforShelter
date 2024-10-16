@@ -1,96 +1,111 @@
 .sandview-container {
     display: flex;
     padding: 20px;
-    gap: 20px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     margin-top: 100px;
-    margin-bottom: 100px;
-}
-
-.sandview-card {
-    background: #f1ecec;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
-    padding: 20px;
+    margin-bottom: 50px;
+  }
+  
+  .sandview-card {
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
     width: 100%;
     max-width: 1200px;
     display: flex;
     gap: 20px;
-    flex-direction: row;
-}
-
-.sandview-images-section,
-.sandview-details-section {
+  }
+  
+  .sandview-images-section {
     flex: 1;
-}
-
-.sandview-images-section {
-    max-width: 400px;
-    display: flex;
-    flex-direction: column; 
-}
-
-.sandview-image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-}
-
-.sandview-image-item {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s; 
-}
-
-.sandview-image-item:hover {
-    transform: scale(1.05); 
-}
-
-.sandview-details-section {
-    max-width: 600px;
     display: flex;
     flex-direction: column;
-}
-
-.sandview-title {
-    margin: 0 0 20px 0;
-    font-size: 28px; 
-    color: #333; 
-}
-
-.sandview-details-section p {
-    margin: 10px 0;
-    line-height: 1.6; 
-}
-
-.sandview-contact-details-button {
+  }
+  
+  .sandview-main-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border: 3px solid #ffcc00; /* Highlight color */
+  }
+  
+  .sandview-main-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .sandview-thumbnail-carousel {
+    display: flex;
+    overflow-x: auto;
+    margin-top: 15px;
+  }
+  
+  .sandview-thumbnail {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, border 0.3s;
+  }
+  
+  .sandview-thumbnail:hover {
+    transform: scale(1.05);
+    border: 2px solid #ffcc00; /* Highlight color */
+  }
+  
+  .sandview-details-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sandview-title {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sandview-details-section p {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .sandview-contact-details-button {
     margin: 20px 0;
-    padding: 10px 20px;
+    padding: 12px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s; 
-}
-
-.sandview-contact-details-button:hover {
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .sandview-contact-details-button:hover {
     background-color: #0056b3;
-}
-
-.sandview-contact-details {
+    transform: scale(1.02);
+  }
+  
+  .sandview-contact-details {
     margin-top: 20px;
-    padding: 10px;
+    padding: 15px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.sandview-modal-overlay {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sandview-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -101,141 +116,70 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.sandview-modal-content {
+  }
+  
+  .sandview-modal-content {
     position: relative;
     background-color: white;
-    padding: 10px;
+    padding: 15px;
     border-radius: 12px; 
     width: 500px;
-    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); 
-}
-
-.sandview-modal-image {
-    width: 480px;
-    height: 380px;
-    border-radius: 1px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.sandview-close-button {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .sandview-modal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .sandview-close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: red;
+    background: #ffcc00; /* Highlight color */
     color: white;
     border: none;
-    padding: 10px 10px; 
-    font-size: 18px;
+    padding: 10px; 
+    font-size: 20px;
     cursor: pointer;
     border-radius: 50%;
     transition: background-color 0.3s; 
-}
-
-.sandview-close-button:hover {
+  }
+  
+  .sandview-close-button:hover {
     background-color: darkred;
-}
-
-@media (max-width: 768px) {
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
     .sandview-card {
-        flex-direction: column;
-        padding: 15px;
+      flex-direction: column;
+      padding: 15px;
     }
-
-    .sandview-images-section,
-    .sandview-details-section {
-        max-width: 100%;
+  
+    .sandview-thumbnail {
+      width: 70px; 
+      height: 70px; 
     }
-
-    .sandview-image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 5px;
+  }
+  
+  @media (max-width: 480px) {
+    .sandview-thumbnail {
+      width: 60px; 
+      height: 60px; 
     }
-
-    .sandview-image-item {
-        height: 150px;
-    }
-
+  
     .sandview-title {
-        font-size: 24px;
+      font-size: 24px; 
     }
-
-    .sandview-details-section p {
-        margin: 8px 0;
-    }
-
+  
     .sandview-contact-details-button {
-        width: 100%;
-        padding: 8px 0;
-        font-size: 16px;
+      padding: 10px;
+      font-size: 14px;
     }
-
-    .sandview-modal-content {
-        max-width: 95%;
-        max-height: 85%;
-        padding: 15px;
-    }
-
-    .sandview-close-button {
-        font-size: 16px;
-        padding: 4px 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .sandview-card {
-        padding: 10px;
-    }
-
-    .sandview-image-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    }
-
-    .sandview-image-item {
-        height: 120px;
-    }
-
-    .sandview-title {
-        font-size: 20px;
-    }
-
-    .sandview-details-section p {
-        font-size: 10px;
-    }
-
-    .sandview-contact-details-button {
-        padding: 6px 0;
-        font-size: 14px;
-    }
-
-    .sandview-modal-content {
-        padding: 5px;
-    }
-
-    .sandview-close-button {
-        font-size: 14px;
-        padding: 3px 7px;
-    }
-
-    .sandview-modal-content {
-        max-width: 90%;
-        max-height: 75%;
-        padding: 10px;
-        border-radius: 6px;
-    }
-
-    .sandview-modal-image {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    .sandview-close-button {
-        font-size: 14px;
-        padding: 5px 10px;
-    }
-}
+  }
+  

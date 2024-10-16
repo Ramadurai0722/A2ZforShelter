@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import config from '../../../config';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import config from "../../../config";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 import './steelall.css'; 
-import Navbar from '../../Navbar/Navbar';
-import Footer from '../../Footer/Footer';
 
 const CategorySteelall = () => {
   const [data, setData] = useState([]);
@@ -15,9 +15,10 @@ const CategorySteelall = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
 
-  const steelRoute = `${config.apiURL}/steelRoute/steel`; 
+  const steelRoute = `${config.apiURL}/steelRoute/steel`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +27,6 @@ const CategorySteelall = () => {
         const response = await axios.get(steelRoute);
         setData(response.data);
 
-        // Fetch like counts
         const counts = await Promise.all(response.data.map(steel =>
           axios.get(`${config.apiURL}/favourites/count/${steel._id}`)
         ));
@@ -64,10 +64,6 @@ const CategorySteelall = () => {
     navigate(`/steelview/${steelId}`);
   };
 
-  const handleViewDetailsClick = (steelId) => {
-    navigate(`/steelview/${steelId}`);
-  };
-
   const handleAddToFavourites = async (steelId) => {
     const userId = getUserId();
     const productId = steelId;
@@ -75,15 +71,15 @@ const CategorySteelall = () => {
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
-          params: { userId, productId } 
+          params: { userId, productId }
         });
-        setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
+        setFavourites(prevFavourites => prevFavourites.filter(id => id !== productId));
       } else {
         await axios.post(`${config.apiURL}/favourites/add`, { userId, productId });
-        setFavourites((prevFavourites) => [...prevFavourites, productId]);
+        setFavourites(prevFavourites => [...prevFavourites, productId]);
       }
       const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${productId}`);
-      setLikeCounts((prevCounts) => ({
+      setLikeCounts(prevCounts => ({
         ...prevCounts,
         [productId]: countData.count
       }));
@@ -91,6 +87,23 @@ const CategorySteelall = () => {
       console.error('Error updating favourites:', err);
     }
   };
+
+  
+  const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+  };
+  
+  const queryNumber = parseFloat(searchQuery);
+
+  const filteredData = data.filter(steel =>
+    steel.steelType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    steel.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    steel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    steel.steelCategory.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (isNumeric(searchQuery) && steel.price && steel.price >= queryNumber)
+  );
+
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -101,57 +114,82 @@ const CategorySteelall = () => {
           <h2>Steel Products</h2>
         </div>
 
-        <div className="steeleall-card-container">
-          {data.map((steel) => {
-            const steelId = steel._id;
+        <div className="cat-search-container">
+          <input
+            type="text"
+            placeholder="Search by steel type, brand, or category..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="cat-search-input"
+          />
+          <button className="cat-search-button">
+            Search
+          </button>
+        </div>
 
-            return (
-              <div key={steelId} className={`steeleall-card ${favourites.includes(steelId) ? 'favourite' : ''}`} onClick={() => handleCardClick(steelId)}>
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop
-                  autoPlay
-                  stopOnHover
-                  dynamicHeight
-                  className="steeleall-carousel"
-                >
-                  {steel.images.map((photo, idx) => (
-                    <div key={idx}>
-                      <img src={`${config.apiURL}/${photo}`} alt={`Steel ${steel.name}`} />
+        <div className="steeleall-card-container">
+          {filteredData.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No products found for "{searchQuery}".</p>
+          ) : (
+            filteredData.map((steel) => {
+              const steelId = steel._id;
+
+              return (
+                <div key={steelId} className={`steeleall-card ${favourites.includes(steelId) ? 'favourite' : ''}`} onClick={() => handleCardClick(steelId)}>
+                  <div className="steeleall-card-content">
+                    <div className="steeleall-header">
+                      <h3>{steel.steelType}</h3>
+                      <p className="steeleall-price" style={{ color: "green" }}>{steel.price} RPS</p>
                     </div>
-                  ))}
-                </Carousel>
-                <div className="steeleall-card-content">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToFavourites(steelId);
-                    }}
-                    className="steeleall-favourite-button"
-                  >
-                    {favourites.includes(steelId) ? (
-                      <FaHeart className="steeleall-favourite-icon filled" />
-                    ) : (
-                      <FaRegHeart className="steeleall-favourite-icon" />
-                    )}
-                    <span className="steeleall-like-count">{likeCounts[steelId] || 0} Likes</span>
-                  </button>
-                  <h3>{steel.brand}</h3>
-                  <p><strong>Seller Name:</strong> {steel.name}</p>
-                  <p><strong>Category:</strong> {steel.steelCategory}</p>
-                  <p><strong>Type:</strong> {steel.steelType}</p>
-                  <p><strong>Thickness:</strong> {steel.steelThickness}</p>
-                  <p><strong>Length:</strong> {steel.meter}</p>
-                  <p><strong>Price:</strong> {steel.price} RPS</p>
-                  <div className="steeleall-card-buttons">
-                    <button onClick={() => handleViewDetailsClick(steelId)} className="steeleall-view-details-button">
-                      View Details
-                    </button>
+
+                    <Carousel
+                      showThumbs={false}
+                      infiniteLoop
+                      autoPlay
+                      stopOnHover
+                      dynamicHeight
+                      className="steeleall-carousel"
+                    >
+                      {steel.images.map((photo, idx) => (
+                        <div key={idx}>
+                          <img src={`${config.apiURL}/${photo}`} alt={`Steel ${steel.name}`} />
+                        </div>
+                      ))}
+                    </Carousel>
+
+                    <div className="steeleall-like-container">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToFavourites(steelId);
+                        }}
+                        className="steeleall-favourite-button"
+                      >
+                        {favourites.includes(steelId) ? (
+                          <FaHeart className="steeleall-favourite-icon filled" />
+                        ) : (
+                          <FaRegHeart className="steeleall-favourite-icon" />
+                        )}
+                      </button>
+                      <span className="steeleall-like-count">{likeCounts[steelId] || 0} Likes</span>
+                    </div>
+
+                    <h6>{steel.brand}</h6>
+                    <p><strong>Seller Name:</strong> {steel.name}</p>
+                    <p><strong>Category:</strong> {steel.steelCategory}</p>
+                    <p><strong>Thickness:</strong> {steel.steelThickness}</p>
+                    <p><strong>Length:</strong> {steel.meter}</p>
+
+                    <div className="steeleall-card-buttons">
+                      <button onClick={() => handleCardClick(steelId)} className="steeleall-view-details-button">
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
       <Footer />

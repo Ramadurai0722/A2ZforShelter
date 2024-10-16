@@ -30,18 +30,19 @@
 .pipewireall-card {
     width: 300px;
     height: 590px;
-    background: #e7e3e3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #f8f9fa; 
+    border: 1px solid #dee2e6; 
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .pipewireall-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px); 
 }
 
 .pipewireall-carousel {
@@ -49,7 +50,7 @@
 }
 
 .pipewireall-card-content {
-    padding: 15px;
+    padding: 20px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -57,13 +58,17 @@
     overflow: hidden;
 }
 
-.pipewireall-card-content h3 {
+.pipewireall-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
+    margin-bottom: 15px; 
+}
+
+.pipewireall-header h3 {
+    font-size: 20px; 
+    color: #190ede; 
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -71,7 +76,8 @@
 
 .pipewireall-card-content p {
     margin: 5px 0;
-    color: #555;
+    font-weight: bold;
+    color: #495057; 
     word-wrap: break-word;
 }
 
@@ -96,11 +102,25 @@
     transition: color 0.3s, background-color 0.3s;
 }
 
+.pipewireall-like-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+}
+
 .pipewireall-favourite-button {
     font-size: 20px;
-    display: flex;
-    align-items: center;
     cursor: pointer;
+    width: auto; 
+    background: transparent; 
+    border: none; 
+    margin: 0 0 5px 0; 
+}
+
+.pipewireall-like-count {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 .pipewireall-view-details-button:hover,
@@ -117,13 +137,6 @@
     color: red;
 }
 
-.pipewireall-like-count {
-    margin-left: 5px;
-    font-size: 14px;
-    color: #333;
-}
-
-
 /* Media Queries */
 @media screen and (max-width: 600px) {
     .pipewireall-card {
@@ -136,27 +149,41 @@
     }
 }
 
-@media (max-width: 900px) and (min-width:600px){
+@media (max-width: 900px) and (min-width: 600px) {
     .pipewireall-card {
         width: 40%;
-        height: auto;
+        height: auto; 
     }
-    .pipewireall-card-content p{
+    .pipewireall-card-content p {
         font-size: 13px;
     }
-    .pipewireall-header h2 {
+    .pipewireall-header-container h2 {
         font-size: 25px;
     }
 }
-@media (max-width: 1200px) and (min-width:900px){
+
+@media (max-width: 1200px) and (min-width: 900px) {
     .pipewireall-card {
         width: 23%;
-        height: 620px;
+        height: auto; 
     }
-    .pipewireall-card-content p{
+    .pipewireall-card-content p {
         font-size: 13px;
     }
-    .pipewireall-header h2 {
+    .pipewireall-header-container h2 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 1200px) {
+    .pipewireall-card {
+        width: 23%;
+        height: auto; 
+    }
+    .pipewireall-card-content p {
+        font-size: 13px;
+    }
+    .pipewireall-header-container h2 {
         font-size: 25px;
     }
 }

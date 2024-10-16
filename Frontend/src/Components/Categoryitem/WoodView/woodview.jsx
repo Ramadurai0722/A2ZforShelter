@@ -43,8 +43,9 @@ const WoodView = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!wood) return 
+  if (!wood) return <p>Loading...</p>;
 
   return (
     <>
@@ -52,21 +53,23 @@ const WoodView = () => {
       <div className="woodview-container">
         <div className="woodview-card">
           <div className="woodview-images-section">
-            {wood.images && wood.images.length > 0 ? (
-              <div className="woodview-image-grid">
-                {wood.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`Wood Image ${index + 1}`}
-                    className="woodview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${wood.images[0]}`}
+              alt="Main Wood"
+              className="woodview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${wood.images[0]}`)}
+            />
+            <div className="woodview-thumbnail-carousel">
+              {wood.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`Wood Image ${index + 1}`}
+                  className="woodview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="woodview-details-section">
@@ -95,7 +98,7 @@ const WoodView = () => {
         {isModalOpen && (
           <div className="woodview-modal-overlay" onClick={handleCloseModal}>
             <div className="woodview-modal-content">
-              <span className="woodview-close-button" onClick={handleCloseModal}>X</span>
+              <span className="woodview-close-button" onClick={handleCloseModal}>✖</span>
               <img src={selectedImage} alt="Enlarged View" className="woodview-modal-image" />
             </div>
           </div>

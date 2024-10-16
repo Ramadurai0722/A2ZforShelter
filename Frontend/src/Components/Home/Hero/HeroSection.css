@@ -3,32 +3,14 @@
   padding: 0;
   color: #fff; 
   overflow: hidden;
+  margin-top: 30px;
 }
 
 .hero-container img {
-  width: 100%;
-  height: 60vh; 
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1;
-  filter: brightness(70%);
-  transition: filter 0.3s ease-in-out;
-}
-
-.hero-container img:hover {
-  filter: brightness(80%);
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60vh;
-  background: rgba(0, 0, 0, 0.5); 
-  z-index: 2;
 }
 
 .hero-container .MuiTypography-root {
@@ -41,12 +23,19 @@
 .search-box {
   padding: 10px;
   border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 16px rgba(245, 4, 4, 0.3);
   background: rgba(255, 255, 255, 0.9);
-  margin-top: 20px; 
   position: relative;
-  z-index: 3;
   transition: box-shadow 0.4s ease;
+  width: 80%;
+  margin-top: -60px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  margin-top: 20px;  
 }
 
 .search-box:hover {
@@ -108,10 +97,15 @@ input[type="text"] {
 
 .map-container {
   display: flex;
+  flex-direction: column; 
   margin-top: 20px;
   padding: 20px;
-  position: relative;
-  margin-top: 85px; 
+}
+
+@media (min-width: 600px) {
+  .map-container {
+    flex-direction: row; 
+  }
 }
 
 .map-container, .leaflet-container {
@@ -136,27 +130,17 @@ input[type="text"] {
   z-index: 1000; 
 }
 
-
-@media (max-width: 768px) {
-  .hero-container .MuiTypography-h3 {
-    font-size: 2.5rem; 
-  }
-
-  .hero-container .MuiTypography-subtitle1 {
-    font-size: 1.2rem; 
-  }
-
-  .search-box {
-    padding: 15px; 
-  }
+@media (max-width: 450px) {
   .map-container {
-    padding: 0;
-    width: 150%;
-    margin-left: 20px;
+    flex-direction: column; 
+    height: auto;
+    width: 100%; 
+    margin-left: 0; 
+    padding: 10px; 
   }
 
-  .map-container .leaflet-container {
-    height: 300px;
-    
+  .leaflet-container {
+    height: 200px; 
+    width: 100%; 
   }
 }

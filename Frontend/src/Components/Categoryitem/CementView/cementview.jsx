@@ -43,8 +43,9 @@ const CementView = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!cement) return 
+  if (!cement) return <p>Loading...</p>;
 
   return (
     <>
@@ -52,21 +53,23 @@ const CementView = () => {
       <div className="cementview-container">
         <div className="cementview-card"> 
           <div className="cementview-images-section">
-            {cement.images && cement.images.length > 0 ? (
-              <div className="cementview-image-grid"> 
-                {cement.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`Cement Image ${index + 1}`}
-                    className="cementview-image-item" 
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${cement.images[0]}`}
+              alt="Main Cement"
+              className="cementview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${cement.images[0]}`)}
+            />
+            <div className="cementview-thumbnail-carousel">
+              {cement.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`Cement Image ${index + 1}`}
+                  className="cementview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="cementview-details-section"> 
@@ -94,7 +97,7 @@ const CementView = () => {
         {isModalOpen && (
           <div className="cementview-modal-overlay" onClick={handleCloseModal}> 
             <div className="cementview-modal-content"> 
-              <span className="cementview-close-button" onClick={handleCloseModal}>X</span>
+              <span className="cementview-close-button" onClick={handleCloseModal}>✖</span>
               <img src={selectedImage} alt="Enlarged View" className="cementview-modal-image" /> 
             </div>
           </div>

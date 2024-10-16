@@ -5,6 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { CircularProgress, Snackbar, Alert } from "@mui/material";
 import config from "../../config";
+import "./AgentList.css";
 
 const AgentSlist = () => {
   const [data, setData] = useState([]);
@@ -72,17 +73,17 @@ const AgentSlist = () => {
     );
 
   return (
-    <div className="category-container">
-      <div className="header-container">
+    <div className="agents-category-container">
+      <div className="agents-header-container">
         <h2>Agents</h2>
       </div>
 
-      <div className="card-container">
+      <div className="agents-card-container">
         {data.map((agent, index) => (
           <div
             key={index}
-            className="card"
-            onClick={() => handleCardClick(agent._id.$oid)}
+            className="agents-card"
+            onClick={() => handleCardClick(agent._id)} 
           >
             <Carousel
               showThumbs={false}
@@ -90,7 +91,7 @@ const AgentSlist = () => {
               autoPlay
               stopOnHover
               dynamicHeight
-              className="carousel"
+              className="agents-carousel"
             >
               {agent.images.map((photo, idx) => (
                 <div key={idx}>
@@ -101,7 +102,7 @@ const AgentSlist = () => {
                 </div>
               ))}
             </Carousel>
-            <div className="card-content">
+            <div className="agents-card-content">
               <h3>
                 {agent.firstName} {agent.lastName}
               </h3>
@@ -111,13 +112,10 @@ const AgentSlist = () => {
               <p>
                 <strong>Phone:</strong> {agent.phoneNumber}
               </p>
-              {/* <p>
-                <strong>Product Interest:</strong> {agent.productInterest}
-              </p> */}
-              <div className="card-buttons">
+              <div className="agents-card-buttons">
                 <button
-                  onClick={() => handleViewDetailsClick(agent._id.$oid)}
-                  className="view-details-button"
+                  onClick={() => handleViewDetailsClick(agent._id)} 
+                  className="agents-view-details-button"
                 >
                   View Details
                 </button>

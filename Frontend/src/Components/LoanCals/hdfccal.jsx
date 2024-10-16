@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
+import { Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Table } from 'antd';
 import './Loancal.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
@@ -11,13 +10,10 @@ const HDFCLoanCalculator = () => {
     const [interestRate, setInterestRate] = useState(8.05);
     const [loanTenure, setLoanTenure] = useState(12);
     const [result, setResult] = useState(null);
+
     const convertNumberToWords = (num) => {
-        const a = [
-            '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
-        ];
-        const b = [
-            '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
-        ];
+        const a = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+        const b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
         const n = (num) => {
             if (num === 0) return 'zero';
@@ -31,8 +27,9 @@ const HDFCLoanCalculator = () => {
 
         return n(num);
     };
+
     const loanAmountInWords = loanAmount ? convertNumberToWords(parseInt(loanAmount, 10)) : '';
-    
+
     const calculateEMI = () => {
         const principal = parseFloat(loanAmount);
         const monthlyInterestRate = parseFloat(interestRate) / 12 / 100;
@@ -42,6 +39,7 @@ const HDFCLoanCalculator = () => {
             setResult(null);
             return;
         }
+
         const emi = (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths)) /
             (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
 
@@ -75,35 +73,22 @@ const HDFCLoanCalculator = () => {
         });
     };
 
-    const hdfc = [
-        { key: '1', loanslap: 'For Women* (upto 30 Lakhs)', termLoan: '8.60 - 9.10' },
-        { key: '2', loanslap: 'For Others* (upto 30 Lakhs)', termLoan: '8.65 - 9.15' },
-        { key: '3', loanslap: 'For Women* (30.01 Lakhs to 75 Lakhs)', termLoan: '8.85 - 9.35' },
-        { key: '4', loanslap: 'For Others* (30.01 Lakhs to 75 Lakhs', termLoan: '8.90 - 9.40' },
-        { key: '5', loanslap: 'For Women* (75.01 Lakhs & Above)', termLoan: '8.95 - 9.45' },
-        { key: '6', loanslap: 'For Others*(75.01 Lakhs & Above)', termLoan: '9.00 - 9.50' },
+    const hdfcRates = [
+        { label: 'For Women* (upto 30 Lakhs)', rate: '8.60 - 9.10' },
+        { label: 'For Others* (upto 30 Lakhs)', rate: '8.65 - 9.15' },
+        { label: 'For Women* (30.01 Lakhs to 75 Lakhs)', rate: '8.85 - 9.35' },
+        { label: 'For Others* (30.01 Lakhs to 75 Lakhs)', rate: '8.90 - 9.40' },
+        { label: 'For Women* (75.01 Lakhs & Above)', rate: '8.95 - 9.45' },
+        { label: 'For Others*(75.01 Lakhs & Above)', rate: '9.00 - 9.50' },
     ];
 
-    const hdfc1 = [
-        { key: '1', loanslap: 'Processing Fees', termLoan: '0.50% of loan amount or Rs 3,000 (whichever is higher)' },
-        { key: '2', loanslap: 'Foreclosure or Prepayment Charges', termLoan: 'Up to 2%' },
-        { key: '3', loanslap: 'Delayed payment charges', termLoan: 'Up to 24% p.a.' },
-        { key: '4', loanslap: 'Check dishonor charges', termLoan: 'Rs. 300' },
-        { key: '5', loanslap: 'PDC Swap Charges', termLoan: 'Up to Rs. 500' },
+    const hdfcFees = [
+        { label: 'Processing Fees', details: '0.50% of loan amount or Rs 3,000 (whichever is higher)' },
+        { label: 'Foreclosure or Prepayment Charges', details: 'Up to 2%' },
+        { label: 'Delayed payment charges', details: 'Up to 24% p.a.' },
+        { label: 'Check dishonor charges', details: 'Rs. 300' },
+        { label: 'PDC Swap Charges', details: 'Up to Rs. 500' },
     ];
-
-    const columns = {
-        hdfc: [
-            { title: 'Loan Slap', dataIndex: 'loanslap', key: 'loanslap' },
-            { title: 'Home Loan Interest Rates (% p.a.)', dataIndex: 'termLoan', key: 'termLoan' },
-        ],
-    };
-    const column = {
-        hdfc1: [
-            {  dataIndex: 'loanslap', key: 'loanslap' },
-            {  dataIndex: 'termLoan', key: 'termLoan' },
-        ],
-    };
 
     return (
         <>
@@ -111,7 +96,7 @@ const HDFCLoanCalculator = () => {
             <div className="container">
                 <AppBar position="static" className="app-bar">
                     <Toolbar>
-                    <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
+                        <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
                         <Button component={Link} to="/hdfchomeloan" color="inherit" className="nav-button">HDFC</Button>
                         <Button component={Link} to="/kotakhomeloan" color="inherit" className="nav-button">Kotak</Button>
                         <Button component={Link} to="/landthomeloan" color="inherit" className="nav-button">L&T</Button>
@@ -123,17 +108,17 @@ const HDFCLoanCalculator = () => {
                 <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: 'auto', padding: 2 }}>
                     <CardContent>
                         <Typography variant="h4" component="h2" textAlign="center" gutterBottom className="typography-heading">
-                            HDFC Home Loan Interest Calculator
+                            HDFC Home Loan Calculator
                         </Typography>
 
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Amount (₹)"
+                                <label htmlFor="loanAmount">Loan Amount (₹)</label>
+                                <input
+                                    id="loanAmount"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(e.target.value)}
-                                    variant="outlined"
                                     type="number"
                                 />
                                 <Typography variant="body2" color="textSecondary" style={{ marginTop: 10 }}>
@@ -142,22 +127,24 @@ const HDFCLoanCalculator = () => {
                             </Grid>
 
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Interest Rate (%)"
+                                <label htmlFor="interestRate">Interest Rate (%)</label>
+                                <input
+                                    id="interestRate"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                     step="0.01"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Tenure (Months)"
+                                <label htmlFor="loanTenure">Loan Tenure (Months)</label>
+                                <input
+                                    id="loanTenure"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={loanTenure}
                                     onChange={(e) => setLoanTenure(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                 />
                             </Grid>
                         </Grid>
@@ -172,7 +159,7 @@ const HDFCLoanCalculator = () => {
                         </Button>
 
                         {result && result.loanDetails && (
-                            <Card className="loan-summary-card">
+                            <Card className="loan-summary-card" style={{ marginTop: '20px' }}>
                                 <CardContent>
                                     <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
                                         Loan Summary
@@ -185,42 +172,63 @@ const HDFCLoanCalculator = () => {
                                     <Typography variant="h6" component="h4" gutterBottom>
                                         Detailed Breakdown:
                                     </Typography>
-                                    <Table
-                                        columns={[
-                                            { title: 'Month', dataIndex: 'month', key: 'month' },
-                                            { title: 'Monthly EMI', dataIndex: 'emi', key: 'emi' },
-                                            { title: 'Interest Payment', dataIndex: 'interest', key: 'interest' },
-                                            { title: 'Principal Repayment', dataIndex: 'principal', key: 'principal' }
-                                        ]}
-                                        dataSource={result.monthlyInterestPayment.map((interest, index) => ({
-                                            key: index + 1,
-                                            month: index + 1,
-                                            emi: result.emi,
-                                            interest: interest,
-                                            principal: result.principalRepayment[index]
-                                        }))}
-                                        pagination={false}
-                                    />
+                                    <div className="table-container"> {/* Add the table-container class here */}
+                                        <table className="table-responsive"> {/* Use table-responsive class */}
+                                            <thead className="table-header"> {/* Add table-header class */}
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Monthly EMI</th>
+                                                    <th>Interest Payment</th>
+                                                    <th>Principal Repayment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-body"> {/* Add table-body class */}
+                                                {result.monthlyInterestPayment.map((interest, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>₹{result.emi}</td>
+                                                        <td>₹{interest}</td>
+                                                        <td>₹{result.principalRepayment[index]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </CardContent>
                             </Card>
                         )}
 
-                        <div className="loan-details">
+
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
+                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
+                                HDFC Home Loan Interest Rates
+                            </Typography>
+                            <ul>
+                                {hdfcRates.map((item, index) => (
+                                    <li key={index}>
+                                        <strong>{item.label}</strong>: {item.rate}
+                                    </li>
+                                ))}
+                            </ul>
+                            <br />
 
                             <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                            HDFC Home Loan Interest Rates
+                                What Other Fees & Charges are Applicable?
                             </Typography>
-                            <Table columns={columns.hdfc} dataSource={hdfc} pagination={false} />
-
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                            What Other Fees & Charges are Applicable?
-                            </Typography>
-                            <Table columns={column.hdfc1} dataSource={hdfc1} pagination={false} />
-
+                            <ul>
+                                {hdfcFees.map((item, index) => (
+                                    <li key={index}>
+                                        <strong>{item.label}</strong>: {item.details}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                        <p>Last Updated 17-September-2024</p>
+
+
                     </CardContent>
                 </Card>
+                <br />
+                <p>Last Updated 14-October-2024</p>
             </div>
             <Footer />
         </>

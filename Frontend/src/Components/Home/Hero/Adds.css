@@ -1,0 +1,119 @@
+.adds-carousel-container {
+    max-width: 900px;
+    margin-top: -10px;
+}
+
+.adds-carousel-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.adds-ad-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 500px;
+}
+
+.adds-ad-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.adds-image-container {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.adds-ad-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.adds-no-image {
+    width: 100%;
+    height: 200px;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.adds-ad-price, .adds-ad-location {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+@media (max-width: 1260px) {
+    .adds-ad-card {
+        padding: 10px;
+        margin: 5px;
+    }
+    
+    .adds-ad-price, .adds-ad-location {
+        font-size: 16px;
+    }
+}
+@media (max-width: 1100px) {
+    .adds-ad-card {
+        padding: 10px;
+        margin: 5px;
+    }
+    
+    .adds-ad-price, .adds-ad-location {
+        font-size: 15px;
+    }
+}
+@media (max-width: 1000px) {
+    .adds-ad-card {
+        padding: 10px;
+        margin: 5px;
+    }
+    
+    .adds-ad-price, .adds-ad-location {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 900px) {
+    .adds-ad-card {
+        padding: 10px;
+        margin: 5px;
+    }
+    
+    .adds-ad-price, .adds-ad-location {
+        font-size: 15px;
+    }
+}
+@media (max-width: 768px) {
+    .adds-ad-card {
+        padding: 10px;
+        margin: 5px;
+    }
+    
+    .adds-ad-price, .adds-ad-location {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 500px) {
+    .adds-carousel-title {
+        font-size: 1.5rem;
+    }
+
+    .adds-ad-location{
+        font-size: 10px;
+    }
+}

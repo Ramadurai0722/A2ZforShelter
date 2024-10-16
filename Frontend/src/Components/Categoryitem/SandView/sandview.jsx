@@ -43,46 +43,50 @@ const SandView = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!sand) return
+  if (loading) return <p>Loading...</p>;
+  if (!sand) return <p>No sand data available</p>;
 
   return (
     <>
       <Navbar />
       <div className="sandview-container">
-        <div className="sandview-card">
+        <div className="sandview-card"> 
           <div className="sandview-images-section">
-            {sand.images && sand.images.length > 0 ? (
-              <div className="sandview-image-grid">
-                {sand.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`Sand Image ${index + 1}`}
-                    className="sandview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${sand.images[0]}`}
+              alt="Main Sand"
+              className="sandview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${sand.images[0]}`)}
+            />
+            <div className="sandview-thumbnail-carousel">
+              {sand.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`Sand Image ${index + 1}`}
+                  className="sandview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
-          <div className="sandview-details-section">
-            <h2 className="sandview-title">{sand.sandType || 'N/A'}</h2>
+          <div className="sandview-details-section"> 
+            <h2 className="sandview-title">{sand.sandType || 'N/A'}</h2> 
             <p><strong>Seller Name:</strong> {sand.name || 'N/A'}</p>
             <p><strong>Quantity:</strong> {sand.quantity || 'N/A'}</p>
             <p><strong>Price:</strong> {sand.price || 'N/A'} RPS</p>
             <p><strong>Description:</strong> {sand.description || 'N/A'}</p>
             <p><strong>Address:</strong> {sand.sellerAddress || 'N/A'}</p>
 
-            <button className="sandview-contact-details-button" onClick={handleToggleContact}>
+            <button className="sandview-contact-details-button" onClick={handleToggleContact}> 
               {showContact ? 'Hide Contact Details' : 'Show Contact Details'}
             </button>
 
             {showContact && (
-              <div className="sandview-contact-details">
+              <div className="sandview-contact-details"> 
                 <p><strong>Phone Number:</strong> {sand.phoneNumber || 'N/A'}</p>
                 <p><strong>Email ID:</strong> {sand.email || 'N/A'}</p>
               </div>
@@ -91,10 +95,10 @@ const SandView = () => {
         </div>
 
         {isModalOpen && (
-          <div className="sandview-modal-overlay" onClick={handleCloseModal}>
-            <div className="sandview-modal-content">
-              <span className="sandview-close-button" onClick={handleCloseModal}>X</span>
-              <img src={selectedImage} alt="Enlarged View" className="sandview-modal-image" />
+          <div className="sandview-modal-overlay" onClick={handleCloseModal}> 
+            <div className="sandview-modal-content"> 
+              <span className="sandview-close-button" onClick={handleCloseModal}>✖</span>
+              <img src={selectedImage} alt="Enlarged View" className="sandview-modal-image" /> 
             </div>
           </div>
         )}

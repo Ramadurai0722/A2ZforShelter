@@ -43,34 +43,37 @@ const SteelView = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!steel) return 
+  if (!steel) return <p>Loading...</p>;
 
   return (
     <>
       <Navbar />
       <div className="steelview-container">
-        <div className="steelview-card">
+        <div className="steelview-card"> 
           <div className="steelview-images-section">
-            {steel.images && steel.images.length > 0 ? (
-              <div className="steelview-image-grid">
-                {steel.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`Steel Image ${index + 1}`}
-                    className="steelview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${steel.images[0]}`}
+              alt="Main Steel"
+              className="steelview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${steel.images[0]}`)}
+            />
+            <div className="steelview-thumbnail-carousel">
+              {steel.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`Steel Image ${index + 1}`}
+                  className="steelview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
-          <div className="steelview-details-section">
-            <h2 className="steelview-title">{steel.brand || 'N/A'}</h2>
+          <div className="steelview-details-section"> 
+            <h2 className="steelview-title">{steel.brand || 'N/A'}</h2> 
             <p><strong>Steel Type:</strong> {steel.steelType || 'N/A'}</p>
             <p><strong>Steel Category:</strong> {steel.steelCategory || 'N/A'}</p>
             <p><strong>Steel Thickness:</strong> {steel.steelThickness || 'N/A'}</p>
@@ -79,12 +82,12 @@ const SteelView = () => {
             <p><strong>Description:</strong> {steel.description || 'N/A'}</p>
             <p><strong>Address:</strong> {steel.shopAddress || 'N/A'}</p>
 
-            <button className="steelview-contact-details-button" onClick={handleToggleContact}>
+            <button className="steelview-contact-details-button" onClick={handleToggleContact}> 
               {showContact ? 'Hide Contact Details' : 'Show Contact Details'}
             </button>
 
             {showContact && (
-              <div className="steelview-contact-details">
+              <div className="steelview-contact-details"> 
                 <p><strong>Phone Number:</strong> {steel.phoneNumber || 'N/A'}</p>
                 <p><strong>Email ID:</strong> {steel.email || 'N/A'}</p>
               </div>
@@ -93,10 +96,10 @@ const SteelView = () => {
         </div>
 
         {isModalOpen && (
-          <div className="steelview-modal-overlay" onClick={handleCloseModal}>
-            <div className="steelview-modal-content">
-              <span className="steelview-close-button" onClick={handleCloseModal}>X</span>
-              <img src={selectedImage} alt="Enlarged View" className="steelview-modal-image" />
+          <div className="steelview-modal-overlay" onClick={handleCloseModal}> 
+            <div className="steelview-modal-content"> 
+              <span className="steelview-close-button" onClick={handleCloseModal}>✖</span>
+              <img src={selectedImage} alt="Enlarged View" className="steelview-modal-image" /> 
             </div>
           </div>
         )}

@@ -1,0 +1,125 @@
+.agents-category-container {
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.agents-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.agents-header-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.agents-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.agents-card {
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.agents-card:hover {
+    transform: translateY(-10px);
+}
+
+.agents-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.agents-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.agents-card-content h3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.agents-card-content p {
+    margin: 5px 0;
+    color: #555;
+    word-wrap: break-word;
+}
+
+.agents-card-content p strong {
+    color: #000;
+}
+
+.agents-card-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.agents-view-details-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.agents-view-details-button:hover {
+    background-color: transparent;
+    color: #0056b3;
+}
+
+.agents-carousel .slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.agents-carousel {
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    .agents-card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .agents-card {
+        width: 100%;
+        max-width: 700px;
+        height: auto;
+    }
+}

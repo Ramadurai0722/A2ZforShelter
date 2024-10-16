@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import config from "../../../config";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import './cementall.css'; 
@@ -15,6 +15,7 @@ const CategoryCementall = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   const cementRoute = `${config.apiURL}/cementRoutes/cement`;
@@ -73,7 +74,7 @@ const CategoryCementall = () => {
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
-          params: { userId, productId } 
+          params: { userId, productId }
         });
         setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
       } else {
@@ -89,7 +90,31 @@ const CategoryCementall = () => {
       console.error('Error updating favourites:', err);
     }
   };
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      setSearchQuery(e.target.value);
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+
+  const filteredData = data.filter(cement => {
+    const { brand, name, cementType, price } = cement;
+    const query = searchQuery.toLowerCase();
+    
+    const queryNumber = parseFloat(searchQuery);
+    const isNumericQuery = !isNaN(queryNumber) && searchQuery.trim() !== '';
+  
+    return (
+      (brand && brand.toLowerCase().includes(query)) ||
+      (name && name.toLowerCase().includes(query)) ||
+      (cementType && cementType.toLowerCase().includes(query)) ||
+      (isNumericQuery && price >=queryNumber) 
+    );
+  });
+  
 
   return (
     <>
@@ -98,47 +123,70 @@ const CategoryCementall = () => {
         <div className="cementall-header-container">
           <h2>Cement Products</h2>
         </div>
+        
+        <div className="cat-search-container">
+          <input
+            type="text"
+            placeholder="Search by brand, seller name, type, or price..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearch}
+            className="cat-search-input"
+          />
+          <button onClick={handleSearch} className="cat-search-button"> 
+            Search
+          </button>
+        </div>
 
         <div className="cementall-card-container">
-          {data.map((cement) => {
+          {filteredData.length === 0 && searchQuery && (
+            <p>No items matched for "{searchQuery}"</p>
+          )}
+          {filteredData.map((cement) => {
             const cementId = cement._id;
 
             return (
-              <div key={cementId} className={`cementall-card ${favourites.includes(cementId) ? 'cementall-favourite' : ''}`} onClick={() => handleCardClick(cementId)}>
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop
-                  autoPlay
-                  stopOnHover
-                  dynamicHeight
-                  className="cementall-carousel"
-                >
-                  {cement.images.map((photo, idx) => (
-                    <div key={idx}>
-                      <img src={`${config.apiURL}/${photo}`} alt={`Cement ${cement.name}`} />
-                    </div>
-                  ))}
-                </Carousel>
+              <div key={cementId} className={`cementall-card ${favourites.includes(cementId) ? 'favourite' : ''}`} onClick={() => handleCardClick(cementId)}>
                 <div className="cementall-card-content">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToFavourites(cementId);
-                    }}
-                    className="cementall-favourite-button"
+                  <div className="cementall-header">
+                    <h3>{cement.quantity} KG</h3>
+                    <p className="cementall-price" style={{color: "green"}}>{cement.price} RPS</p>
+                  </div>
+                  <Carousel
+                    showThumbs={false}
+                    infiniteLoop
+                    autoPlay
+                    stopOnHover
+                    dynamicHeight
+                    className="cementall-carousel"
                   >
-                    {favourites.includes(cementId) ? (
-                      <FaHeart className="cementall-favourite-icon filled" />
-                    ) : (
-                      <FaRegHeart className="cementall-favourite-icon" />
-                    )}
+                    {cement.images.map((photo, idx) => (
+                      <div key={idx}>
+                        <img src={`${config.apiURL}/${photo}`} alt={`Cement ${cement.name}`} />
+                      </div>
+                    ))}
+                  </Carousel>
+
+                  <div className="cementall-like-container">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToFavourites(cementId);
+                      }}
+                      className="cementall-favourite-button"
+                    >
+                      {favourites.includes(cementId) ? (
+                        <FaHeart className="cementall-favourite-icon filled" />
+                      ) : (
+                        <FaRegHeart className="cementall-favourite-icon" />
+                      )}
+                    </button>
                     <span className="cementall-like-count">{likeCounts[cementId] || 0} Likes</span>
-                  </button>
-                  <h3>{cement.brand}</h3>
+                  </div>
+                  <h6>{cement.brand}</h6>
                   <p><strong>Seller Name:</strong> {cement.name}</p>
                   <p><strong>Type:</strong> {cement.cementType}</p>
-                  <p><strong>Quantity:</strong> {cement.quantity} <span>Kg</span></p>
-                  <p><strong>Price:</strong> {cement.price} RPS</p>
+
                   <div className="cementall-card-buttons">
                     <button onClick={() => handleViewDetailsClick(cementId)} className="cementall-view-details-button">
                       View Details

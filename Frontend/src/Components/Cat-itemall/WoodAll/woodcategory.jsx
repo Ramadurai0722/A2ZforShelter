@@ -4,10 +4,10 @@ import axios from 'axios';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import config from "../../../config";
-import './woodall.css'; 
+import config from '../../../config';
 import Navbar from '../../Navbar/Navbar';
 import Footer from '../../Footer/Footer';
+import './woodall.css';
 
 const CategoryWoodall = () => {
   const [data, setData] = useState([]);
@@ -15,6 +15,7 @@ const CategoryWoodall = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
 
   const woodRoute = `${config.apiURL}/woodRoute/wood`;
@@ -25,6 +26,7 @@ const CategoryWoodall = () => {
         setLoading(true);
         const response = await axios.get(woodRoute);
         setData(response.data);
+        
         const counts = await Promise.all(response.data.map(wood =>
           axios.get(`${config.apiURL}/favourites/count/${wood._id}`)
         ));
@@ -62,10 +64,6 @@ const CategoryWoodall = () => {
     navigate(`/woodview/${woodId}`);
   };
 
-  const handleViewDetailsClick = (woodId) => {
-    navigate(`/woodview/${woodId}`);
-  };
-
   const handleAddToFavourites = async (woodId) => {
     const userId = getUserId();
     const productId = woodId;
@@ -73,7 +71,7 @@ const CategoryWoodall = () => {
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
-          params: { userId, productId } 
+          params: { userId, productId }
         });
         setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
       } else {
@@ -89,6 +87,20 @@ const CategoryWoodall = () => {
       console.error('Error updating favourites:', err);
     }
   };
+  const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+  };
+  
+  const queryNumber = parseFloat(searchQuery);
+  
+
+  const filteredData = data.filter(wood =>
+    wood.wood.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    wood.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (isNumeric(searchQuery) && wood.price && wood.price >= queryNumber)
+  );
+
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -98,56 +110,79 @@ const CategoryWoodall = () => {
         <div className="woodall-header-container">
           <h2>Wood Products</h2>
         </div>
-        
-        <div className="woodall-card-container">
-          {data.map((wood) => {
-            const woodId = wood._id;
 
-            return (
-              <div key={woodId} className={`woodall-card ${favourites.includes(woodId) ? 'favourite' : ''}`} onClick={() => handleCardClick(woodId)}>
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop
-                  autoPlay
-                  stopOnHover
-                  dynamicHeight
-                  className="woodall-carousel"
-                >
-                  {wood.images.map((photo, idx) => (
-                    <div key={idx}>
-                      <img src={`${config.apiURL}/${photo}`} alt={`Wood ${wood.name}`} />
+        <div className="cat-search-container">
+          <input
+            type="text"
+            placeholder="Search by wood type or seller..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="cat-search-input"
+          />
+          <button className="cat-search-button">
+            Search
+          </button>
+        </div>
+
+        <div className="woodall-card-container">
+          {filteredData.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No products found for "{searchQuery}".</p>
+          ) : (
+            filteredData.map((wood) => {
+              const woodId = wood._id;
+
+              return (
+                <div key={woodId} className={`woodall-card ${favourites.includes(woodId) ? 'favourite' : ''}`} onClick={() => handleCardClick(woodId)}>
+                  <div className="woodall-card-content">
+                    <div className="woodall-header">
+                      <h3>{wood.quantity}</h3>
+                      <p className="woodall-price" style={{ color: "green" }}>{wood.price} RPS</p>
                     </div>
-                  ))}
-                </Carousel>
-                <div className="woodall-card-content">
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation(); 
-                      handleAddToFavourites(woodId);
-                    }} 
-                    className="woodall-favourite-button"
-                  >
-                    {favourites.includes(woodId) ? (
-                      <FaHeart className="woodall-favourite-icon filled" />
-                    ) : (
-                      <FaRegHeart className="woodall-favourite-icon" />
-                    )}
-                    <span className="woodall-like-count">{likeCounts[woodId] || 0} Likes</span>
-                  </button>
-                  <h3>{wood.wood}</h3>
-                  <p><strong>Seller Name:</strong> {wood.name}</p>
-                  <p><strong>Thickness:</strong> {wood.thickness}</p>
-                  <p><strong>Quantity:</strong> {wood.quantity}</p>
-                  <p><strong>Price:</strong> {wood.price} RPS</p>
-                  <div className="woodall-card-buttons">
-                    <button onClick={() => handleViewDetailsClick(woodId)} className="woodall-view-details-button">
-                      View Details
-                    </button>
+                    <Carousel
+                      showThumbs={false}
+                      infiniteLoop
+                      autoPlay
+                      stopOnHover
+                      dynamicHeight
+                      className="woodall-carousel"
+                    >
+                      {wood.images.map((photo, idx) => (
+                        <div key={idx}>
+                          <img src={`${config.apiURL}/${photo}`} alt={`Wood ${wood.name}`} />
+                        </div>
+                      ))}
+                    </Carousel>
+
+                    <div className="woodall-like-container">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToFavourites(woodId);
+                        }}
+                        className="woodall-favourite-button"
+                      >
+                        {favourites.includes(woodId) ? (
+                          <FaHeart className="woodall-favourite-icon filled" />
+                        ) : (
+                          <FaRegHeart className="woodall-favourite-icon" />
+                        )}
+                      </button>
+                      <span className="woodall-like-count">{likeCounts[woodId] || 0} Likes</span>
+                    </div>
+                    <h6>{wood.wood}</h6>
+                    <p><strong>Seller Name:</strong> {wood.name}</p>
+                    <p><strong>Thickness:</strong> {wood.thickness}</p>
+
+                    <div className="woodall-card-buttons">
+                      <button onClick={() => handleCardClick(woodId)} className="woodall-view-details-button">
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
       <Footer />

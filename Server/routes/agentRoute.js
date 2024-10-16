@@ -1,5 +1,5 @@
 const express = require("express");
-const { createAgent, getAllAgent } = require("../Controller/agentController");
+const { createAgent, getAllAgent, getAgentById } = require("../Controller/agentController");
 const multer = require("multer");
 const path = require("path");
 const authMiddleware = require("../middleware/authmiddleware");
@@ -21,5 +21,7 @@ const upload = multer({ storage: storage });
 
 router.post("/createAgent", upload.array("images", 10), createAgent);
 router.get('/GetAgent', getAllAgent);
+router.get('/agents/:id', getAgentById);
+
 
 module.exports = router;

@@ -14,12 +14,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import customIcon from "../images/location.png";
 import config from "../../../config";
-import image1 from "../images/image1.webp";
-import image2 from "../images/image2.webp";
-import image3 from "../images/image3.jpg";
-import image4 from "../images/image4.webp";
-import image5 from "../images/image5.jpg";
+import bannerImage from '../../../assets/house banner1.jpg';
 import "./HeroSection.css";
+import AdsCarousel from "./Adds";
 
 const customMarkerIcon = new L.Icon({
   iconUrl: customIcon,
@@ -28,7 +25,6 @@ const customMarkerIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
-const bannerImages = [image1, image2, image3, image4, image5];
 
 function MapView({ center, zoom, onMapClick }) {
   const map = useMap();
@@ -95,17 +91,17 @@ function HeroSection() {
           const response = await fetch(`${config.apiURL}/api/districts?stateGeonameId=${selectedState}`);
           const data = await response.json();
           setDistricts(data || []);
-          setSelectedDistrict(""); 
-          setSelectedCity(""); 
+          setSelectedDistrict("");
+          setSelectedCity("");
         } catch (error) {
           console.error("Failed to fetch districts:", error);
         }
       };
       fetchDistricts();
     } else {
-      setDistricts([]); 
-      setSelectedDistrict(""); 
-      setSelectedCity(""); 
+      setDistricts([]);
+      setSelectedDistrict("");
+      setSelectedCity("");
     }
   }, [selectedState]);
 
@@ -116,15 +112,15 @@ function HeroSection() {
           const response = await fetch(`${config.apiURL}/api/cities?districtGeonameId=${selectedDistrict}`);
           const data = await response.json();
           setCities(data || []);
-          setSelectedCity(""); // Reset city selection
+          setSelectedCity("");
         } catch (error) {
           console.error("Failed to fetch cities:", error);
         }
       };
       fetchCities();
     } else {
-      setCities([]); // Clear cities if no district is selected
-      setSelectedCity(""); // Reset city selection
+      setCities([]);
+      setSelectedCity("");
     }
   }, [selectedDistrict]);
 
@@ -133,62 +129,59 @@ function HeroSection() {
     setMarkerPosition([lat, lng]);
     setMapCenter([lat, lng]);
     setMapZoom(13);
-  
+
     const fetchLocationData = async (lat, lng) => {
       try {
         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
         const data = await response.json();
         if (data && data.address) {
           const { address } = data;
-  
-          // Find the state based on the address
+
           const state = states.find((s) => s.name === address.state);
           if (state) {
             setSelectedState(state.geonameId);
-  
-            // Fetch districts for the selected state
+
             const responseDistricts = await fetch(`${config.apiURL}/api/districts?stateGeonameId=${state.geonameId}`);
             const districtsData = await responseDistricts.json();
             setDistricts(districtsData || []);
-  
-            // Find the district based on the address
+
             const district = districtsData.find((d) => d.name === address.district);
             if (district) {
               setSelectedDistrict(district.geonameId);
-  
-              // Fetch cities for the selected district
+
+
               const responseCities = await fetch(`${config.apiURL}/api/cities?districtGeonameId=${district.geonameId}`);
               const citiesData = await responseCities.json();
               setCities(citiesData || []);
-              
-              // Find the city based on the address
+
+
               const city = citiesData.find((c) => c.name === address.city);
               if (city) {
                 setSelectedCity(city.geonameId);
               } else {
-                setSelectedCity(""); // Reset if no city is found
+                setSelectedCity("");
               }
             } else {
-              setSelectedDistrict(""); // Reset if no district is found
-              setCities([]); // Clear cities if no district is found
-              setSelectedCity(""); // Reset city selection
+              setSelectedDistrict("");
+              setCities([]);
+              setSelectedCity("");
             }
           } else {
-            setSelectedState(""); // Reset if no state is found
-            setDistricts([]); // Clear districts if no state is found
-            setSelectedDistrict(""); // Reset district selection
-            setCities([]); // Clear cities if no state is found
-            setSelectedCity(""); // Reset city selection
+            setSelectedState("");
+            setDistricts([]);
+            setSelectedDistrict("");
+            setCities([]);
+            setSelectedCity("");
           }
         }
       } catch (error) {
         console.error("Failed to fetch location data:", error);
       }
     };
-  
+
     fetchLocationData(lat, lng);
   };
-  
+
   const handleLocationSearch = async () => {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${searchLocation}`);
     const data = await response.json();
@@ -203,134 +196,131 @@ function HeroSection() {
   return (
     <React.Fragment>
       <Box className="hero-container">
-        <Slider {...settings}>
-          {bannerImages.map((image, index) => (
-            <Box
-              key={index}
-              style={{
-                position: "relative",
-                height: "100vh",
-              }}
-            >
-              <img src={image} alt={`Banner ${index}`} />
-              <Box className="hero-overlay" />
-              <Container
-                maxWidth="lg"
-                style={{
-                  position: "relative",
-                  zIndex: 3,
-                  color: "white",
-                  paddingTop: "100px",
-                  textAlign: "center",
-                }}
-              >
-                <Typography variant="h3" gutterBottom>
-                  Your Property, Our Priority.
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  From as low as $10 per day with limited time offer discounts.
-                </Typography>
-
-                <Paper elevation={3} className="search-box">
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6} md={3}>
-                      <label htmlFor="state-select">State</label>
-                      <select
-                        id="state-select"
-                        value={selectedState}
-                        onChange={(e) => setSelectedState(e.target.value)}
-                        style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
-                      >
-                        <option value="" disabled>Select State</option>
-                        {states.map((state) => (
-                          <option key={state.geonameId} value={state.geonameId}>
-                            {state.name}
-                          </option>
-                        ))}
-                      </select>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} md={3}>
-                      <label htmlFor="district-select">District</label>
-                      <select
-                        id="district-select"
-                        value={selectedDistrict}
-                        onChange={(e) => setSelectedDistrict(e.target.value)}
-                        disabled={!selectedState}
-                        style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
-                      >
-                        <option value="" disabled>Select District</option>
-                        {districts.map((district) => (
-                          <option key={district.geonameId} value={district.geonameId}>
-                            {district.name}
-                          </option>
-                        ))}
-                      </select>
-                    </Grid>
-
-                    <Grid item xs={12} sm={6} md={3}>
-                      <label htmlFor="city-select">City</label>
-                      <select
-                        id="city-select"
-                        value={selectedCity}
-                        onChange={(e) => setSelectedCity(e.target.value)}
-                        disabled={!selectedDistrict}
-                        style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
-                      >
-                        <option value="" disabled>Select City</option>
-                        {cities.map((city) => (
-                          <option key={city.geonameId} value={city.geonameId}>
-                            {city.name}
-                          </option>
-                        ))}
-                      </select>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={3}>
-                      <label htmlFor="location-search">Search Location</label>
-                      <input
-                        id="location-search"
-                        type="text"
-                        className="search-location"
-                        value={searchLocation}
-                        onChange={(e) => setSearchLocation(e.target.value)}
-                        onKeyPress={(e) => {
-                          if (e.key === "Enter") {
-                            handleLocationSearch();
-                          }
-                        }}
-                        style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
-                      />
-                    </Grid>
-                  </Grid>
-
-                  <Grid container justifyContent="center" style={{ marginTop: '10px' }}>
-                    <Grid item xs={12} sm={8} md={6}>
-                      <label htmlFor="item-search">Search Item</label>
-                      <input
-                        id="item-search"
-                        type="text"
-                        style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
-                      />
-                    </Grid>
-                  </Grid>
-                </Paper>
-
-              </Container>
-            </Box>
-          ))}
-        </Slider>
-
-        <Box className="map-container" style={{ marginTop: '85px' }}>
-          <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: "500px", width: "60%", margin: "0" }}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <MapView center={mapCenter} zoom={mapZoom} onMapClick={handleMapClick} />
-            <Marker position={markerPosition} icon={customMarkerIcon}>
-              <Popup>A custom marker!</Popup>
-            </Marker>
-          </MapContainer>
+        <Box
+          style={{
+            position: "relative",
+            height: "85vh",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={bannerImage}
+            alt="Banner"
+            style={{
+              width: '100%',
+              height: '90%',
+              top: 0,
+              left: 0,
+            }}
+          />
         </Box>
-
       </Box>
+
+      <div className="search-container">
+        <Paper elevation={3} className="search-box">
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={3}>
+              <label htmlFor="state-select">State</label>
+              <select
+                id="state-select"
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+              >
+                <option value="" disabled>Select State</option>
+                {states.map((state) => (
+                  <option key={state.geonameId} value={state.geonameId}>
+                    {state.name}
+                  </option>
+                ))}
+              </select>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <label htmlFor="district-select">District</label>
+              <select
+                id="district-select"
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                disabled={!selectedState}
+                style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+              >
+                <option value="" disabled>Select District</option>
+                {districts.map((district) => (
+                  <option key={district.geonameId} value={district.geonameId}>
+                    {district.name}
+                  </option>
+                ))}
+              </select>
+            </Grid>
+
+            <Grid item xs={12} sm={6} md={3}>
+              <label htmlFor="city-select">City</label>
+              <select
+                id="city-select"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                disabled={!selectedDistrict}
+                style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+              >
+                <option value="" disabled>Select City</option>
+                {cities.map((city) => (
+                  <option key={city.geonameId} value={city.geonameId}>
+                    {city.name}
+                  </option>
+                ))}
+              </select>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <label htmlFor="location-search">Search Location</label>
+              <input
+                id="location-search"
+                type="text"
+                className="search-location"
+                value={searchLocation}
+                onChange={(e) => setSearchLocation(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    handleLocationSearch();
+                  }
+                }}
+                style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container justifyContent="center" style={{ marginTop: '10px' }}>
+            <Grid item xs={12} sm={8} md={6}>
+              <label htmlFor="item-search">Search Item</label>
+              <input
+                id="item-search"
+                type="text"
+                style={{ width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ccc" }}
+              />
+            </Grid>
+          </Grid>
+        </Paper>
+      </div>
+
+      <Box className="map-container" style={{ marginTop: '35px' }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: "500px", width: "100%" }}>
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              <MapView center={mapCenter} zoom={mapZoom} onMapClick={handleMapClick} />
+              <Marker position={markerPosition} icon={customMarkerIcon}>
+                <Popup>A custom marker!</Popup>
+              </Marker>
+            </MapContainer>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <AdsCarousel />
+          </Grid>
+        </Grid>
+      </Box>
+
+
+
     </React.Fragment>
   );
 }

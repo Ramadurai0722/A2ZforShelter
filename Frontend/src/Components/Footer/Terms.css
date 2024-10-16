@@ -1,0 +1,25 @@
+.termbox{
+    background-color:white;
+}
+.box1 , .box3{
+    background-color:rgb(247, 247, 247);
+    width: 1300px;
+    padding: 10px;
+    margin-left: 100px
+}
+.box2{
+    background-color: rgb(254, 254, 242);
+    width: 1300px;
+    padding: 10px;
+    margin-left: 100px
+}
+
+.center-content {
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; /* Makes sure content is centered vertically within the viewport */
+  }
+  

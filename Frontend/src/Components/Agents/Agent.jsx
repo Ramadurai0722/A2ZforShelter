@@ -4,6 +4,8 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Snackbar, Alert } from "@mui/material";
 import axios from "axios";
 import config from "../../config"; 
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
 const { Title } = Typography;
 
@@ -150,11 +152,15 @@ const Agent = () => {
       setLoading(false); 
     }
   };
+
   const inputStyle = { height: "50px" };
+  
   return (
+    <>
+    <Navbar />
     <div
       className="container"
-      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto" }}
+      style={{ width: "80%", maxWidth: "1200px", margin: "0 auto",marginTop:"130px",marginBottom:"50px"}}
     >
       <Title
         level={2}
@@ -285,6 +291,8 @@ const Agent = () => {
         </Alert>
       </Snackbar>
     </div>
+    <Footer />
+    </>
   );
 };
 

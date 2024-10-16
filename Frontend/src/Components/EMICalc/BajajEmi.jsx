@@ -1,48 +1,46 @@
 import React, { useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import './SbiEmi.css'; // Import the CSS file
+import './SbiEmi.css';
+import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
-// Register the chart elements
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const BajajEmi = () => {
-  const [loanAmount, setLoanAmount] = useState(6500000); // Default loan amount
-  const [interestRate, setInterestRate] = useState(9); // Default interest rate
-  const [loanTenure, setLoanTenure] = useState(5); // Default tenure (years)
-  const [emi, setEmi] = useState(0); // EMI result
-  const [interestAmount, setInterestAmount] = useState(0); // Interest result
-  const [principalAmount, setPrincipalAmount] = useState(0); // Principal component
-  const [totalRepayment, setTotalRepayment] = useState(0); // Total repayment
-  const [eligibleEmi, setEligibleEmi] = useState(0); // Eligible EMI
+  const [loanAmount, setLoanAmount] = useState(6500000);
+  const [interestRate, setInterestRate] = useState(9);
+  const [loanTenure, setLoanTenure] = useState(5);
+  const [emi, setEmi] = useState(0);
+  const [interestAmount, setInterestAmount] = useState(0);
+  const [principalAmount, setPrincipalAmount] = useState(0);
+  const [totalRepayment, setTotalRepayment] = useState(0);
+  const [eligibleEmi, setEligibleEmi] = useState(0);
 
-  // EMI Calculation function
   const calculateEMI = () => {
     let principal = loanAmount;
     let annualInterestRate = interestRate;
     let tenureInYears = loanTenure;
 
-    let monthlyInterestRate = annualInterestRate / (12 * 100); // Convert annual rate to monthly and percentage
-    let tenureInMonths = tenureInYears * 12; // Convert years to months
+    let monthlyInterestRate = annualInterestRate / (12 * 100);
+    let tenureInMonths = tenureInYears * 12;
 
-    // EMI formula
     let emiCalculated = (
       principal *
       monthlyInterestRate *
       Math.pow(1 + monthlyInterestRate, tenureInMonths)
     ) / (Math.pow(1 + monthlyInterestRate, tenureInMonths) - 1);
 
-    let totalRepaymentAmount = emiCalculated * tenureInMonths; // Total repayment amount
-    let totalInterest = totalRepaymentAmount - principal; // Interest component
+    let totalRepaymentAmount = emiCalculated * tenureInMonths;
+    let totalInterest = totalRepaymentAmount - principal;
 
-    setEmi(emiCalculated.toFixed(2)); // Update EMI state
-    setInterestAmount(totalInterest.toFixed(2)); // Update interest
-    setPrincipalAmount(principal); // Update principal
-    setTotalRepayment(totalRepaymentAmount.toFixed(2)); // Update total repayment
-    setEligibleEmi(emiCalculated.toFixed(2)); // Update eligible EMI
+    setEmi(emiCalculated.toFixed(2));
+    setInterestAmount(totalInterest.toFixed(2));
+    setPrincipalAmount(principal);
+    setTotalRepayment(totalRepaymentAmount.toFixed(2));
+    setEligibleEmi(emiCalculated.toFixed(2));
   };
 
-  // Chart data for Pie chart (EMI breakdown)
   const pieData = {
     labels: ['Eligible EMI', 'Principal Amount', 'Interest Amount'],
     datasets: [
@@ -56,15 +54,14 @@ const BajajEmi = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="sbi-emi-container">
-      {/* Section 1: Header */}
       <header className="header">
         <h1>BAJAJ Home Loan EMI Calculator</h1>
       </header>
 
-      {/* Section 2: Chart and EMI Calculation */}
       <section className="content-container">
-        {/* Chart Section */}
         <div className="chart-section">
           <h2 className="sub-header">EMI Breakdown</h2>
           <div className="chart-wrapper">
@@ -72,7 +69,6 @@ const BajajEmi = () => {
           </div>
         </div>
 
-        {/* Input Fields and EMI Calculation */}
         <div className="input-section">
           <h2 className="sub-header">Calculate Your EMI</h2>
           <div className="input-container">
@@ -111,7 +107,6 @@ const BajajEmi = () => {
         </div>
       </section>
 
-      {/* Section 3: Loan Summary */}
       <section className="summary-section">
         <h2 className="sub-header">Loan Summary</h2>
         <p>Total Principal: ₹{principalAmount}</p>
@@ -119,7 +114,6 @@ const BajajEmi = () => {
         <p>Total Repayment Amount: ₹{totalRepayment}</p>
       </section>
 
-      {/* Section 4: Additional Info */}
       <section className="info-section">
         <h1>Home Loan Prepayment Calculator</h1>
         <p>
@@ -127,7 +121,6 @@ const BajajEmi = () => {
         </p>
       </section>
 
-      {/* Section 5: EMI Calculation Formula */}
       <section className="formula-section">
         <h1>Home Loan EMI Calculation Formula</h1>
         <p>
@@ -144,6 +137,8 @@ const BajajEmi = () => {
         </p>
       </section>
     </div>
+    <Footer />
+    </>
   );
 };
 

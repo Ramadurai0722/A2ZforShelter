@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
+import { Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { Table } from 'antd';
 import './Loancal.css';
@@ -76,7 +76,6 @@ const SBILoanCalculator = () => {
         });
     };
 
-
     const homeLoanHighlights = [
         {
             key: '1',
@@ -88,42 +87,12 @@ const SBILoanCalculator = () => {
     ];
 
     const regularHomeLoans = [
-        {
-            key: '1',
-            cibil: '≥800',
-            termLoan: '8.05%',
-            maxgain: '8.45%',
-        },
-        {
-            key: '2',
-            cibil: '750-799',
-            termLoan: '8.15%',
-            maxgain: '8.55%',
-        },
-        {
-            key: '3',
-            cibil: '700-749',
-            termLoan: '8.25%',
-            maxgain: '8.65%',
-        },
-        {
-            key: '4',
-            cibil: '650-699',
-            termLoan: '8.35%',
-            maxgain: '8.75%',
-        },
-        {
-            key: '5',
-            cibil: '550-649',
-            termLoan: '8.55%',
-            maxgain: '8.95%',
-        },
-        {
-            key: '6',
-            cibil: 'NTC/No CIBIL Score/-1',
-            termLoan: '8.25%',
-            maxgain: '8.65%',
-        },
+        { key: '1', cibil: '≥800', termLoan: '8.05%', maxgain: '8.45%' },
+        { key: '2', cibil: '750-799', termLoan: '8.15%', maxgain: '8.55%' },
+        { key: '3', cibil: '700-749', termLoan: '8.25%', maxgain: '8.65%' },
+        { key: '4', cibil: '650-699', termLoan: '8.35%', maxgain: '8.75%' },
+        { key: '5', cibil: '550-649', termLoan: '8.55%', maxgain: '8.95%' },
+        { key: '6', cibil: 'NTC/No CIBIL Score/-1', termLoan: '8.25%', maxgain: '8.65%' },
     ];
 
     const realtyLoans = [
@@ -144,35 +113,13 @@ const SBILoanCalculator = () => {
         { key: '6', cibil: 'NTC/No CIBIL Score/-1', termLoan: '8.35%' },
     ];
 
-    const columns = {
-        highlights: [
-            { title: 'Interest Rate', dataIndex: 'interestRate', key: 'interestRate' },
-            { title: 'Loan Amount', dataIndex: 'loanAmount', key: 'loanAmount' },
-            { title: 'Loan Tenure', dataIndex: 'tenure', key: 'tenure' },
-            { title: 'Processing Charges', dataIndex: 'processingCharges', key: 'processingCharges' },
-        ],
-        regular: [
-            { title: 'CIBIL Score', dataIndex: 'cibil', key: 'cibil' },
-            { title: 'Term Loan (p.a.)', dataIndex: 'termLoan', key: 'termLoan' },
-            { title: 'Maxgain (p.a.)', dataIndex: 'maxgain', key: 'maxgain' },
-        ],
-        realty: [
-            { title: 'CIBIL Score', dataIndex: 'cibil', key: 'cibil' },
-            { title: 'Term Loan (p.a.)', dataIndex: 'termLoan', key: 'termLoan' },
-        ],
-        tribal: [
-            { title: 'CIBIL Score', dataIndex: 'cibil', key: 'cibil' },
-            { title: 'Term Loan (p.a.)', dataIndex: 'termLoan', key: 'termLoan' },
-        ],
-    };
-
     return (
         <>
             <Navbar />
             <div className="container">
                 <AppBar position="static" className="app-bar">
                     <Toolbar>
-                    <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
+                        <Button component={Link} to="/sbihomeloan" color="inherit" className="nav-button">SBI</Button>
                         <Button component={Link} to="/hdfchomeloan" color="inherit" className="nav-button">HDFC</Button>
                         <Button component={Link} to="/kotakhomeloan" color="inherit" className="nav-button">Kotak</Button>
                         <Button component={Link} to="/landthomeloan" color="inherit" className="nav-button">L&T</Button>
@@ -188,40 +135,45 @@ const SBILoanCalculator = () => {
                         </Typography>
 
                         <Grid container spacing={3}>
-                        <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Amount (₹)"
+                            <Grid item xs={12} sm={4}>
+                                <label htmlFor="loanAmount">Loan Amount (₹)</label>
+                                <input
+                                    id="loanAmount"
+                                    className="input-field"
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(e.target.value)}
-                                    variant="outlined"
                                     type="number"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                                 <Typography variant="body2" color="textSecondary" style={{ marginTop: 10 }}>
                                     {loanAmountInWords}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Interest Rate (%)"
+                                <label htmlFor="interestRate">Interest Rate (%)</label>
+                                <input
+                                    id="interestRate"
+                                    className="input-field"
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                     step="0.01"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Tenure (Months)"
+                                <label htmlFor="loanTenure">Loan Tenure (Months)</label>
+                                <input
+                                    id="loanTenure"
+                                    className="input-field"
                                     value={loanTenure}
                                     onChange={(e) => setLoanTenure(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                 />
                             </Grid>
                         </Grid>
-
+    
                         <Button
                             fullWidth
                             variant="contained"
@@ -230,9 +182,9 @@ const SBILoanCalculator = () => {
                             onClick={calculateEMI}>
                             Calculate Loan Details
                         </Button>
-
+    
                         {result && result.loanDetails && (
-                            <Card className="loan-summary-card">
+                            <Card className="loan-summary-card" style={{ marginTop: '20px' }}>
                                 <CardContent>
                                     <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
                                         Loan Summary
@@ -245,47 +197,89 @@ const SBILoanCalculator = () => {
                                     <Typography variant="h6" component="h4" gutterBottom>
                                         Detailed Breakdown:
                                     </Typography>
-                                    <Table
-                                        columns={[
-                                            { title: 'Month', dataIndex: 'month', key: 'month' },
-                                            { title: 'Monthly EMI', dataIndex: 'emi', key: 'emi' },
-                                            { title: 'Interest Payment', dataIndex: 'interest', key: 'interest' },
-                                            { title: 'Principal Repayment', dataIndex: 'principal', key: 'principal' }
-                                        ]}
-                                        dataSource={result.monthlyInterestPayment.map((interest, index) => ({
-                                            key: index + 1,
-                                            month: index + 1,
-                                            emi: result.emi,
-                                            interest: interest,
-                                            principal: result.principalRepayment[index]
-                                        }))}
-                                        pagination={false}
-                                    />
+                                    <div className="table-container"> 
+                                        <table className="table-responsive"> 
+                                            <thead className="table-header"> 
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Monthly EMI</th>
+                                                    <th>Interest Payment</th>
+                                                    <th>Principal Repayment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-body"> 
+                                                {result.monthlyInterestPayment.map((interest, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>₹{result.emi}</td>
+                                                        <td>₹{interest}</td>
+                                                        <td>₹{result.principalRepayment[index]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </CardContent>
                             </Card>
                         )}
-
-                        <div className="loan-details">
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
                             <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
                                 SBI Home Loan Highlights
                             </Typography>
-                            <Table columns={columns.highlights} dataSource={homeLoanHighlights} pagination={false} />
-
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                SBI Regular Home Loans
-                            </Typography>
-                            <Table columns={columns.regular} dataSource={regularHomeLoans} pagination={false} />
-
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                SBI Realty Loans
-                            </Typography>
-                            <Table columns={columns.realty} dataSource={realtyLoans} pagination={false} />
-
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                SBI Tribal Plus Loans
-                            </Typography>
-                            <Table columns={columns.tribal} dataSource={tribalPlusLoans} pagination={false} />
+                            {homeLoanHighlights.map(item => (
+                                <div key={item.key}>
+                                    <Typography variant="body1"><strong>Interest Rate: </strong>{item.interestRate}</Typography>
+                                    <Typography variant="body1"><strong>Loan Amount: </strong>{item.loanAmount}</Typography>
+                                    <Typography variant="body1"><strong>Loan Tenure: </strong>{item.tenure}</Typography>
+                                    <Typography variant="body1"><strong>Processing Charges: </strong>{item.processingCharges}</Typography>
+                                    <hr />
+                                </div>
+                            ))}
                         </div>
+
+                        {/* Regular Home Loans */}
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
+                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
+                                Regular Home Loans
+                            </Typography>
+                            {regularHomeLoans.map(item => (
+                                <div key={item.key}>
+                                    <Typography variant="body1"><strong>CIBIL Score: </strong>{item.cibil}</Typography>
+                                    <Typography variant="body1"><strong>Term Loan (p.a.): </strong>{item.termLoan}</Typography>
+                                    <Typography variant="body1"><strong>Maxgain (p.a.): </strong>{item.maxgain}</Typography>
+                                    <hr />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Realty Loans */}
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
+                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
+                                Realty Loans
+                            </Typography>
+                            {realtyLoans.map(item => (
+                                <div key={item.key}>
+                                    <Typography variant="body1"><strong>CIBIL Score: </strong>{item.cibil}</Typography>
+                                    <Typography variant="body1"><strong>Term Loan (p.a.): </strong>{item.termLoan}</Typography>
+                                    <hr />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Tribal Plus Loans */}
+                        <div className="loan-details" style={{ marginTop: '20px' }}>
+                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
+                                Tribal Plus Loans
+                            </Typography>
+                            {tribalPlusLoans.map(item => (
+                                <div key={item.key}>
+                                    <Typography variant="body1"><strong>CIBIL Score: </strong>{item.cibil}</Typography>
+                                    <Typography variant="body1"><strong>Term Loan (p.a.): </strong>{item.termLoan}</Typography>
+                                    <hr />
+                                </div>
+                            ))}
+                        </div>
+
                         <p>Last Updated 17-September-2024</p>
                     </CardContent>
                 </Card>

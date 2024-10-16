@@ -1,0 +1,16 @@
+.privacy{
+    background-color: white;
+}
+.privacybox {
+    background-color: rgb(5, 5, 120);
+    color: white;
+    height: 300px;
+    width: 1300px;
+    margin-left: 100px;
+}
+.privacybox h1{
+    color: white;
+}
+a{
+    font-size: 13px;
+}

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import config from "../../../config";
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 import './sandall.css'; 
-import Navbar from '../../Navbar/Navbar';
-import Footer from '../../Footer/Footer';
 
 const CategorySandall = () => {
   const [data, setData] = useState([]);
@@ -15,6 +15,7 @@ const CategorySandall = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const sandRoute = `${config.apiURL}/sandRoute/sand`;
@@ -74,7 +75,7 @@ const CategorySandall = () => {
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
-          params: { userId, productId } 
+          params: { userId, productId }
         });
         setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
       } else {
@@ -90,64 +91,104 @@ const CategorySandall = () => {
       console.error('Error updating favourites:', err);
     }
   };
+
+  const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+  };
+  
+  const queryNumber = parseFloat(searchQuery);
+  
+  // Filtering logic based on the search query
+  const filteredData = data.filter(sand =>
+    sand.sandType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    sand.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    sand.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (isNumeric(searchQuery) && sand.price && sand.price >= queryNumber)
+  );
+
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <>
       <Navbar />
-      <div className="sandeall-category-container">
-        <div className="sandeall-header-container">
+      <div className="sandall-category-container">
+        <div className="sandall-header-container">
           <h2>Sand Products</h2>
         </div>
-        
-        <div className="sandeall-card-container">
-          {data.map((sand) => {
-            const sandId = sand._id;
 
-            return (
-              <div key={sandId} className={`sandeall-card ${favourites.includes(sandId) ? 'favourite' : ''}`} onClick={() => handleCardClick(sandId)}>
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop
-                  autoPlay
-                  stopOnHover
-                  dynamicHeight
-                  className="sandeall-carousel"
-                >
-                  {sand.images.map((photo, idx) => (
-                    <div key={idx}>
-                      <img src={`${config.apiURL}/${photo}`} alt={`Sand ${sand.sandType}`} />
+        <div className="cat-search-container">
+          <input
+            type="text"
+            placeholder="Search by sand type, seller, or description..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="cat-search-input"
+          />
+          <button className="cat-search-button">
+            Search
+          </button>
+        </div>
+
+        <div className="sandall-card-container">
+          {filteredData.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No products found for "{searchQuery}".</p>
+          ) : (
+            filteredData.map((sand) => {
+              const sandId = sand._id;
+
+              return (
+                <div key={sandId} className={`sandall-card ${favourites.includes(sandId) ? 'favourite' : ''}`} onClick={() => handleCardClick(sandId)}>
+                  <div className="sandall-card-content">
+                    <div className="sandall-header">
+                      <h3>{sand.quantity}</h3>
+                      <p className="sandall-price" style={{ color: "green" }}>{sand.price} RPS</p>
                     </div>
-                  ))}
-                </Carousel>
-                <div className="sandeall-card-content">
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation(); 
-                      handleAddToFavourites(sandId);
-                    }} 
-                    className="sandeall-favourite-button"
-                  >
-                    {favourites.includes(sandId) ? (
-                      <FaHeart className="sandeall-favourite-icon filled" />
-                    ) : (
-                      <FaRegHeart className="sandeall-favourite-icon" />
-                    )}
-                    <span className="sandeall-like-count">{likeCounts[sandId] || 0} Likes</span>
-                  </button>
-                  <h3>{sand.sandType}</h3>
-                  <p><strong>Seller Name:</strong> {sand.name}</p>
-                  <p><strong>Quantity:</strong> {sand.quantity}</p>
-                  <p><strong>Price:</strong> {sand.price} RPS</p>
-                  <div className="sandeall-card-buttons">
-                    <button onClick={() => handleViewDetailsClick(sandId)} className="sandeall-view-details-button">
-                      View Details
-                    </button>
+                    <Carousel
+                      showThumbs={false}
+                      infiniteLoop
+                      autoPlay
+                      stopOnHover
+                      dynamicHeight
+                      className="sandall-carousel"
+                    >
+                      {sand.images.map((photo, idx) => (
+                        <div key={idx}>
+                          <img src={`${config.apiURL}/${photo}`} alt={`Sand ${sand.sandType}`} />
+                        </div>
+                      ))}
+                    </Carousel>
+
+                    <div className="sandall-like-container">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToFavourites(sandId);
+                        }}
+                        className="sandall-favourite-button"
+                      >
+                        {favourites.includes(sandId) ? (
+                          <FaHeart className="sandall-favourite-icon filled" />
+                        ) : (
+                          <FaRegHeart className="sandall-favourite-icon" />
+                        )}
+                      </button>
+                      <span className="sandall-like-count">{likeCounts[sandId] || 0} Likes</span>
+                    </div>
+                    <h6>{sand.sandType}</h6>
+                    <p><strong>Seller Name:</strong> {sand.name}</p>
+                    <p><strong>Description:</strong> {sand.description}</p>
+
+                    <div className="sandall-card-buttons">
+                      <button onClick={() => handleViewDetailsClick(sandId)} className="sandall-view-details-button">
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
       <Footer />

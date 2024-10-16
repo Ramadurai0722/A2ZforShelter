@@ -45,7 +45,7 @@ const CateringView = () => {
   };
 
   if (error) return <p>Error: {error}</p>;
-  if (!catering) return 
+  if (!catering) return <p>Loading...</p>;
 
   return (
     <>
@@ -53,38 +53,38 @@ const CateringView = () => {
       <div className="cateringview-container">
         <div className="cateringview-card">
           <div className="cateringview-images-section">
-            {catering.images && catering.images.length > 0 ? (
-              <div className="cateringview-image-grid">
-                {catering.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`Catering Image ${index + 1}`}
-                    className="cateringview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${catering.images[0]}`}
+              alt="Main Catering"
+              className="cateringview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${catering.images[0]}`)}
+            />
+            <div className="cateringview-thumbnail-carousel">
+              {catering.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`Catering Image ${index + 1}`}
+                  className="cateringview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="cateringview-details-section">
             <h2 className="cateringview-title">{catering.name || 'N/A'}</h2>
+            <p className="cateringview-price">{catering.price || 'N/A'} RPS</p>
             <p><strong>Meals Offered:</strong> {catering.meals || 'N/A'}</p>
-            <p><strong>Number of Consumer:</strong> {catering.numberOfPeople || 'N/A'}</p>
-            <p><strong>Price:</strong> {catering.price || 'N/A'} RPS</p>
+            <p><strong>Number of Consumers:</strong> {catering.numberOfPeople || 'N/A'}</p>
             <p><strong>Description:</strong> {catering.description || 'N/A'}</p>
-            <p><strong>Menu Catalogues:</strong> {catering.menuCatlogues || 'N/A'}</p>
+            <p><strong>Menu Catalogues:</strong> {catering.menuCatalogues || 'N/A'}</p>
             <p><strong>Address:</strong> {catering.shopAddress || 'N/A'}</p>
 
-            {/* Button to toggle contact details */}
             <button className="cateringview-contact-details-button" onClick={handleToggleContact}>
               {showContact ? 'Hide Contact Details' : 'Show Contact Details'}
             </button>
 
-            {/* Contact details section */}
             {showContact && (
               <div className="cateringview-contact-details">
                 <p><strong>Phone Number:</strong> {catering.phoneNumber || 'N/A'}</p>
@@ -94,11 +94,10 @@ const CateringView = () => {
           </div>
         </div>
 
-        {/* Modal for showing larger image */}
         {isModalOpen && (
           <div className="cateringview-modal-overlay" onClick={handleCloseModal}>
             <div className="cateringview-modal-content">
-              <span className="cateringview-close-button" onClick={handleCloseModal}>X</span>
+              <span className="cateringview-close-button" onClick={handleCloseModal}>✖</span>
               <img src={selectedImage} alt="Enlarged View" className="cateringview-modal-image" />
             </div>
           </div>

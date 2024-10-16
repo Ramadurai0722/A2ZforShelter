@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Card, CardContent, Typography, Grid, AppBar, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Table } from 'antd';
-import { toWords } from 'number-to-words';
 import './Loancal.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
@@ -15,7 +13,8 @@ const AxisLoanCalculator = () => {
 
     const convertNumberToWords = (num) => {
         const a = [
-            '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
+            '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+            'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
         ];
         const b = [
             '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
@@ -33,22 +32,25 @@ const AxisLoanCalculator = () => {
 
         return n(num);
     };
+
     const loanAmountInWords = loanAmount ? convertNumberToWords(parseInt(loanAmount, 10)) : '';
 
     const calculateEMI = () => {
         const principal = parseFloat(loanAmount);
         const monthlyInterestRate = parseFloat(interestRate) / 12 / 100;
-        const numberOfMonths = parseInt(loanTenure);
+        const numberOfMonths = parseInt(loanTenure, 10);
 
         if (isNaN(principal) || isNaN(monthlyInterestRate) || isNaN(numberOfMonths) || numberOfMonths <= 0) {
             setResult(null);
             return;
         }
+
         const emi = (principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfMonths)) /
             (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1);
 
         const totalPayment = emi * numberOfMonths;
         const totalInterest = totalPayment - principal;
+
         let monthlyInterestPayment = [];
         let principalRepayment = [];
         let balance = principal;
@@ -78,48 +80,32 @@ const AxisLoanCalculator = () => {
     };
 
     const axisBankHomeLoans = [
-        { key: '1', product: 'Axis Bank Home Loan (floating rate)', salariedRate: '6.90% - 8.40%', selfEmployedRate: '7.00% - 8.55%' },
-        { key: '2', product: 'Axis Bank Home Loan (fixed rate)', rate: '12.00%' },
-        { key: '3', product: 'Axis Bank QuikPay Home Loan', rate: '6.90% onwards' },
-        { key: '4', product: 'Axis Bank Shubh Aarambh Home Loan', rate: '6.90% onwards' },
-        { key: '5', product: 'Axis Bank Fast Forward Home Loan', rate: '6.90% onwards' },
-        { key: '6', product: 'Axis Bank Asha Home Loan', salariedRate: '10.05% - 11.00%', selfEmployedRate: '10.30% - 11.50%' },
-        { key: '7', product: 'Axis Bank Super Saver Home Loan', rate: '6.90% onwards' },
-        { key: '8', product: 'Axis Bank Power Advantage Home Loan', rate: '6.90% onwards' },
-        { key: '9', product: 'Top-up Home Loan', rate: '8.65% onwards' },
-        { key: '10', product: 'PMAY CLSS', rate: '6.90% onwards' },
+        { product: 'Axis Bank Home Loan (floating rate)', salariedRate: '6.90% - 8.40%', selfEmployedRate: '7.00% - 8.55%' },
+        { product: 'Axis Bank Home Loan (fixed rate)', rate: '12.00%' },
+        { product: 'Axis Bank QuikPay Home Loan', rate: '6.90% onwards' },
+        { product: 'Axis Bank Shubh Aarambh Home Loan', rate: '6.90% onwards' },
+        { product: 'Axis Bank Fast Forward Home Loan', rate: '6.90% onwards' },
+        { product: 'Axis Bank Asha Home Loan', salariedRate: '10.05% - 11.00%', selfEmployedRate: '10.30% - 11.50%' },
+        { product: 'Axis Bank Super Saver Home Loan', rate: '6.90% onwards' },
+        { product: 'Axis Bank Power Advantage Home Loan', rate: '6.90% onwards' },
+        { product: 'Top-up Home Loan', rate: '8.65% onwards' },
+        { product: 'PMAY CLSS', rate: '6.90% onwards' },
     ];
-
-    const columns = {
-        axisBankHomeLoans: [
-            { title: 'Product', dataIndex: 'product', key: 'product' },
-            { title: 'Salaried Interest Rate (% p.a.)', dataIndex: 'salariedRate', key: 'salariedRate', render: (text) => text || '-' },
-            { title: 'Self-Employed Interest Rate (% p.a.)', dataIndex: 'selfEmployedRate', key: 'selfEmployedRate', render: (text) => text || '-' },
-            { title: 'Interest Rate', dataIndex: 'rate', key: 'rate', render: (text) => text || '-' },
-        ],
-    };
 
     const loanCharges = [
-        { key: '1', chargeType: 'Processing Charges', details: 'Up to 1% of the sanctioned loan amount (with a minimum of Rs. 10,000 + GST)' },
-        { key: '2', chargeType: 'Prepayment Charges (Floating Rate Loan)', details: 'Nil' },
-        { key: '3', chargeType: 'Prepayment Charges (Fixed Rate Loan)', details: '2% of the outstanding principal' },
-        { key: '4', chargeType: 'Penal Rate of Interest', details: 'No charges within 60 km. radius / Rs. 750 for any subsequent visits' },
-        { key: '5', chargeType: 'Valuation Fee (Construction-Linked)', details: '2% per month. 24% per annum' },
-        { key: '6', chargeType: 'Switching Fees (Base Rate/BPLR to Fixed Rate)', details: 'A minimum of Rs 10,000 or 1% of the outstanding principal (whichever is highest)' },
-        { key: '7', chargeType: 'Switching Fees (Fixed Rate to Floating Rate)', details: '2% of the outstanding amount of principal' },
-        { key: '8', chargeType: 'Cheque Return Charges / Repayment Instructions', details: 'Rs. 500 each time' },
-        { key: '9', chargeType: 'Cheque/Instrument Swapping Charges', details: 'Rs. 500 each time' },
-        { key: '10', chargeType: 'Issuance Charges for Duplicate Statement', details: 'Rs. 250 each time' },
-        { key: '11', chargeType: 'CERSAI Charges', details: 'For a loan amount up to Rs. 5 lakhs – Rs. 50 / For a loan amount above Rs. 5 lakhs – Rs. 100' },
-        { key: '12', chargeType: 'Insurance/ Loan Cover', details: 'Compulsory as per the actuals to be paid to the insurance company' },
+        { chargeType: 'Processing Charges', details: 'Up to 1% of the sanctioned loan amount (with a minimum of Rs. 10,000 + GST)' },
+        { chargeType: 'Prepayment Charges (Floating Rate Loan)', details: 'Nil' },
+        { chargeType: 'Prepayment Charges (Fixed Rate Loan)', details: '2% of the outstanding principal' },
+        { chargeType: 'Penal Rate of Interest', details: 'No charges within 60 km radius / Rs. 750 for any subsequent visits' },
+        { chargeType: 'Valuation Fee (Construction-Linked)', details: '2% per month. 24% per annum' },
+        { chargeType: 'Switching Fees (Base Rate/BPLR to Fixed Rate)', details: 'A minimum of Rs 10,000 or 1% of the outstanding principal (whichever is highest)' },
+        { chargeType: 'Switching Fees (Fixed Rate to Floating Rate)', details: '2% of the outstanding amount of principal' },
+        { chargeType: 'Cheque Return Charges / Repayment Instructions', details: 'Rs. 500 each time' },
+        { chargeType: 'Cheque/Instrument Swapping Charges', details: 'Rs. 500 each time' },
+        { chargeType: 'Issuance Charges for Duplicate Statement', details: 'Rs. 250 each time' },
+        { chargeType: 'CERSAI Charges', details: 'For a loan amount up to Rs. 5 lakhs – Rs. 50 / For a loan amount above Rs. 5 lakhs – Rs. 100' },
+        { chargeType: 'Insurance/Loan Cover', details: 'Compulsory as per the actuals to be paid to the insurance company' },
     ];
-
-    const column = {
-        loanCharges: [
-            { title: 'Particulars', dataIndex: 'chargeType', key: 'chargeType' },
-            { title: 'Charges Applicable', dataIndex: 'details', key: 'details' },
-        ],
-    };
 
     return (
         <>
@@ -139,17 +125,17 @@ const AxisLoanCalculator = () => {
                 <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: 'auto', padding: 2 }}>
                     <CardContent>
                         <Typography variant="h4" component="h2" textAlign="center" gutterBottom className="typography-heading">
-                            Axis Bank Home Loan Interest Calculator
+                            Axis Home Loan Calculator
                         </Typography>
 
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Amount (₹)"
+                                <label htmlFor="loanAmount">Loan Amount (₹)</label>
+                                <input
+                                    id="loanAmount"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={loanAmount}
                                     onChange={(e) => setLoanAmount(e.target.value)}
-                                    variant="outlined"
                                     type="number"
                                 />
                                 <Typography variant="body2" color="textSecondary" style={{ marginTop: 10 }}>
@@ -158,22 +144,24 @@ const AxisLoanCalculator = () => {
                             </Grid>
 
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Interest Rate (%)"
+                                <label htmlFor="interestRate">Interest Rate (%)</label>
+                                <input
+                                    id="interestRate"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                     step="0.01"
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4}>
-                                <TextField
-                                    fullWidth
-                                    label="Loan Tenure (Months)"
+                                <label htmlFor="loanTenure">Loan Tenure (Months)</label>
+                                <input
+                                    id="loanTenure"
+                                    style={{ width: '100%', padding: '10px', marginTop: '5px' }}
                                     value={loanTenure}
                                     onChange={(e) => setLoanTenure(e.target.value)}
-                                    variant="outlined"
+                                    type="number"
                                 />
                             </Grid>
                         </Grid>
@@ -188,7 +176,7 @@ const AxisLoanCalculator = () => {
                         </Button>
 
                         {result && result.loanDetails && (
-                            <Card className="loan-summary-card">
+                            <Card className="loan-summary-card" style={{ marginTop: '20px' }}>
                                 <CardContent>
                                     <Typography variant="h5" component="h3" textAlign="center" gutterBottom>
                                         Loan Summary
@@ -201,39 +189,62 @@ const AxisLoanCalculator = () => {
                                     <Typography variant="h6" component="h4" gutterBottom>
                                         Detailed Breakdown:
                                     </Typography>
-                                    <Table
-                                        columns={[
-                                            { title: 'Month', dataIndex: 'month', key: 'month' },
-                                            { title: 'Monthly EMI', dataIndex: 'emi', key: 'emi' },
-                                            { title: 'Interest Payment', dataIndex: 'interest', key: 'interest' },
-                                            { title: 'Principal Repayment', dataIndex: 'principal', key: 'principal' }
-                                        ]}
-                                        dataSource={result.monthlyInterestPayment.map((interest, index) => ({
-                                            key: index + 1,
-                                            month: index + 1,
-                                            emi: result.emi,
-                                            interest: interest,
-                                            principal: result.principalRepayment[index]
-                                        }))}
-                                        pagination={false}
-                                    />
+                                    <div className="table-container"> {/* Add the table-container class here */}
+                                        <table className="table-responsive"> {/* Use table-responsive class */}
+                                            <thead className="table-header"> {/* Add table-header class */}
+                                                <tr>
+                                                    <th>Month</th>
+                                                    <th>Monthly EMI</th>
+                                                    <th>Interest Payment</th>
+                                                    <th>Principal Repayment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="table-body"> {/* Add table-body class */}
+                                                {result.monthlyInterestPayment.map((interest, index) => (
+                                                    <tr key={index}>
+                                                        <td>{index + 1}</td>
+                                                        <td>₹{result.emi}</td>
+                                                        <td>₹{interest}</td>
+                                                        <td>₹{result.principalRepayment[index]}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </CardContent>
                             </Card>
                         )}
 
-                        <div className="loan-details">
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                Axis Bank Home Loan Products
-                            </Typography>
-                            <Table columns={columns.axisBankHomeLoans} dataSource={axisBankHomeLoans} pagination={false} />
 
-                            <Typography variant="h5" component="h3" textAlign="center" gutterBottom className="typography-subheading">
-                                Loan Charges and Fees
-                            </Typography>
-                            <Table columns={column.loanCharges} dataSource={loanCharges} pagination={false} />
+                        <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: '20px auto', padding: 2 }}>
+                            <CardContent>
+                                <Typography variant="h4" component="h2" textAlign="center" gutterBottom>
+                                    Axis Bank Home Loans
+                                </Typography>
+                                <Grid container spacing={2}>
+                                    {axisBankHomeLoans.map((loan, index) => (
+                                        <Grid item xs={12} sm={6} key={index}>
+                                            <Typography variant="body1">{loan.product}: {loan.rate ? loan.rate : `${loan.salariedRate} (Salaried), ${loan.selfEmployedRate} (Self Employed)`}</Typography>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </CardContent>
+                        </Card>
 
-                        </div>
-                        <p>Last Updated 17-September-2024</p>
+                        <Card className="MuiCard-root" sx={{ maxWidth: 900, margin: '20px auto', padding: 2 }}>
+                            <CardContent>
+                                <Typography variant="h4" component="h2" textAlign="center" gutterBottom>
+                                    Axis Bank Home Loan Charges
+                                </Typography>
+                                <Grid container spacing={2}>
+                                    {loanCharges.map((charge, index) => (
+                                        <Grid item xs={12} sm={6} key={index}>
+                                            <Typography variant="body1">{charge.chargeType}: {charge.details}</Typography>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </CardContent>
+                        </Card>
                     </CardContent>
                 </Card>
             </div>

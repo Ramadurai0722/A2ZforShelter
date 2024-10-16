@@ -25,10 +25,11 @@
   transform: translateY(-5px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
-.logout-button {
-  align-items: end;
-  margin-left: 500px;
-  top: 20px;
+
+.logout-button,
+.edit-profile-button,
+.dashboard-button,
+.favorites-button {
   background-color: #ff4d4d;
   color: #ffffff;
   border: none;
@@ -36,10 +37,14 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  width: 100px;
+  width: 100px; /* Fixed width for larger screens */
+  transition: background-color 0.3s;
 }
 
-.logout-button:hover {
+.logout-button:hover,
+.edit-profile-button:hover,
+.dashboard-button:hover,
+.favorites-button:hover {
   background-color: #ff3333;
 }
 
@@ -90,6 +95,7 @@ label {
   color: #333;
   text-align: left;
 }
+
 .form-input,
 .form-select,
 .form-textarea {
@@ -123,7 +129,9 @@ label {
   gap: 10px;
 }
 
-.edit-profile-button, .dashboard-button {
+.edit-profile-button,
+.dashboard-button,
+.favorites-button {
   background: #6e8efb;
   color: #ffffff;
   border: none;
@@ -133,11 +141,14 @@ label {
   font-size: 16px;
 }
 
-.edit-profile-button:hover, .dashboard-button:hover {
+.edit-profile-button:hover,
+.dashboard-button:hover,
+.favorites-button:hover {
   background: #5a7cf0;
 }
 
-.save-button, .cancel-button {
+.save-button,
+.cancel-button {
   background: #4caf50;
   color: #ffffff;
   border: none;
@@ -158,6 +169,7 @@ label {
 .cancel-button:hover {
   background: #e53935;
 }
+
 .profile-details p {
   margin: 10px 0;
   color: #555;
@@ -223,17 +235,43 @@ label {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .profile-card {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 1000px) {
   .profile-card {
     padding: 20px;
-    width: 300px;
+    max-width: 90%; /* Make it responsive on smaller screens */
+  }
+
+  .logout-button,
+  .edit-profile-button,
+  .dashboard-button,
+  .favorites-button {
+    width: 40%; /* Make buttons wider on smaller screens */
+    margin: 10px 0; /* Add vertical margin */
+  }
+}
+
+@media (max-width: 800px) {
+  .profile-card {
+    padding: 15px;
   }
 
   .profile-image {
     width: 100px;
     height: 100px;
   }
-  .logout-button{
-    margin-left: 190px;
+
+  .logout-button,
+  .edit-profile-button,
+  .dashboard-button,
+  .favorites-button {
+    width: 40%; /* Full width on mobile */
+    margin: 10px auto; /* Center buttons on mobile */
   }
 }

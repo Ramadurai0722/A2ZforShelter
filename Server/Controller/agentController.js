@@ -41,3 +41,18 @@ exports.getAllAgent = async (req, res) => {
       res.status(500).json({ message: 'Error fetching catering posts', error });
     }
   };
+
+  exports.getAgentById = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const agent = await Agent.findById(id); 
+      if (!agent) {
+        return res.status(404).json({ message: 'Agent not found' });
+      }
+      res.status(200).json(agent);
+    } catch (error) {
+      res.status(500).json({ message: 'Error fetching agent', error });
+    }
+  };
+  

@@ -9,7 +9,6 @@ import Profile from "../Components/Pages/profile";
 // Post Forms
 import SaleProperty from "../Components/SellingDetails/SaleProperty";
 import PostHouse from "../Components/SellingDetails/House/PostHouse";
-import AdList from "../Components/SellingDetails/House/Houses";
 import CementPostForm from "../Components/SellingDetails/Cement/CementPost";
 import SandPostForm from "../Components/SellingDetails/Sand/sandpost";
 import SteelPostForm from "../Components/SellingDetails/Steel/SteelPost";
@@ -21,17 +20,6 @@ import Pipe_wires from "../Components/SellingDetails/Pipe&wire/Pipe&wires";
 import SellerDashboard from "../Components/SellingDetails/Seller Dashboard/Seller/DashBoard";
 import Pgpost from "../Components/SellingDetails/PGHostel/PgHostel";
 
-// Home view Categories
-import CategoryHouse from "../Components/Home/House/CategoryHouse";
-import CategoryCement from "../Components/Home/Cement/CategoryCement";
-import CategoryStone from "../Components/Home/Stone/CategoryStone";
-import CategorySand from "../Components/Home/Sand/CategorySand";
-import CategoryWood from "../Components/Home/Wood/CategoryWood";
-import CategoryPipeWire from "../Components/Home/Pipe&Wire/CategoryPipewire";
-import CategorySteel from "../Components/Home/Steel/CategorySteel";
-import CategoryInterior from "../Components/Home/Interior/Categoryinterior";
-import CategoryCatering from "../Components/Home/Catering/Categorycaterings";
-import CategoryPgHostel from "../Components/Home/PgHostel/Categorypgs";
 
 //Veiw Category Products with id(specific products)
 import ProductViewpg from "../Components/Categoryitem/PgView/pgview";
@@ -58,6 +46,7 @@ import CategorySandall from "../Components/Cat-itemall/SandAll/sandcategory";
 import CategorySteelall from "../Components/Cat-itemall/SteelAll/steelcategory";
 import CategoryStoneall from "../Components/Cat-itemall/StoneAll/stonecategory";
 import SellerInteriorView from "../Components/SellingDetails/SellerViewDetails/Interiorview/InteriorDetails";
+import CategoryList from "../Components/Home/Categories/category";
 
 // seller category
 import CategoryHouse1 from "../Components/SellingDetails/Seller Dashboard/Houseseller/House";
@@ -138,6 +127,17 @@ import BorewellList from "../Components/Borewell/borewellall";
 import CivilEngineer from "../Components/SellingDetails/CivilEnginee/CivilEngineer";
 import CivilEngineerList from "../Components/Civil/civilall";
 
+// priya Footer
+import Privacy from "../Components/Footer/ContactUs";
+import Privacy1 from "../Components/Footer/Privacy";
+import TermandCondition from "../Components/Footer/TermandCondition";
+import FeedbackForm from "../Components/Footer/Feedback";
+
+// Adds
+import AdsCarousel from "../Components/Home/Hero/Adds";
+import AgentViewId from "../Components/Agents/AgentView";
+
+
 function MainRoutes() {
   return (
     <Routes>
@@ -145,6 +145,7 @@ function MainRoutes() {
       {/* Auth */}
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/Adds" element={<AdsCarousel />} />
       <Route path="/login" element={<LoginRegister />} />
       <Route path="/profile" element={<Profile />} />
 
@@ -152,7 +153,6 @@ function MainRoutes() {
       <Route path="/post" element={<SaleProperty />} />
       <Route path="/posthouse" element={<PostHouse />} />
       <Route path="/pgHostel" element={<Pgpost />} />
-      <Route path="/houselist" element={<AdList />} />
       <Route path="/cementpost" element={<CementPostForm />} />
       <Route path="/sandpost" element={<SandPostForm />} />
       <Route path="/steelpost" element={<SteelPostForm />} />
@@ -163,17 +163,6 @@ function MainRoutes() {
       <Route path="/Pipe&wires" element={<Pipe_wires />} />
       <Route path="/sellDashBoard" element={<SellerDashboard />} />
 
-      {/* Home page Content */}
-      <Route path="/categoryhouse" element={<CategoryHouse />} />
-      <Route path="/categorycement" element={<CategoryCement />} />
-      <Route path="/categorystone" element={<CategoryStone />} />
-      <Route path="/categorysand" element={<CategorySand />} />
-      <Route path="/categorywood" element={<CategoryWood />} />
-      <Route path="/categorypipewire" element={<CategoryPipeWire />} />
-      <Route path="/categorysteel" element={<CategorySteel />} />
-      <Route path="/categoryinterior" element={<CategoryInterior />} />
-      <Route path="/categorycatering" element={<CategoryCatering />} />
-      <Route path="/categorypghostel" element={<CategoryPgHostel />} />
 
       {/* Buyer view product(specific) */}
       <Route path="/productviewpg/:id" element={<ProductViewpg />} />
@@ -199,6 +188,7 @@ function MainRoutes() {
       <Route path="/sandall" element={<CategorySandall />} />
       <Route path="/steelall" element={<CategorySteelall />} />
       <Route path="/stoneall" element={<CategoryStoneall />} />
+      <Route path="/category" element={<CategoryList />} />
 
       {/* seller */}
 
@@ -263,6 +253,7 @@ function MainRoutes() {
       {/* agent ui design*/}
       <Route path="/agents" element={<Agent />} />
       <Route path="/agentsList" element={<AgentDashboard />} />
+      <Route path="/agents/:id" element={<AgentViewId />} />
 
       {/* Loan*/}
       <Route path="/Loanpost" element={<Loanpost />} />
@@ -280,6 +271,12 @@ function MainRoutes() {
       {/* civil */}
       <Route path="/civilpost" element={<CivilEngineer />} />
       <Route path="/civilall" element={<CivilEngineerList />} />
+
+      {/* priya */}
+      <Route path="/contactus" element={<Privacy />} />
+      <Route path="/privacy" element={<Privacy1 />} />
+      <Route path="/terms&condition" element={<TermandCondition />} />
+      <Route path="/feedback" element={<FeedbackForm />} />
     </Routes>
   );
 }

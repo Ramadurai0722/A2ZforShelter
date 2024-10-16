@@ -56,9 +56,9 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  // const handleMouseEnter = (dropdown) => {
-  //   setActiveDropdown(dropdown);
-  // };
+  const handleMouseEnter = (dropdown) => {
+    setActiveDropdown(dropdown);
+  };
 
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? "" : dropdown);
@@ -80,13 +80,14 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img
-          src="/media/companylogo.png"
-          alt="Logo"
-          style={{ height: "100px" }}
-        />
-        <a href="/">A2Z for Shelter</a>
+        <a href="/">
+          <img
+            src="/media/companylogo12.png"
+            alt="Logo"
+          />
+        </a>
       </div>
+
 
       {/* Toggle menu */}
       <button className="navbar-toggle" onClick={toggleMenu}>
@@ -98,6 +99,7 @@ const Navbar = () => {
         <div
           className={`navbar-dropdown ${activeDropdown === "land" ? "active" : ""}`}
           onMouseEnter={() => handleMouseEnter("land")}
+          onMouseLeave={() => setActiveDropdown("")}
         >
           <span className="home-loan-text" onClick={() => toggleDropdown("land")}>
             Home Loans
@@ -108,26 +110,17 @@ const Navbar = () => {
               <div className="link-row" style={{ display: "flex", padding: "10px", marginTop: "10px" }}>
                 <a href="/agentsList" className="navbar-link">Agents</a>
                 <a href="/Loanall" className="navbar-link">Loan</a>
-                <a href="/Landall" className="navbar-link">Land</a>
+                <a href="/sbihomeloan" className="navbar-link">Loan Calculator</a>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div style={{ display: "flex" }}>
                 <div style={{ flex: 1, padding: "4px", fontSize: "12px" }}>
-                  <h3>Monthly EMI Calculator</h3>
+                  <h4>Monthly EMI Calculator</h4>
                   <a href="/sbiemi">Sbi EMI Calculator</a><br />
                   <a href="/hdfcemi">Hdfc EMI Calculator</a><br />
                   <a href="/kotakemi">Kotak EMI Calculator</a><br />
                   <a href="/l&temi">L&T EMI Calculator</a><br />
                   <a href="/axisemi">Axis EMI Calculator</a><br />
                   <a href="/bajajemi">Bajaj EMI Calculator</a>
-                </div>
-                <div style={{ flex: 1, padding: "3px", fontSize: "12px" }}>
-                  <h3>Interest Calculator</h3>
-                  <a href="/sbihomeloan">Sbi HomeLoan Interest Calculator</a><br />
-                  <a href="/hdfchomeloan">Hdfc HomeLoan Interest Calculator</a><br />
-                  <a href="/kotakhomeloan">Kotak HomeLoan Interest Calculator</a><br />
-                  <a href="/landthomeloan">L&T HomeLoan Interest Calculator</a><br />
-                  <a href="/axishomeloan">Axis HomeLoan Interest Calculator</a><br />
-                  <a href="/bajajhomeloan">Bajaj HomeLoan Interest Calculator</a>
                 </div>
               </div>
             </div>
@@ -138,6 +131,7 @@ const Navbar = () => {
         <div
           className={`navbar-dropdown ${activeDropdown === "interiors" ? "active" : ""}`}
           onMouseEnter={() => handleMouseEnter("interiors")}
+          onMouseLeave={() => setActiveDropdown("")}
         >
           <span onClick={() => toggleDropdown("interiors")}>
             Interiors
@@ -169,6 +163,7 @@ const Navbar = () => {
         <div
           className={`navbar-dropdown ${activeDropdown === "buy" ? "active" : ""}`}
           onMouseEnter={() => handleMouseEnter("buy")}
+          onMouseLeave={() => setActiveDropdown("")}
         >
           <span className="span" onClick={() => toggleDropdown("buy")}>
             Buy
@@ -193,6 +188,7 @@ const Navbar = () => {
         <div
           className={`navbar-dropdown ${activeDropdown === "service" ? "active" : ""}`}
           onMouseEnter={() => handleMouseEnter("service")}
+          onMouseLeave={() => setActiveDropdown("")}
         >
           <span className="span" onClick={() => toggleDropdown("service")}>
             Services
@@ -210,6 +206,7 @@ const Navbar = () => {
         <div
           className={`navbar-dropdown ${activeDropdown === "design" ? "active" : ""}`}
           onMouseEnter={() => handleMouseEnter("design")}
+          onMouseLeave={() => setActiveDropdown("")}
         >
           <span className="span" onClick={() => toggleDropdown("design")}>
             Design
@@ -246,7 +243,7 @@ const Navbar = () => {
             )}
           </div>
         ) : (
-          <a href="/login" className="navbar-button">Login</a>
+          <a href="/login" className="navbar-button">Access Portal</a>
         )}
       </div>
     </nav>

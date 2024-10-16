@@ -43,8 +43,9 @@ const InteriorView = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!interior) return
+  if (!interior) return <p>Loading...</p>;
 
   return (
     <>
@@ -52,21 +53,23 @@ const InteriorView = () => {
       <div className="interiorview-container">
         <div className="interiorview-card">
           <div className="interiorview-images-section">
-            {interior.images && interior.images.length > 0 ? (
-              <div className="interiorview-image-grid">
-                {interior.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`Interior Image ${index + 1}`}
-                    className="interiorview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${interior.images[0]}`}
+              alt="Main Interior"
+              className="interiorview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${interior.images[0]}`)}
+            />
+            <div className="interiorview-thumbnail-carousel">
+              {interior.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`Interior Image ${index + 1}`}
+                  className="interiorview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="interiorview-details-section">
@@ -77,12 +80,10 @@ const InteriorView = () => {
             <p><strong>Description:</strong> {interior.description || 'N/A'}</p>
             <p><strong>Address:</strong> {interior.sellerAddress || 'N/A'}</p>
 
-            {/* Button to toggle contact details */}
             <button className="interiorview-contact-details-button" onClick={handleToggleContact}>
               {showContact ? 'Hide Contact Details' : 'Show Contact Details'}
             </button>
 
-            {/* Contact details section */}
             {showContact && (
               <div className="interiorview-contact-details">
                 <p><strong>Phone Number:</strong> {interior.phoneNumber || 'N/A'}</p>
@@ -92,11 +93,10 @@ const InteriorView = () => {
           </div>
         </div>
 
-        {/* Modal for showing larger image */}
         {isModalOpen && (
           <div className="interiorview-modal-overlay" onClick={handleCloseModal}>
             <div className="interiorview-modal-content">
-              <span className="interiorview-close-button" onClick={handleCloseModal}>X</span>
+              <span className="interiorview-close-button" onClick={handleCloseModal}>✖</span>
               <img src={selectedImage} alt="Enlarged View" className="interiorview-modal-image" />
             </div>
           </div>

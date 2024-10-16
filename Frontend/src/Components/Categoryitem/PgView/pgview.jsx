@@ -43,8 +43,9 @@ const ProductViewpg = () => {
     setIsModalOpen(false);       
     setSelectedImage(null);     
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!product) return 
+  if (!product) return <p>Loading...</p>;
 
   return (
     <>
@@ -52,21 +53,23 @@ const ProductViewpg = () => {
       <div className="pgview-container">
         <div className="pgview-card">
           <div className="pgview-images-section">
-            {product.photos && product.photos.length > 0 ? (
-              <div className="pgview-image-grid">
-                {product.photos.map((photo, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${photo}`}
-                    alt={`Product Image ${index + 1}`}
-                    className="pgview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${photo}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${product.photos[0]}`}
+              alt="Main PG Hostel"
+              className="pgview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${product.photos[0]}`)}
+            />
+            <div className="pgview-thumbnail-carousel">
+              {product.photos.map((photo, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${photo}`}
+                  alt={`Product Image ${index + 1}`}
+                  className="pgview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${photo}`)}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="pgview-details-section">
@@ -80,12 +83,10 @@ const ProductViewpg = () => {
             <p><strong>Price:</strong> {product.price || 'N/A'} RPS</p>
             <p><strong>Description:</strong> {product.description || 'N/A'}</p>
             
-            {/* Contact Details Button */}
             <button className="pgview-contact-details-button" onClick={handleToggleContact}>
               {showContact ? 'Hide Contact Details' : 'Show Contact Details'}
             </button>
-            
-            {/* Conditional Rendering of Contact Details */}
+
             {showContact && (
               <div className="pgview-contact-details">
                 <p><strong>Phone Number:</strong> {product.phoneNumber || 'N/A'}</p>
@@ -95,11 +96,10 @@ const ProductViewpg = () => {
           </div>
         </div>
 
-        {/* Modal for showing larger image */}
         {isModalOpen && (
           <div className="pgview-modal-overlay" onClick={handleCloseModal}>
             <div className="pgview-modal-content">
-              <span className="pgview-close-button" onClick={handleCloseModal}>X</span>
+              <span className="pgview-close-button" onClick={handleCloseModal}>✖</span>
               <img src={selectedImage} alt="Enlarged View" className="pgview-modal-image" />
             </div>
           </div>

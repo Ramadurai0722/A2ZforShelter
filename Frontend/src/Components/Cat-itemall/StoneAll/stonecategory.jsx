@@ -5,9 +5,9 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import config from "../../../config";
-import './stoneall.css'; 
 import Navbar from '../../Navbar/Navbar';
 import Footer from '../../Footer/Footer';
+import './stoneall.css'; 
 
 const CategoryStoneall = () => {
   const [data, setData] = useState([]);
@@ -15,6 +15,7 @@ const CategoryStoneall = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const navigate = useNavigate();
 
   const stoneRoute = `${config.apiURL}/stoneRoute/stone`;
@@ -25,8 +26,7 @@ const CategoryStoneall = () => {
         setLoading(true);
         const response = await axios.get(stoneRoute);
         setData(response.data);
-
-        // Fetch favourite counts for each stone
+        
         const counts = await Promise.all(response.data.map(stone =>
           axios.get(`${config.apiURL}/favourites/count/${stone._id}`)
         ));
@@ -64,10 +64,6 @@ const CategoryStoneall = () => {
     navigate(`/stoneview/${stoneId}`);
   };
 
-  const handleViewDetailsClick = (stoneId) => {
-    navigate(`/stoneview/${stoneId}`);
-  };
-
   const handleAddToFavourites = async (stoneId) => {
     const userId = getUserId();
     const productId = stoneId;
@@ -75,7 +71,7 @@ const CategoryStoneall = () => {
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
-          params: { userId, productId } 
+          params: { userId, productId }
         });
         setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
       } else {
@@ -91,65 +87,102 @@ const CategoryStoneall = () => {
       console.error('Error updating favourites:', err);
     }
   };
+
+  const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+  };
+  
+  const queryNumber = parseFloat(searchQuery);
+
+  const filteredData = data.filter(stone =>
+    stone.stoneType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    stone.stoneCategory.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    stone.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (isNumeric(searchQuery) && stone.price && stone.price >= queryNumber)
+  );
+
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <>
       <Navbar />
-      <div className="stoneeall-category-container">
-        <div className="stoneeall-header-container">
+      <div className="stoneall-category-container">
+        <div className="stoneall-header-container">
           <h2>Stone Products</h2>
         </div>
 
-        <div className="stoneeall-card-container">
-          {data.map((stone) => {
-            const stoneId = stone._id;
+        <div className="cat-search-container">
+          <input
+            type="text"
+            placeholder="Search by stone type, category, or seller..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="cat-search-input"
+          />
+          <button className="cat-search-button">
+            Search
+          </button>
+        </div>
 
-            return (
-              <div key={stoneId} className={`stoneeall-card ${favourites.includes(stoneId) ? 'favourite' : ''}`} onClick={() => handleCardClick(stoneId)}>
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop
-                  autoPlay
-                  stopOnHover
-                  dynamicHeight
-                  className="stoneeall-carousel"
-                >
-                  {stone.images.map((photo, idx) => (
-                    <div key={idx}>
-                      <img src={`${config.apiURL}/${photo}`} alt={`Stone ${stone.name}`} />
+        <div className="stoneall-card-container">
+          {filteredData.length === 0 ? (
+            <p style={{ textAlign: "center" }}>No products found for "{searchQuery}".</p>
+          ) : (
+            filteredData.map((stone) => {
+              const stoneId = stone._id;
+
+              return (
+                <div key={stoneId} className={`stoneall-card ${favourites.includes(stoneId) ? 'favourite' : ''}`} onClick={() => handleCardClick(stoneId)}>
+                  <div className="stoneall-card-content">
+                    <div className="stoneall-header">
+                      <h3>{stone.quantity}</h3>
+                      <p className="stoneall-price" style={{ color: "green" }}>{stone.price} RPS</p>
                     </div>
-                  ))}
-                </Carousel>
-                <div className="stoneeall-card-content">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToFavourites(stoneId);
-                    }}
-                    className="stoneeall-favourite-button"
-                  >
-                    {favourites.includes(stoneId) ? (
-                      <FaHeart className="stoneeall-favourite-icon filled" />
-                    ) : (
-                      <FaRegHeart className="stoneeall-favourite-icon" />
-                    )}
-                    <span className="stoneeall-like-count">{likeCounts[stoneId] || 0} Likes</span>
-                  </button>
-                  <h3>{stone.stoneCategory}</h3>
-                  <p><strong>Seller Name:</strong> {stone.name}</p>
-                  <p><strong>Type:</strong> {stone.stoneType}</p>
-                  <p><strong>Quantity:</strong> {stone.quantity}</p>
-                  <p><strong>Price:</strong> {stone.price} RPS</p>
-                  <div className="stoneeall-card-buttons">
-                    <button onClick={() => handleViewDetailsClick(stoneId)} className="stoneeall-view-details-button">
-                      View Details
-                    </button>
+                    <Carousel
+                      showThumbs={false}
+                      infiniteLoop
+                      autoPlay
+                      stopOnHover
+                      dynamicHeight
+                      className="stoneall-carousel"
+                    >
+                      {stone.images.map((photo, idx) => (
+                        <div key={idx}>
+                          <img src={`${config.apiURL}/${photo}`} alt={`Stone ${stone.name}`} />
+                        </div>
+                      ))}
+                    </Carousel>
+                    <div className="stoneall-like-container">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToFavourites(stoneId);
+                        }}
+                        className="stoneall-favourite-button"
+                      >
+                        {favourites.includes(stoneId) ? (
+                          <FaHeart className="stoneall-favourite-icon filled" />
+                        ) : (
+                          <FaRegHeart className="stoneall-favourite-icon" />
+                        )}
+                      </button>
+                      <span className="stoneall-like-count">{likeCounts[stoneId] || 0} Likes</span>
+                    </div>
+                    <h6>{stone.stoneCategory}</h6>
+                    <p><strong>Seller Name:</strong> {stone.name}</p>
+                    <p><strong>Type:</strong> {stone.stoneType}</p>
+
+                    <div className="stoneall-card-buttons">
+                      <button onClick={() => handleCardClick(stoneId)} className="stoneall-view-details-button">
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </div>
       <Footer />

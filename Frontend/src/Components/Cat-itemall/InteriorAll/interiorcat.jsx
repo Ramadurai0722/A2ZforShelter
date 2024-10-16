@@ -3,11 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import config from "../../../config";
-import "./incat.css"; // Updated CSS import
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
+import './interiorall.css';
 
 const InteriorCategoryPage = () => {
   const { category } = useParams();
@@ -17,18 +17,17 @@ const InteriorCategoryPage = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchInterior = async () => {
       try {
-        const response = await axios.get(
-          `${config.apiURL}/interiorRoute/interior`
-        );
+        const response = await axios.get(`${config.apiURL}/interiorRoute/interior`);
         setInterior(response.data);
 
         const counts = await Promise.all(
-          response.data.map((item) =>
+          response.data.map(item =>
             axios.get(`${config.apiURL}/favourites/count/${item._id}`)
           )
         );
@@ -48,9 +47,7 @@ const InteriorCategoryPage = () => {
     const fetchFavourites = async () => {
       const userId = getUserId();
       try {
-        const response = await axios.get(
-          `${config.apiURL}/favourites/all/${userId}`
-        );
+        const response = await axios.get(`${config.apiURL}/favourites/all/${userId}`);
         setFavourites(response.data);
       } catch (err) {
         console.error("Error fetching favourites:", err);
@@ -63,7 +60,7 @@ const InteriorCategoryPage = () => {
 
   useEffect(() => {
     if (interior.length > 0) {
-      const filtered = interior.filter((item) => item.category === category);
+      const filtered = interior.filter(item => item.category === category);
       setFilteredInterior(filtered);
     }
   }, [interior, category]);
@@ -76,26 +73,20 @@ const InteriorCategoryPage = () => {
     navigate(`/interiorview/${interiorId}`);
   };
 
-  const handleViewDetailsClick = (interiorId) => {
-    navigate(`/interiorview/${interiorId}`);
-  };
-
-  const handleAddToFavourites = async (houseId) => {
+  const handleAddToFavourites = async (interiorId) => {
     const userId = getUserId();
-    const productId = houseId;
+    const productId = interiorId;
 
     try {
       if (favourites.includes(productId)) {
-        await axios.delete(`${config.apiURL}/favourites/remove`, {
-          params: { userId, productId } 
-        });
-        setFavourites((prevFavourites) => prevFavourites.filter((id) => id !== productId));
+        await axios.delete(`${config.apiURL}/favourites/remove`, { params: { userId, productId } });
+        setFavourites(prevFavourites => prevFavourites.filter(id => id !== productId));
       } else {
         await axios.post(`${config.apiURL}/favourites/add`, { userId, productId });
-        setFavourites((prevFavourites) => [...prevFavourites, productId]);
+        setFavourites(prevFavourites => [...prevFavourites, productId]);
       }
       const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${productId}`);
-      setLikeCounts((prevCounts) => ({
+      setLikeCounts(prevCounts => ({
         ...prevCounts,
         [productId]: countData.count
       }));
@@ -104,88 +95,116 @@ const InteriorCategoryPage = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' || e.type === 'click') {
+      setSearchQuery(e.target.value);
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+
+  const isNumeric = (value) => {
+    return !isNaN(value) && !isNaN(parseFloat(value));
+  };
+  
+  const queryNumber = parseFloat(searchQuery);
+
+  const filteredByCategory = filteredInterior.filter(item => {
+    const query = searchQuery.toLowerCase();
+    return (
+      item.products.toLowerCase().includes(query) ||
+      item.name.toLowerCase().includes(query) ||
+      (isNumeric(searchQuery) && item.price && item.price >= queryNumber)
+    );
+  });
 
   return (
     <>
       <Navbar />
-      <div className="incat-category-container">
-        <div className="incat-header-container">
-          <h2>{category} Products</h2>
+      <div className="interiorall-category-container">
+        <div className="interiorall-header-container">
+          <h2 style={{ marginTop: "100px" }}>{category} Products</h2>
         </div>
 
-        {filteredInterior.length === 0 ? (
-          <p style={{ textAlign: "center" }}>
-            No products found in this category.
-          </p>
+        <div className="cat-search-container">
+          <input
+            type="text"
+            placeholder="Search by product name, seller name, or price..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearch}
+            className="cat-search-input"
+          />
+          <button onClick={handleSearch} className="cat-search-button"> 
+            Search
+          </button>
+        </div>
+
+        {filteredByCategory.length === 0 ? (
+          <p style={{ textAlign: "center" }}>No products found for "{searchQuery}" in this category.</p>
         ) : (
-          <div className="incat-card-container">
-            {filteredInterior.map((item) => (
-              <div
-                key={item._id}
-                className={`incat-card ${
-                  favourites.includes(item._id) ? "favourite" : ""
-                }`}
-                onClick={() => handleCardClick(item._id)}
-              >
-                <Carousel
-                  showThumbs={false}
-                  infiniteLoop
-                  autoPlay
-                  stopOnHover
-                  dynamicHeight
-                  className="incat-carousel"
+          <div className="interiorall-card-container">
+            {filteredByCategory.map((item) => {
+              const interiorId = item._id;
+
+              return (
+                <div
+                  key={interiorId}
+                  className={`interiorall-card ${favourites.includes(interiorId) ? 'favourite' : ''}`}
+                  onClick={() => handleCardClick(interiorId)}
                 >
-                  {item.images.map((photo, idx) => (
-                    <div key={idx}>
-                      <img
-                        src={`${config.apiURL}/${photo}`}
-                        alt={`Interior ${item.name}`}
-                      />
+                  <div className="interiorall-card-content">
+                    <div className="interiorall-header">
+                      <h3>{item.products}</h3>
+                      <p className="interiorall-price" style={{ color: "green" }}>{item.price} RPS</p>
                     </div>
-                  ))}
-                </Carousel>
-                <div className="incat-card-content">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddToFavourites(item._id);
-                    }}
-                    className="incat-favourite-button"
-                  >
-                    {favourites.includes(item._id) ? (
-                      <FaHeart className="incat-favourite-icon filled" />
-                    ) : (
-                      <FaRegHeart className="incat-favourite-icon" />
-                    )}
-                    <span className="incat-like-count">
-                      {likeCounts[item._id] || 0} Likes
-                    </span>
-                  </button>
-                  <h3>{item.products}</h3>
-                  <p>
-                    <strong>Seller Name:</strong> {item.name}
-                  </p>
-                  <p>
-                    <strong>Category:</strong> {item.category}
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {item.description}
-                  </p>
-                  <p>
-                    <strong>Price:</strong> {item.price} RPS
-                  </p>
-                  <div className="incat-card-buttons">
-                    <button
-                      onClick={() => handleViewDetailsClick(item._id)}
-                      className="incat-view-details-button"
+                    <Carousel
+                      showThumbs={false}
+                      infiniteLoop
+                      autoPlay
+                      stopOnHover
+                      dynamicHeight
+                      className="interiorall-carousel"
                     >
-                      View Details
-                    </button>
+                      {item.images.map((photo, idx) => (
+                        <div key={idx}>
+                          <img src={`${config.apiURL}/${photo}`} alt={`Interior ${item.products}`} />
+                        </div>
+                      ))}
+                    </Carousel>
+
+                    <div className="interiorall-like-container">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToFavourites(interiorId);
+                        }}
+                        className="interiorall-favourite-button"
+                      >
+                        {favourites.includes(interiorId) ? (
+                          <FaHeart className="interiorall-favourite-icon filled" />
+                        ) : (
+                          <FaRegHeart className="interiorall-favourite-icon" />
+                        )}
+                      </button>
+                      <span className="interiorall-like-count">{likeCounts[interiorId] || 0} Likes</span>
+                    </div>
+                    <p><strong>Seller Name:</strong> {item.name}</p>
+                    <p><strong>Category:</strong> {item.category}</p>
+
+                    <div className="interiorall-card-buttons">
+                      <button
+                        onClick={() => handleCardClick(interiorId)}
+                        className="interiorall-view-details-button"
+                      >
+                        View Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>

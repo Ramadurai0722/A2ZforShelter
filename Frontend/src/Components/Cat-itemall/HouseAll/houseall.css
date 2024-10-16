@@ -29,19 +29,20 @@
 
 .houseall-card {
     width: 300px;
-    height: 650px;
-    background: #e7e3e3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 600px; 
+    background: #f8f9fa; 
+    border: 1px solid #dee2e6; 
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .houseall-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px); 
 }
 
 .houseall-carousel {
@@ -49,7 +50,7 @@
 }
 
 .houseall-card-content {
-    padding: 15px;
+    padding: 20px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -57,21 +58,30 @@
     overflow: hidden;
 }
 
-.houseall-card-content h3 {
+.houseall-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
+    margin-bottom: 15px; 
+}
+
+.houseall-header h3 {
+    font-size: 20px; 
+    color: #190ede; 
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+.houseall-header p {
+    font-size: 20px; 
+    font-weight: bold;
+}
+
 .houseall-card-content p {
     margin: 5px 0;
-    color: #555;
+    color: #495057; 
     word-wrap: break-word;
 }
 
@@ -96,11 +106,26 @@
     transition: color 0.3s, background-color 0.3s;
 }
 
+.houseall-like-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+  
+}
+
 .houseall-favourite-button {
     font-size: 20px;
-    display: flex;
-    align-items: center;
     cursor: pointer;
+    width: auto; 
+    background: transparent; 
+    border: none; 
+    margin: 0 0 5px 0; 
+}
+
+.houseall-like-count {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 .houseall-view-details-button:hover,
@@ -117,17 +142,11 @@
     color: red;
 }
 
-.houseall-like-count {
-    margin-left: 5px;
-    font-size: 14px;
-    color: #333;
-}
-
 /* Media Queries */
 @media screen and (max-width: 600px) {
     .houseall-card {
         width: 80%;
-        height: auto; 
+        height: auto;
     }
 
     .houseall-header-container h2 {
@@ -135,27 +154,41 @@
     }
 }
 
-@media (max-width: 900px) and (min-width:600px){
+@media (max-width: 900px) and (min-width: 600px) {
     .houseall-card {
         width: 40%;
-        height: auto;
+        height: auto; 
     }
-    .houseall-card-content p{
+    .houseall-card-content p {
         font-size: 13px;
     }
-    .houseall-header h2 {
+    .houseall-header-container h2 {
         font-size: 25px;
     }
 }
-@media (max-width: 1200px) and (min-width:900px){
+
+@media (max-width: 1200px) and (min-width: 900px) {
     .houseall-card {
         width: 23%;
-        height: 620px;
+        height: auto; 
     }
-    .houseall-card-content p{
+    .houseall-card-content p {
         font-size: 13px;
     }
-    .houseall-header h2 {
+    .houseall-header-container h2 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 1200px) {
+    .houseall-card {
+        width: 23%;
+        height: auto; 
+    }
+    .houseall-card-content p {
+        font-size: 13px;
+    }
+    .houseall-header-container h2 {
         font-size: 25px;
     }
 }

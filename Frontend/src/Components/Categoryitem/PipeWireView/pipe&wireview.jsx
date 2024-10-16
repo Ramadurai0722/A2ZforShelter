@@ -43,8 +43,9 @@ const PipeWireView = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
+
   if (error) return <p>Error: {error}</p>;
-  if (!pipeWire) return 
+  if (!pipeWire) return <p>Loading...</p>;
 
   return (
     <>
@@ -52,56 +53,40 @@ const PipeWireView = () => {
       <div className="pipewireview-container">
         <div className="pipewireview-card">
           <div className="pipewireview-images-section">
-            {pipeWire.images && pipeWire.images.length > 0 ? (
-              <div className="pipewireview-image-grid">
-                {pipeWire.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={`${config.apiURL}/${image}`}
-                    alt={`PipeWire Image ${index + 1}`}
-                    className="pipewireview-image-item"
-                    onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p>No images available</p>
-            )}
+            <img
+              src={`${config.apiURL}/${pipeWire.images[0]}`}
+              alt="Main PipeWire"
+              className="pipewireview-main-image"
+              onClick={() => handleImageClick(`${config.apiURL}/${pipeWire.images[0]}`)}
+            />
+            <div className="pipewireview-thumbnail-carousel">
+              {pipeWire.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${config.apiURL}/${image}`}
+                  alt={`PipeWire Image ${index + 1}`}
+                  className="pipewireview-thumbnail"
+                  onClick={() => handleImageClick(`${config.apiURL}/${image}`)}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="pipewireview-details-section">
-            {pipeWire.Type === "Pipes" ? (
-              <>
-                <h2 className="pipewireview-title">{pipeWire.pipeBrand || 'N/A'}</h2>
-                <p><strong>Seller Name:</strong> {pipeWire.name}</p>
-                <p><strong>Pipe Type:</strong> {pipeWire.pipeType}</p>
-                <p><strong>Diameter:</strong> {pipeWire.pipeDiameter}</p>
-                <p><strong>Length:</strong> {pipeWire.pipeLength}</p>
-                <p><strong>Quantity:</strong> {pipeWire.quantity}</p>
-                <p><strong>Address:</strong> {pipeWire.sellerAddress}</p>
-                <p><strong>Description:</strong> {pipeWire.description}</p>
-                <p><strong>Price:</strong> {pipeWire.price} RPS</p>
-              </>
-            ) : pipeWire.Type === "Wires" ? (
-              <>
-                <h2 className="pipewireview-title">{pipeWire.wireBrand || 'N/A'}</h2>
-                <p><strong>Seller Name:</strong> {pipeWire.name}</p>
-                <p><strong>Wire Type:</strong> {pipeWire.wireType}</p>
-                <p><strong>Diameter:</strong> {pipeWire.wireDiameter}</p>
-                <p><strong>Length:</strong> {pipeWire.wireLength}</p>
-                <p><strong>Quantity:</strong> {pipeWire.quantity}</p>
-                <p><strong>Address:</strong> {pipeWire.sellerAddress}</p>
-                <p><strong>Description:</strong> {pipeWire.description}</p>
-                <p><strong>Price:</strong> {pipeWire.price} RPS</p>
-              </>
-            ) : null}
+            <h2 className="pipewireview-title">{pipeWire.Type === "Pipes" ? pipeWire.pipeBrand : pipeWire.wireBrand || 'N/A'}</h2>
+            <p><strong>Seller Name:</strong> {pipeWire.name}</p>
+            <p><strong>{pipeWire.Type === "Pipes" ? 'Pipe Type' : 'Wire Type'}:</strong> {pipeWire.Type === "Pipes" ? pipeWire.pipeType : pipeWire.wireType}</p>
+            <p><strong>Diameter:</strong> {pipeWire.Type === "Pipes" ? pipeWire.pipeDiameter : pipeWire.wireDiameter}</p>
+            <p><strong>Length:</strong> {pipeWire.Type === "Pipes" ? pipeWire.pipeLength : pipeWire.wireLength}</p>
+            <p><strong>Quantity:</strong> {pipeWire.quantity}</p>
+            <p><strong>Address:</strong> {pipeWire.sellerAddress}</p>
+            <p><strong>Description:</strong> {pipeWire.description}</p>
+            <p><strong>Price:</strong> {pipeWire.price} RPS</p>
 
-            {/* Button to toggle contact details */}
             <button className="pipewireview-contact-details-button" onClick={handleToggleContact}>
               {showContact ? 'Hide Contact Details' : 'Show Contact Details'}
             </button>
 
-            {/* Contact details section */}
             {showContact && (
               <div className="pipewireview-contact-details">
                 <p><strong>Phone Number:</strong> {pipeWire.phoneNumber || 'N/A'}</p>
@@ -111,11 +96,10 @@ const PipeWireView = () => {
           </div>
         </div>
 
-        {/* Modal for showing larger image */}
         {isModalOpen && (
           <div className="pipewireview-modal-overlay" onClick={handleCloseModal}>
             <div className="pipewireview-modal-content">
-              <span className="pipewireview-close-button" onClick={handleCloseModal}>X</span>
+              <span className="pipewireview-close-button" onClick={handleCloseModal}>✖</span>
               <img src={selectedImage} alt="Enlarged View" className="pipewireview-modal-image" />
             </div>
           </div>

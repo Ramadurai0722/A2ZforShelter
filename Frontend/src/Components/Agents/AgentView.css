@@ -1,0 +1,65 @@
+.agentviewid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    padding: 20px;
+    margin-bottom: 40px;
+    margin-top: 100px;
+}
+
+.agentviewid-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.agentviewid-header h2 {
+    font-size: 28px; 
+    color: #333;
+    text-align: center; 
+    font-weight: bold; 
+}
+
+.agentviewid-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 15px; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-bottom: 30px;
+    width: 80%;
+    max-width: 350px; 
+    max-height: 700px;
+}
+
+.agentviewid-image {
+    width: 100%;
+    max-height: 300px;
+    border-radius: 15px; 
+    margin-bottom: 20px;
+}
+
+.agentviewid-info {
+    text-align: center;
+}
+
+.agentviewid-info p {
+    margin: 8px 0; 
+    color: #555;
+    font-size: 16px; 
+}
+
+.agentviewid-info p strong {
+    color: #000;
+    font-weight: 600; 
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .agentviewid-card {
+        width: 90%; /* Ensure it takes up more space on mobile */
+    }
+}

@@ -1,6 +1,7 @@
 .cementall-category-container {
     padding: 20px;
-    margin-top: 60px;
+    margin-bottom: 40px;
+    margin-top: 70px;
 }
 
 .cementall-header-container {
@@ -17,6 +18,47 @@
     margin-right: 10px;
 }
 
+.cat-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto; 
+}
+
+.cat-search-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px; 
+    font-size: 16px;
+    width: 100%; 
+    max-width: 500px;
+    transition: border-color 0.3s;
+}
+
+.cat-search-container button {
+    padding: 12px 15px; 
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cat-search-container button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.cat-search-container button:active {
+    transform: translateY(0); 
+}
+
 .cementall-card-container {
     display: flex;
     flex-wrap: wrap;
@@ -28,18 +70,20 @@
 
 .cementall-card {
     width: 300px;
-    background: #e7e3e3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 510px; 
+    background: #f8f9fa; 
+    border: 1px solid #dee2e6; 
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .cementall-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px); 
 }
 
 .cementall-carousel {
@@ -47,7 +91,7 @@
 }
 
 .cementall-card-content {
-    padding: 15px;
+    padding: 20px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -55,21 +99,30 @@
     overflow: hidden;
 }
 
-.cementall-card-content h3 {
+.cementall-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 10px;
-    font-size: 18px;
-    color: #333;
+    margin-bottom: 15px; 
+}
+
+.cementall-header h3 {
+    font-size: 20px; 
+    color: #190ede; 
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+.cementall-header p {
+    font-size: 20px; 
+    font-weight: bold;
+}
+
 .cementall-card-content p {
     margin: 5px 0;
-    color: #555;
+    color: #495057; 
     word-wrap: break-word;
 }
 
@@ -94,11 +147,25 @@
     transition: color 0.3s, background-color 0.3s;
 }
 
+.cementall-like-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+}
+
 .cementall-favourite-button {
     font-size: 20px;
-    display: flex;
-    align-items: center;
     cursor: pointer;
+    width: auto; 
+    background: transparent; 
+    border: none; 
+    margin: 0 0 5px 0; 
+}
+
+.cementall-like-count {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 .cementall-view-details-button:hover,
@@ -115,44 +182,53 @@
     color: red;
 }
 
-.cementall-like-count {
-    margin-left: 5px;
-    font-size: 14px;
-    color: #333;
-}
-
 /* Media Queries */
 @media screen and (max-width: 600px) {
     .cementall-card {
         width: 80%;
-        height: auto; 
+        height: auto;
     }
 
-    .cementall-header h2 {
+    .cementall-header-container h2 {
         font-size: 18px;
     }
 }
-@media (max-width: 900px) and (min-width:600px){
+
+@media (max-width: 900px) and (min-width: 600px) {
     .cementall-card {
         width: 40%;
-        height: auto;
+        height: auto; 
     }
-    .cementall-card-content p{
+    .cementall-card-content p {
         font-size: 13px;
     }
-    .cementall-header h2 {
+    .cementall-header-container h2 {
         font-size: 25px;
     }
 }
-@media (max-width: 1200px) and (min-width:900px){
+
+@media (max-width: 1200px) and (min-width: 900px) {
     .cementall-card {
         width: 23%;
-        height: 580px;
+        height: auto; 
     }
-    .cementall-card-content p{
+    .cementall-card-content p {
         font-size: 13px;
     }
-    .cementall-header h2 {
+    .cementall-header-container h2 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 1200px) {
+    .cementall-card {
+        width: 23%;
+        height: auto; 
+    }
+    .cementall-card-content p {
+        font-size: 13px;
+    }
+    .cementall-header-container h2 {
         font-size: 25px;
     }
 }
