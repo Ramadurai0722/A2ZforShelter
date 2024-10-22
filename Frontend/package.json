@@ -30,6 +30,7 @@
     "axios": "^1.7.5",
     "babylonjs": "^7.25.1",
     "drei": "^2.2.21",
+    "formik": "^2.4.6",
     "framer-motion": "^11.5.4",
     "interactjs": "^1.10.27",
     "ionicons": "^7.4.0",

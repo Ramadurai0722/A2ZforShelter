@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './Feedback.css'; // For custom styling
+import config from "../../config";
 
 const FeedbackForm = () => {
   const [feedback, setFeedback] = useState({
@@ -6,126 +10,122 @@ const FeedbackForm = () => {
     comments: '',
     name: '',
     email: '',
+    phoneNumber: '',
   });
+
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (authToken) {
+      axios
+        .get(`${config.apiURL}/api/getprofile`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        })
+        .then((response) => {
+          const { username, email, phoneNumber } = response.data;
+          setFeedback((prevData) => ({
+            ...prevData,
+            name: username,
+            email,
+            phoneNumber,
+          }));
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
+  }, []);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!feedback.rating) newErrors.rating = 'Please select a rating';
+    if (!feedback.comments) newErrors.comments = 'Comments are required';
+    if (!feedback.name) newErrors.name = 'Name is required';
+    if (!feedback.email) newErrors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(feedback.email)) newErrors.email = 'Email is invalid';
+    return newErrors;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFeedback({
-      ...feedback,
-      [name]: value,
-    });
+    setFeedback({ ...feedback, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here (e.g., API call)
-    console.log('Feedback submitted:', feedback);
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    try {
+      await axios.post(`${config.apiURL}/feedback/send-feedback`, feedback);
+      setMessage('Feedback sent successfully!');
+    } catch (error) {
+      setMessage('Error sending feedback.');
+      console.error('Error sending feedback!', error);
+    }
+
+    setFeedback({ rating: '', comments: '', name: '', email: '' });
+    setErrors({});
   };
 
   return (
-    <div>
-      <h2>Feedback</h2>
-      <div className="mb-4 small">Please provide your feedback in the form below</div>
-      <form id="feedback_form" onSubmit={handleSubmit}>
-        <label>How do you rate your overall experience?</label>
-        <div className="mb-3 d-flex flex-row py-1">
-          <div className="form-check mr-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="rating"
-              id="rating_bad"
-              value="bad"
-              checked={feedback.rating === 'bad'}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="rating_bad">
-              Bad
-            </label>
-          </div>
-
-          <div className="form-check mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="rating"
-              id="rating_good"
-              value="good"
-              checked={feedback.rating === 'good'}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="rating_good">
-              Good
-            </label>
-          </div>
-
-          <div className="form-check mx-3">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="rating"
-              id="rating_excellent"
-              value="excellent"
-              checked={feedback.rating === 'excellent'}
-              onChange={handleChange}
-            />
-            <label className="form-check-label" htmlFor="rating_excellent">
-              Excellent!
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="form-label" htmlFor="feedback_comments">
-            Comments:
-          </label>
-          <textarea
-            className="form-control"
-            required
-            rows="6"
-            name="comments"
-            id="feedback_comments"
-            value={feedback.comments}
+    <div className="feedback-form-container">
+    <div className="feedback-form">
+      <h2 className="feedback-form__title">Feedback</h2>
+      <form className="feedback-form__form" onSubmit={handleSubmit}>
+        <label className="feedback-form__label">Rate your experience:</label>
+        <div className="feedback-form__rating">
+          <input
+            type="radio"
+            name="rating"
+            value="bad"
+            checked={feedback.rating === 'bad'}
             onChange={handleChange}
-          />
+            className="feedback-form__radio"
+          /> Bad
+          <input
+            type="radio"
+            name="rating"
+            value="good"
+            checked={feedback.rating === 'good'}
+            onChange={handleChange}
+            className="feedback-form__radio"
+          /> Good
+          <input
+            type="radio"
+            name="rating"
+            value="excellent"
+            checked={feedback.rating === 'excellent'}
+            onChange={handleChange}
+            className="feedback-form__radio"
+          /> Excellent
         </div>
+        {errors.rating && <p className="feedback-form__error">{errors.rating}</p>}
 
-        <div className="row">
-          <div className="col">
-            <label className="form-label" htmlFor="feedback_name">
-              Your Name:
-            </label>
-            <input
-              type="text"
-              required
-              name="name"
-              className="form-control"
-              id="feedback_name"
-              value={feedback.name}
-              onChange={handleChange}
-            />
-          </div>
+        <label className="feedback-form__label">Comments:</label>
+        <textarea
+          name="comments"
+          value={feedback.comments}
+          onChange={handleChange}
+          className="feedback-form__textarea"
+          required
+        />
+        {errors.comments && <p className="feedback-form__error">{errors.comments}</p>}
 
-          <div className="col mb-4">
-            <label className="form-label" htmlFor="feedback_email">
-              Email:
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="form-control"
-              id="feedback_email"
-              value={feedback.email}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-
-        <button type="submit" className="btn btn-success btn-lg">
-          Post
-        </button>
+        <button type="submit" className="feedback-form__submit">Submit Feedback</button>
       </form>
+
+      {message && <p className="feedback-form__message">{message}</p>}
+    </div>
     </div>
   );
 };

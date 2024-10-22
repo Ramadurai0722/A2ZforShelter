@@ -17,7 +17,8 @@ const steelSchema = new mongoose.Schema({
   meter: { type: String, default: "1 Meter" },
   price: { type: Number, required: true },
   description: { type: String, required: true },
-  images: [{ type: String, required: true }], // Store paths to uploaded images
+  category: { type: String, default: "steel" }, 
+  images: [{ type: String, required: true }], 
 }, { timestamps: true });
 
 const SteelPost = mongoose.model('Steel', steelSchema);

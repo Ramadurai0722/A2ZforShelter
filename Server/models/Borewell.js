@@ -10,6 +10,7 @@ const BorewellSchema = new mongoose.Schema({
     drillingType: { type: String, required: true },
     location: { type: String, required: true },
     equipmentDetails: { type: String, required: true },
+    category: { type: String, default: "borewell" }, 
 });
 
 const Borewell = mongoose.model('Borewell', BorewellSchema);

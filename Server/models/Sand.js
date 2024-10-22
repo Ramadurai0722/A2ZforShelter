@@ -13,6 +13,7 @@ const sandSchema = new mongoose.Schema({
     sandType: { type: String, required: true },
     quantity: { type: String, required: true },
     price: { type: Number, required: true },
+    category: { type: String, default: "sand" }, 
     images: [{ type: String, required: true }],
     description: { type: String, required: true },
 });

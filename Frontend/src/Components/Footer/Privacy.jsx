@@ -1,7 +1,7 @@
 import React from 'react'
 import './Privacy.css'
 
-function Privacy1() {
+function Privacy() {
     const data = [
         {
           category: 'NAME, CONTACT INFORMATION AND IDENTIFIERS',
@@ -137,10 +137,10 @@ function Privacy1() {
       ];
     
   return (
-    <div className='privacy'>
+    <div className='pri-privacy'>
         <a href='/' >Home</a>
 
-       <div className='privacybox'>
+       <div className='pri-privacybox'>
 
         <h1>Privacy Policy</h1>
         <p style={{color:'white'}}>This website is owned and operated by AS Global Softtech  (“Company”, “we”, “us”), and this Privacy Policy outlines our online information practices, and your options regarding the collection and use of information
@@ -151,7 +151,7 @@ function Privacy1() {
        </div>
 
        <div>
-         <h2><strong>1. Information Collected</strong></h2>
+         <h2><b>1. Information Collected</b></h2>
          <p>When you use our Services, you share certain personal information with us, including but not limited to your name, e-mail address and home address, mobile number, and/or credit card information). Additionally, you may provide us with other personal information at your discretion, and as needed in your use of the Services. The information we collect may be combined with information from outside public records (for example, demographic information, navigation information, additional contact information) that we have acquired in accordance with the law. We collect information from you in the following ways. <br/><br/>
 
 </p>
@@ -164,7 +164,7 @@ function Privacy1() {
             </ul>      
             </div><br/>
 <div>
-    <h2><strong>2. US State Resident Privacy Rights</strong></h2>
+    <h2><b>2. US State Resident Privacy Rights</b></h2>
 <ul>
     <li><p>Depending on where you live in the US, some states have enacted privacy laws that contain provisions similar to All the specific information provided in this section applies to consumers who are residents of California as well as residents of other states where similar privacy laws have been enacted. The rights available to you will depend on the laws of the state where you live. we are required to provide certain information to California residents about how we handle certain personal information collected by us online or offline</p></li><br/>
     <li><p>“Personal Information”, is any information that identifies, relates to, describes, is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular consumer or household, including the categories identified in the table below to the extent they identify, relate to, describe, are capable of being associated with, or could be reasonably linked, directly or indirectly, with a particular consumer or household.</p></li><br/>
@@ -236,17 +236,17 @@ function Privacy1() {
         or quality of goods or services if the incentive is reasonably related to the value of the consumer’s data.
       </p>
     </div>
-<h2>3. Accessing, Reviewing, and changing Your Personal Information</h2>
+<h2><b> 3. Accessing, Reviewing, and changing Your Personal Information</b></h2>
 <p>As a registered member you have access to see and change your Personal Information at any time by accessing your account on the Site (through the My Account and My Settings tabs). Be sure to always update your information if any changes have been made. Even when changes are made, we may retain some information from closed accounts so that we can comply with law, prevent fraud, assist with investigations, resolve disputes, analyze or troubleshoot programs, enforce our Terms of Use, or take other actions permitted by law. This will also happen if your account or membership is terminated or suspended. We can maintain some information to prevent re-registration. For non-registered members, you can update or request to access your Personal Information by contacting us.</p><br/>
 <p>Your requests will be responded as soon as reasonably possible but please note that changes requested of us are not always effective immediately. Unless required by law, we are not responsible for informing third parties (including without limitation our third party service providers, potential employers, job-posting sites you authorize us to contact on your behalf, or strategic or marketing partners) with whom we have already shared your information of any changes requested pursuant to this section, or for removing information from or causing information to be removed from the databases or records of such entities.</p><br/>
 
-<h2>4. Information You Share on the Site, Public Information.</h2>
+<h2><b> 4. Information You Share on the Site, Public Information.</b></h2>
 <ul><p>
     <li>There may be information that becomes public by using any of the ResumeNerd services (i.e., resume sharing, profile creation, Job Alerts) that permit you, or ResumeNerd on your behalf, to post information on third party sites (i.e., websites, bulletin boards, personal urls). Also, by posting information or content, such as by posting photos, or participating in online forums or communities, when you interact with our Site through social media sites, plug-ins or other applications, depending upon your privacy settings, this information can become public on the Internet. Once the information is public, we are unable to stop further use of this information. You will have to control this by accessing the privacy settings of each media site.</li><br/>
     <li>A universal application may be created from the information you provide on the Site and it will be visible to potential employers as well as visitors to the Site this information will be available as your contact information. You have an option to restrict the visibility of this information only to registered users by following the instructions on the Site. You agree that employers or Provider may use your contact information to contact you by email and/or SMS text. This consent is not a condition to having access to the Site or Provider services.</li><br/>
 </p></ul><br/>
 <div>
-<h2>5. Privacy Preferences</h2>
+<h2><b> 5. Privacy Preferences </b></h2>
 
       <h5>Opting Out of Promotional Messages</h5>
       <p>
@@ -411,11 +411,11 @@ function Privacy1() {
       <p>If you prefer not to receive marketing communications you may op-out by clicking on the “My Account” tab and clicking “My Settings” and “Preferences”, you may not opt-out of administrative emails (for example, emails about your transactions or policy changes). You may also click the unsubscribe link in the footer of any email or newsletter you receive for your registered account.</p><br/>
       <p>We do not sell or rent your personal information to third parties for marketing purposes without your consent. We may combine your information with information we collect from other companies and use it to improve and personalize the Site.</p><br/>
 
-<h2>10.Notification Regarding Updates.</h2>
+<h2> <b>10.Notification Regarding Updates.</b></h2>
 <p>From time to time, we can choose to update this Privacy Policy. The Privacy Policy posted at any time or from time to time via this Site shall be deemed to be the Privacy Policy then in effect. You agree that we can notify you about material changes in the way we treat Personal Information by placing a notice on the Site. You should check the Site frequently for updates.</p><br/>
 
 
-<h2>11.Privacy Rights of Children</h2>
+<h2><b>11.Privacy Rights of Children</b></h2>
 <p>
         ResumeNerd owns and operates a general audience site that is not intended for use by children under the age of 16. However, if local laws provide for an alternative minimum age for ResumeNerd to lawfully provide the services on the Site to you, then that shall apply as the applicable minimum age.
       </p>
@@ -424,13 +424,13 @@ function Privacy1() {
         Although we will remove this information from our service and system, we cannot ensure its complete and comprehensive removal.
       </p>
       
-      <h3>Contact Information</h3>
+      <h3><b>Contact Information</b></h3>
       <ul>
         <li>
           <strong>Email:</strong> <a href="mailto:asglobalsofttech23@gmail.com">asglobalsofttech23@gmail.com</a>
         </li>
         <li>
-          <strong>Contact: </strong><p>+91**********</p> 
+          <strong>Contact: </strong><p>+91**</p> 
         
         </li>
       </ul>
@@ -441,4 +441,4 @@ function Privacy1() {
   )
 }
 
-export default Privacy1
+export default Privacy

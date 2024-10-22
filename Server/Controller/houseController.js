@@ -1,6 +1,5 @@
 const House = require('../models/House');
-const path = require('path')
-
+const path = require('path');
 
 exports.createHouse = async (req, res) => {
     try {
@@ -17,7 +16,8 @@ exports.createHouse = async (req, res) => {
             userId, type, bedrooms, bathrooms, furnishing, constructionStatus, listedBy,
             superBuiltupArea, carpetArea, maintenance, totalFloors, floorNo,
             carParking, facing, projectName, adTitle, description, price, location,
-            stateName, districtName, cityName, name, phoneNumber, photos, purpose
+            stateName, districtName, cityName, name, phoneNumber, photos, purpose,
+            category: "house" 
         });
 
         await newHouse.save();
@@ -28,6 +28,7 @@ exports.createHouse = async (req, res) => {
         res.status(500).json({ message: 'Server error. Please try again later.' });
     }
 };
+
 
 
 exports.getHouse = async (req, res) => {

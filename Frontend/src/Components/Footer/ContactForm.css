@@ -1,0 +1,118 @@
+/* Container for the entire form */
+.contact-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+/* Form title */
+.contact-form-title {
+    font-size: 24px;
+    color: #007BFF;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Help text under the title */
+.contact-form-help-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Grouping form elements */
+.contact-form-group {
+    margin-bottom: 15px;
+}
+
+/* Form labels */
+.contact-form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Input fields */
+.contact-form-input, .contact-form-select, .contact-form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Textarea for messages */
+.contact-form-textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Submit button */
+.contact-form-submit {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.contact-form-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Contact information section */
+.contact-form-info {
+    margin-top: 30px;
+}
+
+.contact-form-info h3 {
+    font-size: 18px;
+    color: #007BFF;
+    margin-bottom: 5px;
+}
+
+.contact-form-info p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .contact-form-container {
+        padding: 15px;
+    }
+
+    .contact-form-title {
+        font-size: 20px;
+    }
+
+    .contact-form-help-text {
+        font-size: 14px;
+    }
+
+    .contact-form-input, .contact-form-select, .contact-form-textarea {
+        font-size: 13px;
+    }
+
+    .contact-form-submit {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .contact-form-info h3 {
+        font-size: 16px;
+    }
+
+    .contact-form-info p {
+        font-size: 12px;
+    }
+}

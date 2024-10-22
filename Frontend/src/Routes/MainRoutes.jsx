@@ -8,6 +8,7 @@ import Profile from "../Components/Pages/profile";
 
 // Post Forms
 import SaleProperty from "../Components/SellingDetails/SaleProperty";
+
 import PostHouse from "../Components/SellingDetails/House/PostHouse";
 import CementPostForm from "../Components/SellingDetails/Cement/CementPost";
 import SandPostForm from "../Components/SellingDetails/Sand/sandpost";
@@ -71,6 +72,9 @@ import SellerSteelView from "../Components/SellingDetails/SellerViewDetails/Stee
 import SellerStoneView from "../Components/SellingDetails/SellerViewDetails/StoneView/StoneDetails";
 import SellerWoodView from "../Components/SellingDetails/SellerViewDetails/WoodView/WoodDetails";
 
+// seller category edit
+import EditHouseForm from "../Components/SellingDetails/Seller Dashboard/Editcat/houseedit";
+
 //Intrest routes
 import SBILoanCalculator from "../Components/LoanCals/sbiloan";
 import HDFCLoanCalculator from "../Components/LoanCals/hdfccal";
@@ -89,16 +93,6 @@ import BajajEmi from "../Components/EMICalc/BajajEmi";
 
 //favourites
 import FavCategories from "../Components/favourites/favdash";
-import CateringWithFavourites from "../Components/favourites/Cateringfav";
-import CementWithFavourites from "../Components/favourites/Cementfav";
-import HouseWithFavourites from "../Components/favourites/housefav";
-import InteriorWithFavourites from "../Components/favourites/interiorfav";
-import PgHostelWithFavourites from "../Components/favourites/pgfav";
-import PipeWireWithFavourites from "../Components/favourites/pipewire";
-import SandWithFavourites from "../Components/favourites/sandfav";
-import SteelWithFavourites from "../Components/favourites/steelfav";
-import StoneWithFavourites from "../Components/favourites/stonefav";
-import WoodWithFavourites from "../Components/favourites/woodfav";
 
 // 2d design
 import FloorPlanGenerator from "../Components/housebuildrahul/floorplan";
@@ -112,12 +106,13 @@ import CategoryLoanAll from "../Components/loandeal/loanall";
 
 // land
 import LandForm from "../Components/SellingDetails/land/land";
-import LandList from "../Components/Landdeal/landall";
-import LandView from "../Components/Landdeal/landviewid";
+import LandList from "../Components/Landdeal/Land/landall";
+import LandView from "../Components/Landdeal/LandView/landviewid";
 
 // agents (ui)
-import Agent from "../Components/Agents/Agent";
-import AgentDashboard from "../Components/Agents/AgentHome";
+import Agent from "../Components/Agents/Agentform/Agent";
+import AgentViewId from "../Components/Agents/AgentVeiw/AgentView";
+import AgentSlist from "../Components/Agents/Agentlist/AgentList";
 
 // Borewell
 import BoreWell from "../Components/SellingDetails/Borewell/BoreWell";
@@ -135,19 +130,23 @@ import FeedbackForm from "../Components/Footer/Feedback";
 
 // Adds
 import AdsCarousel from "../Components/Home/Hero/Adds";
-import AgentViewId from "../Components/Agents/AgentView";
+import EditHouse from "../Components/SellingDetails/Seller Dashboard/Editcat/houseedit";
+import AboutUs from "../Components/Footer/Aboutus";import Searchresult from "../Components/Home/Hero/Searchresult/searchresult";
+import { SearchProvider } from "../Components/Home/Hero/context/searchcontext";
+
 
 
 function MainRoutes() {
   return (
+    <SearchProvider>
     <Routes>
-
       {/* Auth */}
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/Adds" element={<AdsCarousel />} />
       <Route path="/login" element={<LoginRegister />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path='/searchresult' element={<Searchresult />} />
 
       {/* Post Properties */}
       <Route path="/post" element={<SaleProperty />} />
@@ -182,7 +181,7 @@ function MainRoutes() {
       <Route path="/cementall" element={<CategoryCementall />} />
       <Route path="/houseall" element={<CategoryHouseall />} />
       <Route path="/interiorall" element={<CategoryInteriorall />} />
-      <Route path="/interior/:category" element={<InteriorCategoryPage />} />
+      <Route path="/interior/:type" element={<InteriorCategoryPage />} />
       <Route path="/pgall" element={<CategoryPgHostelall />} />
       <Route path="/pipewireall" element={<CategoryPipeWireall />} />
       <Route path="/sandall" element={<CategorySandall />} />
@@ -215,6 +214,9 @@ function MainRoutes() {
       <Route path="/Sellerstoneview/:id" element={<SellerStoneView />} />
       <Route path="/Sellerwoodview/:id" element={<SellerWoodView />} />
 
+      {/* seller edit category */}
+      <Route path="/editHouse/:id" element={<EditHouse />} />
+
       {/* intrest route */}
       <Route path="/sbihomeloan" element={<SBILoanCalculator />} />
       <Route path="/hdfchomeloan" element={<HDFCLoanCalculator />} />
@@ -233,16 +235,6 @@ function MainRoutes() {
 
       {/* favourites */}
       <Route path="/favcategory" element={<FavCategories />} />
-      <Route path="/favcat" element={<CateringWithFavourites />} />
-      <Route path="/favcement" element={<CementWithFavourites />} />
-      <Route path="/favhouse" element={<HouseWithFavourites />} />
-      <Route path="/favinterior" element={<InteriorWithFavourites />} />
-      <Route path="/favpg" element={<PgHostelWithFavourites />} />
-      <Route path="/favpipe&wire" element={<PipeWireWithFavourites />} />
-      <Route path="/favsand" element={<SandWithFavourites />} />
-      <Route path="/favsteel" element={<SteelWithFavourites />} />
-      <Route path="/favstone" element={<StoneWithFavourites />} />
-      <Route path="/favwood" element={<WoodWithFavourites />} />
 
       {/* 2d plan */}
       <Route path="/floorplan" element={<FloorPlanGenerator />} />
@@ -252,7 +244,7 @@ function MainRoutes() {
 
       {/* agent ui design*/}
       <Route path="/agents" element={<Agent />} />
-      <Route path="/agentsList" element={<AgentDashboard />} />
+      <Route path="/agentsList" element={<AgentSlist />} />
       <Route path="/agents/:id" element={<AgentViewId />} />
 
       {/* Loan*/}
@@ -277,7 +269,9 @@ function MainRoutes() {
       <Route path="/privacy" element={<Privacy1 />} />
       <Route path="/terms&condition" element={<TermandCondition />} />
       <Route path="/feedback" element={<FeedbackForm />} />
+      <Route path="/about" element={<AboutUs />} />
     </Routes>
+    </SearchProvider>
   );
 }
 

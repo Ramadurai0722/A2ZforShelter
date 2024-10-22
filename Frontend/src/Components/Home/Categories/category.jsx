@@ -40,8 +40,7 @@ const CategoryList = () => {
   return (
     <div className="category-list">
       <h2>Categories</h2>
-      
-      {/* First row of categories */}
+
       <div className="categories first-row">
         {categories.filter(category => category.group === 'firsticon').map((category, index) => (
           <Link to={category.path} key={index} className="category firsticon">

@@ -7,86 +7,130 @@ body {
     padding: 0;
 }
 
-.category-container {
-    padding: 5px; 
-    margin-bottom: 40px;
+.loanall-container {
+    padding: 20px; 
+    margin-bottom: 50px;
+    margin-top: 100px;
 }
 
-.header-container {
+.loanall-header-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 30px; 
 }
 
-h2 {
+.loanall-header-container h2 {
     font-size: 36px; 
     color: #333;
     font-weight: 600; 
 }
 
-.card-container {
+.loanall-card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; 
+    gap: 20px; 
     justify-content: center;
 }
 
-.card {
+.loanall-card {
+    width: 90%;
     max-width: 320px;
-    max-height: 345px;
     background: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s; 
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
 }
 
-.card:hover {
+.loanall-card:hover {
     transform: translateY(-5px); 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); 
 }
 
-.card-content {
+.loanall-card-content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
 }
 
-.card-content h3 {
+.loanall-card-content h3 {
     margin: 0 0 10px; 
-    font-size: 20px; 
-    color: #333;
+    font-size: 22px; 
+    color: #007bff; 
     font-weight: 600; 
 }
 
-.card-content p {
+.loanall-card-content p {
     margin: 5px 0; 
     color: #555;
 }
 
-.card-buttons {
-    margin-top: 15px; 
-}
-
-.view-details-button {
-    border: none;
-    background: #007bff;
-    color: white;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s; 
+.loanall-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
     width: 100%;
-    font-weight: 700;
+    max-width: 600px; 
+    margin: 20px auto; 
 }
 
-.view-details-button:hover {
+.loanall-search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px; 
+    font-size: 16px;
+    width: 100%; 
+    max-width: 600px;
+    transition: border-color 0.3s;
+}
+
+.loanall-search-input:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+.loanall-search-button {
+    padding: 12px 15px; 
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.loanall-search-button:hover {
     background-color: #0056b3;
-    transform: scale(1.05); 
+    transform: translateY(-2px);
+}
+
+.loanall-search-button:active {
+    transform: translateY(0); 
+}
+
+.no-loans-message {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .loanall-card-container {
+        gap: 10px; 
+    }
+    
+    .loanall-card {
+        max-width: 90%; 
+    }
 }

@@ -11,6 +11,7 @@ const CivilSchema = new mongoose.Schema({
   servicesProvided: { type: [String], required: true },
   location: { type: String, required: true },
   availability: { type: String, required: true },
+  category: { type: String, default: "civil" }, 
 });
 
 module.exports = mongoose.model('Civil', CivilSchema);

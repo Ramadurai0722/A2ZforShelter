@@ -1,15 +1,19 @@
 const Engineer = require('../models/Civil');
 
-// Create a new engineer
+
 exports.createEngineer = async (req, res) => {
   try {
-    const engineer = new Engineer(req.body);
+    const engineer = new Engineer({
+      ...req.body,
+      category: "civil", 
+    });
     await engineer.save();
     res.status(201).json(engineer);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 // Get all engineers
 exports.getAllEngineers = async (req, res) => {

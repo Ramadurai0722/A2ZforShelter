@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./navbar.css";
+import { useNavigate } from "react-router-dom"; 
 import config from "../../config";
+import Snackbar from '@mui/material/Snackbar'; 
+import MuiAlert from '@mui/material/Alert'; 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +11,10 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileImage, setProfileImage] = useState("");
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false); 
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const checkTokenValidity = () => {
@@ -32,6 +39,7 @@ const Navbar = () => {
     };
     checkTokenValidity();
   }, []);
+
 
   const fetchUserProfile = async (token) => {
     try {
@@ -68,6 +76,34 @@ const Navbar = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
 
+  const handlePostPropertiesClick = () => {
+    if (isLoggedIn) {
+      navigate("/post"); 
+    } else {
+      setSnackbarMessage("Please log in to access this feature."); 
+      setSnackbarOpen(true); 
+      setTimeout(() => {
+        navigate("/login"); 
+      }, 1200);
+    }
+  };
+
+  const handlePricetabelClick = () => {
+    if (isLoggedIn) {
+      navigate("/pricetable"); 
+    } else {
+      setSnackbarMessage("Please log in to access this feature."); 
+      setSnackbarOpen(true); 
+      setTimeout(() => {
+        navigate("/login"); 
+      }, 1200);
+    }
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false); 
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userId");
@@ -96,7 +132,7 @@ const Navbar = () => {
 
       <div className={`navbar-links ${isOpen ? "open" : ""}`}>
         {/* Home Loans */}
-        <div
+        {/* <div
           className={`navbar-dropdown ${activeDropdown === "land" ? "active" : ""}`}
           onMouseEnter={() => handleMouseEnter("land")}
           onMouseLeave={() => setActiveDropdown("")}
@@ -125,7 +161,7 @@ const Navbar = () => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Interiors */}
         <div
@@ -173,8 +209,8 @@ const Navbar = () => {
             <div className="dropdown-menu buy-menu">
               <a href="/cementall">Cement</a>
               <a href="/houseall">House</a>
+              <a href="/interiorall">Interiors</a>
               <a href="/pgall">PG Hostel</a>
-              <a href="/cateringall">Catering</a>
               <a href="/pipewireall">Pipes & Wires</a>
               <a href="/sandall">Sand</a>
               <a href="/steelall">Steel</a>
@@ -196,6 +232,7 @@ const Navbar = () => {
           </span>
           {activeDropdown === "service" && (
             <div className="dropdown-menu service-menu">
+            <a href="/cateringall">Catering Service</a>
               <a href="/borewellall">BoreWell</a>
               <a href="/civilall">Civil Engineers</a>
             </div>
@@ -221,8 +258,12 @@ const Navbar = () => {
         </div>
 
         {/* Final Links */}
-        <a href="/post" className="navbar-link">Post Properties</a>
-        <a href="/pricetable" className="navbar-link">Premium</a>
+        <a href="#" className="navbar-link" onClick={handlePostPropertiesClick}>
+          Post Properties
+        </a>
+        <a href="#" className="navbar-link" onClick={handlePricetabelClick}>
+          Premium
+        </a>
         <a href="#footer" className="navbar-link">Contact Us</a>
       </div>
 
@@ -246,6 +287,16 @@ const Navbar = () => {
           <a href="/login" className="navbar-button">Access Portal</a>
         )}
       </div>
+      <Snackbar 
+        open={snackbarOpen} 
+        autoHideDuration={2000} 
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} 
+      >
+        <MuiAlert onClose={handleSnackbarClose} severity="error" elevation={6} variant="filled">
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </nav>
   );
 };

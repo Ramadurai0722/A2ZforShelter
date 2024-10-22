@@ -8,9 +8,10 @@ import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import './interiorall.css';
+import { Snackbar } from '@mui/material';
 
 const InteriorCategoryPage = () => {
-  const { category } = useParams();
+  const { type } = useParams();
   const [interior, setInterior] = useState([]);
   const [filteredInterior, setFilteredInterior] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,6 +20,7 @@ const InteriorCategoryPage = () => {
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     const fetchInterior = async () => {
@@ -60,13 +62,30 @@ const InteriorCategoryPage = () => {
 
   useEffect(() => {
     if (interior.length > 0) {
-      const filtered = interior.filter(item => item.category === category);
+      const filtered = interior.filter(item => item.type === type);
+      console.log('Filtered Interior:', filtered);
       setFilteredInterior(filtered);
     }
-  }, [interior, category]);
+  }, [interior, type]);
+  
+  
+  const queryNumber = parseFloat(searchQuery);
+
+  const filteredByType = filteredInterior.filter(item => {
+    const query = searchQuery.toLowerCase();
+    return (
+      item.products.toLowerCase().includes(query) ||
+      item.name.toLowerCase().includes(query) ||
+      (isNumeric(searchQuery) && item.price && item.price >= queryNumber)
+    );
+  });
 
   const getUserId = () => {
     return localStorage.getItem("userId");
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
   };
 
   const handleCardClick = (interiorId) => {
@@ -76,6 +95,14 @@ const InteriorCategoryPage = () => {
   const handleAddToFavourites = async (interiorId) => {
     const userId = getUserId();
     const productId = interiorId;
+
+    if (!userId) {
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
 
     try {
       if (favourites.includes(productId)) {
@@ -107,45 +134,34 @@ const InteriorCategoryPage = () => {
   const isNumeric = (value) => {
     return !isNaN(value) && !isNaN(parseFloat(value));
   };
-  
-  const queryNumber = parseFloat(searchQuery);
-
-  const filteredByCategory = filteredInterior.filter(item => {
-    const query = searchQuery.toLowerCase();
-    return (
-      item.products.toLowerCase().includes(query) ||
-      item.name.toLowerCase().includes(query) ||
-      (isNumeric(searchQuery) && item.price && item.price >= queryNumber)
-    );
-  });
 
   return (
     <>
       <Navbar />
-      <div className="interiorall-category-container">
+      <div className="interiorall-category-container" style={{marginTop:"-1px"}}>
         <div className="interiorall-header-container">
-          <h2 style={{ marginTop: "100px" }}>{category} Products</h2>
+          <h2 style={{ marginTop: "100px" }}>{type} Products</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="interiorall-search-container">
           <input
             type="text"
             placeholder="Search by product name, seller name, or price..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
-            className="cat-search-input"
+            className="interiorall-search-input"
           />
-          <button onClick={handleSearch} className="cat-search-button"> 
+          <button onClick={handleSearch} className="interiorall-search-button"> 
             Search
           </button>
         </div>
 
-        {filteredByCategory.length === 0 ? (
-          <p style={{ textAlign: "center" }}>No products found for "{searchQuery}" in this category.</p>
+        {filteredByType.length === 0 ? (
+          <p style={{ textAlign: "center" }}>No products found for "{searchQuery}{type}" in this category.</p>
         ) : (
           <div className="interiorall-card-container">
-            {filteredByCategory.map((item) => {
+            {filteredByType.map((item) => {
               const interiorId = item._id;
 
               return (
@@ -191,7 +207,7 @@ const InteriorCategoryPage = () => {
                       <span className="interiorall-like-count">{likeCounts[interiorId] || 0} Likes</span>
                     </div>
                     <p><strong>Seller Name:</strong> {item.name}</p>
-                    <p><strong>Category:</strong> {item.category}</p>
+                    <p><strong>Type:</strong> {item.type}</p>
 
                     <div className="interiorall-card-buttons">
                       <button
@@ -207,6 +223,23 @@ const InteriorCategoryPage = () => {
             })}
           </div>
         )}
+        
+        <Snackbar
+          open={snackbarOpen}
+          onClose={handleSnackbarClose}
+          message="You need to log in to add to favourites."
+          autoHideDuration={2000}
+          sx={{
+            '& .MuiSnackbarContent-root': {
+              backgroundColor: '#f44336', 
+              color: '#fff', 
+              borderRadius: '8px', 
+              padding: '11px',
+              fontSize: '0.8rem', 
+              boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+            },
+          }}
+        />
       </div>
       <Footer />
     </>

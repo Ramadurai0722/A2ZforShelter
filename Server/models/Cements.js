@@ -5,7 +5,7 @@ const cementSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-      },
+    },
     name: { type: String, required: true },
     email: { type: String, required: true },
     phoneNumber: { type: String, required: true },
@@ -16,6 +16,7 @@ const cementSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     images: [{ type: String, required: true }],
     description: { type: String, required: true },
+    category: { type: String, default: "cement" }, 
 });
 
 const CementPost = mongoose.model("Cements", cementSchema);

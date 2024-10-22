@@ -30,7 +30,7 @@ const InteriorpostForm = () => {
     email: "",
     phoneNumber: "",
     sellerAddress: "",
-    category: "",
+    type: "",
     products: "",
     price: "",
     images: [],
@@ -76,8 +76,8 @@ const InteriorpostForm = () => {
     }
   }, [form]);
 
-// Full categories and products map
-const categoryProductsMap = {
+// Full type and products map
+const typeProductsMap = {
   "Wall & Table Decor": [
     "Wall prints",
     "Clocks",
@@ -281,7 +281,7 @@ const categoryProductsMap = {
         email: "",
         phoneNumber: "",
         sellerAddress: "",
-        category: "",
+        type: "",
         products: "",
         price: "",
         images: [],
@@ -295,7 +295,7 @@ const categoryProductsMap = {
         email: "",
         phoneNumber: "",
         sellerAddress: "",
-        category: "",
+        type: "",
         products: "",
         price: "",
         description: "",
@@ -362,15 +362,15 @@ const categoryProductsMap = {
 
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12}>
-            <Form.Item label="Category" name="category" rules={[{ required: true, message: "Please select a category!" }]}>
+            <Form.Item label="Type" name="category" rules={[{ required: true, message: "Please select a type!" }]}>
               <Select
-                value={formData.category}
-                onChange={(value) => handleChange({ category: value, products: "" })}
+                value={formData.type}
+                onChange={(value) => handleChange({ type: value, products: "" })}
                 style={inputStyle}
               >
-                {Object.keys(categoryProductsMap).map((category) => (
-                  <Option key={category} value={category}>
-                    {category}
+                {Object.keys(typeProductsMap).map((type) => (
+                  <Option key={type} value={type}>
+                    {type}
                   </Option>
                 ))}
               </Select>
@@ -383,7 +383,7 @@ const categoryProductsMap = {
                 onChange={(value) => handleChange({ products: value })}
                 style={inputStyle}
               >
-                {(categoryProductsMap[formData.category] || []).map((product) => (
+                {(typeProductsMap[formData.type] || []).map((product) => (
                   <Option key={product} value={product}>
                     {product}
                   </Option>

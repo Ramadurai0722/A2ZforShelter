@@ -22,7 +22,8 @@ const pipeWireSchema = new mongoose.Schema({
     quantity: { type: String, default: "1 Piece" },
     price: { type: Number, required: true },
     description: { type: String, required: true },
-    images: [{ type: String, required: true }], // Store paths to uploaded images
+    category: { type: String, default: "pipewire" }, 
+    images: [{ type: String, required: true }], 
 }, { timestamps: true });
 
 const PipeWire = mongoose.model('PipeWire', pipeWireSchema);

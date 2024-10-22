@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import HeroSection from "./Hero/HeroSection";
 import Footer from "../Footer/Footer";
-import AgentsSection from "./AgentsSection";
+// import AgentsSection from "./AgenthomeView/AgentsSection";
 import CategoryList from "./Categories/category";
 
 function HomePage() {
@@ -13,7 +13,7 @@ function HomePage() {
         
         <CategoryList />
 
-        <AgentsSection />
+        {/* <AgentsSection /> */}
 
       <Footer />
     </>

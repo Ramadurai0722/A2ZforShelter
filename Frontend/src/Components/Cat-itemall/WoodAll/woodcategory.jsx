@@ -8,6 +8,7 @@ import config from '../../../config';
 import Navbar from '../../Navbar/Navbar';
 import Footer from '../../Footer/Footer';
 import './woodall.css';
+import { Snackbar } from '@mui/material';
 
 const CategoryWoodall = () => {
   const [data, setData] = useState([]);
@@ -15,9 +16,9 @@ const CategoryWoodall = () => {
   const [error, setError] = useState(null);
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
-  const [searchQuery, setSearchQuery] = useState(""); // State for search query
+  const [searchQuery, setSearchQuery] = useState(""); 
   const navigate = useNavigate();
-
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const woodRoute = `${config.apiURL}/woodRoute/wood`;
 
   useEffect(() => {
@@ -59,7 +60,9 @@ const CategoryWoodall = () => {
   const getUserId = () => {
     return localStorage.getItem('userId');
   };
-
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
   const handleCardClick = (woodId) => {
     navigate(`/woodview/${woodId}`);
   };
@@ -67,7 +70,14 @@ const CategoryWoodall = () => {
   const handleAddToFavourites = async (woodId) => {
     const userId = getUserId();
     const productId = woodId;
+    if (!userId) {
 
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
@@ -111,15 +121,15 @@ const CategoryWoodall = () => {
           <h2>Wood Products</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="woodall-search-container">
           <input
             type="text"
             placeholder="Search by wood type or seller..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="cat-search-input"
+            className="woodall-search-input"
           />
-          <button className="cat-search-button">
+          <button className="woodall-search-button">
             Search
           </button>
         </div>
@@ -184,6 +194,22 @@ const CategoryWoodall = () => {
             })
           )}
         </div>
+        <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
       </div>
       <Footer />
     </>

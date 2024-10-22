@@ -140,6 +140,52 @@
 .steeleall-favourite-icon.filled {
     color: red;
 }
+.steeleall-carousel img {
+    height: 200px; 
+    width: 100%; 
+    object-fit: cover; 
+}
+.steeleall-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto; 
+    margin-top: -40px;
+}
+
+.steeleall-search-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px; 
+    font-size: 16px;
+    width: 100%; 
+    max-width: 500px;
+    transition: border-color 0.3s;
+}
+
+.steeleall-search-container button {
+    padding: 12px 15px; 
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.steeleall-search-container button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.steeleall-search-container button:active {
+    transform: translateY(0); 
+}
 
 /* Media Queries */
 @media screen and (max-width: 600px) {

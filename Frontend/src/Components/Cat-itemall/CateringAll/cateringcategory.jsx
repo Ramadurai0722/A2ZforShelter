@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Carousel } from 'react-responsive-carousel';
+import { Snackbar } from '@mui/material';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import config from '../../../config';
@@ -16,6 +17,7 @@ const CategoryCateringall = () => {
   const [favourites, setFavourites] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
 
   const cateringRoute = `${config.apiURL}/cateringRoute/catering`;
@@ -58,6 +60,9 @@ const CategoryCateringall = () => {
   const getUserId = () => {
     return localStorage.getItem('userId');
   };
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
   const handleCardClick = (cateringId) => {
     navigate(`/cateringview/${cateringId}`);
@@ -66,11 +71,19 @@ const CategoryCateringall = () => {
   const handleViewDetailsClick = (cateringId) => {
     navigate(`/cateringview/${cateringId}`);
   };
-
   const handleAddToFavourites = async (cateringId) => {
     const userId = getUserId();
     const productId = cateringId;
 
+    if (!userId) {
+
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
+    
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
@@ -123,16 +136,16 @@ const CategoryCateringall = () => {
           <h2>Catering Services</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="cateringall-search-container">
           <input
             type="text"
             placeholder="Search by name, meals, location, Price..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
-            className="cat-search-input"
+            className="cateringall-search-input"
           />
-          <button onClick={handleSearch} className="cat-search-button"> 
+          <button onClick={handleSearch} className="cateringall-search-button">
             Search
           </button>
         </div>
@@ -198,6 +211,23 @@ const CategoryCateringall = () => {
           })}
         </div>
       </div>
+      <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
+
       <Footer />
     </>
   );

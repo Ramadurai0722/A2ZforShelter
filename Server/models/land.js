@@ -68,6 +68,7 @@ const landSchema = new mongoose.Schema({
     photos: {
         type: [String], 
     },
+    category: { type: String, default: "land" }, 
 });
 
 const Land = mongoose.model("Land", landSchema);

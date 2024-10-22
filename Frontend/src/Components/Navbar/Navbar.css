@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: white; 
+  background-color: white;
   color: #060505;
   position: fixed;
   top: 0;
@@ -163,7 +163,7 @@
 .profile-dropdown {
   position: absolute;
   top: 80px;
-  margin-top: -5px;
+  margin-top: -8px;
   right: 10px;
   background-color: #444;
   border-radius: 5px;
@@ -219,33 +219,33 @@
 
 @media (max-width: 850px) {
   .navbar-links {
-    display: none; 
+    display: none;
     flex-direction: column;
     position: absolute;
-    top: 80px; 
+    top: 80px;
     left: 0;
     width: 100%;
-    background-color: #e3d8d8; 
+    background-color: #e3d8d8;
     padding: 20px;
-    max-height: calc(100vh - 80px); 
-    overflow-y: auto; 
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
     z-index: 999;
     align-items: flex-start;
   }
 
   .navbar-links.open {
-    display: flex; 
+    display: flex;
   }
 
   .navbar-logo img {
     width: 150px;
-    height: auto; 
+    height: auto;
   }
 
   a {
     margin-left: 10px;
     margin-top: 10px;
-    color: #fff; 
+    color: #fff;
   }
 
   .navbar-auth {
@@ -256,25 +256,27 @@
   }
 
   .navbar-button {
-    padding: 10px; /* Increase button padding */
-    border: 1px solid #fff; /* White border */
+    font-size: 13px;
+    padding: 5px 10px;
+    border: 1px solid #0c0b0b;
     border-radius: 5px;
-    color: #fff; /* White text */
+    color: #0c0b0b;
+    text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
   }
 
   .navbar-button:hover {
-    background-color: #555; /* Darker hover state */
+    background-color: #6b6767;
   }
 
   .navbar-toggle {
     display: flex;
     justify-content: end;
-    margin-left: auto; /* Align toggle button to the right */
+    margin-left: auto;
     font-size: 30px;
     background: none;
     border: none;
-    color: #060505; /* Dark color for toggle */
+    color: #060505;
     cursor: pointer;
     outline: none;
     z-index: 1001;
@@ -289,7 +291,7 @@
 
 
 .dropdown-menu {
-  display: none; 
+  display: none;
   position: absolute;
   top: 60px;
   left: 0;
@@ -303,16 +305,13 @@
 
 .profile-dropdown {
   position: absolute;
-  top: 60px;
+  top: 55px;
   right: 10px;
   background-color: #e7d5d5;
   border-radius: 5px;
   padding: 10px;
   width: 150px;
   display: none;
-
-
-
 }
 
 .navbar-profileimage:hover .profile-dropdown {
@@ -328,17 +327,16 @@
 }
 
 .profile-link:hover {
-  background-color: #555; 
+  background-color: #555;
 }
 
-@media (max-width: 440px) {
+@media (max-width: 500px) {
   .navbar-links {
-    display: none; 
+    display: none;
   }
 
   .navbar-links.open {
     display: flex;
-    margin-top: 10px;
   }
 
   a {
@@ -359,11 +357,11 @@
   .dropdown-menu {
     position: relative;
     width: 100%;
-    display: none; 
+    display: none;
     background-color: #e0b0b0;
     padding: 10px;
     border-radius: 5px;
-    margin-top: -70px;
+    margin-top: -60px;
     margin-bottom: 35px;
   }
 
@@ -371,13 +369,21 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-right: 10px; 
+    margin-right: 10px;
   }
 
   .navbar-auth .navbar-profileimage {
     margin-top: 10px;
   }
 
+  .navbar-button {
+    padding: 5px 10px;
+    border: 1px solid #0c0b0b;
+    border-radius: 5px;
+    color: #0c0b0b;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
   .navbar-auth .navbar-button {
     margin-top: 10px;
   }
@@ -390,7 +396,10 @@
   .navbar-toggle {
     display: flex;
     justify-content: end;
-    margin-left: 60px; 
+    margin-left: 60px;
+  }
+  .profile-dropdown{
+    margin-top: 20px;
   }
 }
 
@@ -445,6 +454,7 @@
   .navbar-dropdown {
     font-size: 16px;
   }
+
   .navbar-auth a {
     font-size: 12px;
   }
@@ -511,6 +521,7 @@
   .navbar-dropdown {
     font-size: 16px;
   }
+
   .navbar-auth a {
     font-size: 8px;
   }
@@ -551,6 +562,7 @@
   .navbar-dropdown {
     font-size: 14px;
   }
+
   .navbar-auth a {
     font-size: 8px;
   }

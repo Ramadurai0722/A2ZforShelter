@@ -1,0 +1,83 @@
+/* Feedback.css */
+.feedback-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures the container spans the full height of the viewport */
+    background-color: #f0f0f0; /* Optional: a background color for the page */
+  }
+  
+  .feedback-form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    width: 100%; /* Ensure the form takes full width within the container */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feedback-form__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .feedback-form__form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .feedback-form__label {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .feedback-form__rating {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .feedback-form__radio {
+    margin-left: 10px;
+  }
+  
+  .feedback-form__textarea {
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .feedback-form__submit {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .feedback-form__submit:hover {
+    background-color: #0056b3;
+  }
+  
+  .feedback-form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  
+  .feedback-form__message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: green;
+  }
+  

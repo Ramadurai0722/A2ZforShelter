@@ -11,6 +11,7 @@ const loanSchema = new mongoose.Schema({
     phoneNumber: { type: String, required: true },
     description: { type: String },
     loanType: { type: String, required: true },
+    category: { type: String, default: "loan" }, 
 });
 
 module.exports = mongoose.model('Loan', loanSchema);

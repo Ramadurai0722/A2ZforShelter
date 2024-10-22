@@ -23,6 +23,7 @@ const PgHostelSchema = new mongoose.Schema({
     location: String,
     name: String,
     phoneNumber: String,
+    category: { type: String, default: "pghostel" }, 
     photos: [String],
 });
 

@@ -1,25 +1,133 @@
-.termbox{
-    background-color:white;
-}
-.box1 , .box3{
-    background-color:rgb(247, 247, 247);
-    width: 1300px;
-    padding: 10px;
-    margin-left: 100px
-}
-.box2{
-    background-color: rgb(254, 254, 242);
-    width: 1300px;
-    padding: 10px;
-    margin-left: 100px
+/* Base Styles */
+.res-termbox {
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
-.center-content {
-    /* display: flex; */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh; /* Makes sure content is centered vertically within the viewport */
-  }
-  
+.res-termbox h1, .res-termbox h4 {
+    font-size: 22px;
+    color: #333;
+}
+
+.res-box1, .res-box2 {
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.res-privacy-link {
+    font-size: 14px;
+    color: blue;
+    text-decoration: none;
+}
+
+.res-privacy-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Views */
+
+/* Mobile View (up to 600px) */
+@media only screen and (max-width: 600px) {
+    .res-termbox {
+        padding: 10px;
+        overflow: hidden;
+        
+    }
+
+    .res-termbox h1, .res-termbox h4 {
+        font-size: 18px;
+    }
+
+    .res-box1, .res-box2 {
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .res-privacy-link {
+        font-size: 12px;
+    }
+}
+
+/* Tablet View (601px to 800px) */
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+    .res-termbox {
+        padding: 15px;
+        overflow: hidden;
+    }
+
+    .res-termbox h1, .res-termbox h4 {
+        font-size: 20px;
+    }
+
+    .res-box1, .res-box2 {
+        padding: 12px;
+    }
+
+    .res-privacy-link {
+        font-size: 13px;
+    }
+}
+
+/* Laptop View (801px to 1000px) */
+@media only screen and (min-width: 801px) and (max-width: 1000px) {
+    .res-termbox {
+        padding: 18px;
+        overflow: hidden;
+    }
+
+    .res-termbox h1, .res-termbox h4 {
+        font-size: 21px;
+    }
+
+    .res-box1, .res-box2 {
+        padding: 14px;
+        overflow: hidden;
+    }
+
+    .res-privacy-link {
+        font-size: 14px;
+    }
+}
+
+/* Larger Laptop View (1001px to 1200px) */
+@media only screen and (min-width: 1001px) and (max-width: 1200px) {
+    .res-termbox {
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    .res-termbox h1, .res-termbox h4 {
+        font-size: 22px;
+    }
+
+    .res-box1, .res-box2 {
+        padding: 15px;
+        overflow: hidden;
+    }
+
+    .res-privacy-link {
+        font-size: 14px;
+    }
+}
+
+/* Extra Large View (above 1200px) */
+@media only screen and (min-width: 1201px) {
+    .res-termbox {
+        padding: 25px;
+        overflow: hidden;
+    }
+
+    .res-termbox h1, .res-termbox h4 {
+        font-size: 24px;
+    }
+
+    .res-box1, .res-box2 {
+        padding: 18px;
+        overflow: hidden;
+    }
+
+    .res-privacy-link {
+        font-size: 15px;
+    }
+}

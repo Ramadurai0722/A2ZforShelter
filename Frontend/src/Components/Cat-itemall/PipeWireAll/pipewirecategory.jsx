@@ -8,6 +8,7 @@ import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import './pipewireall.css'; 
+import { Snackbar } from '@mui/material';
 
 const CategoryPipeWireall = () => {
   const [data, setData] = useState([]);
@@ -17,6 +18,7 @@ const CategoryPipeWireall = () => {
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const pipeWireRoute = `${config.apiURL}/pipeWiresRoute/pipewires`;
 
@@ -58,7 +60,9 @@ const CategoryPipeWireall = () => {
   const getUserId = () => {
     return localStorage.getItem('userId');
   };
-
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
   const handleCardClick = (itemId) => {
     navigate(`/pipe&wireview/${itemId}`);
   };
@@ -71,6 +75,15 @@ const CategoryPipeWireall = () => {
     const userId = getUserId();
     const productId = itemId;
 
+    if (!userId) {
+
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
+    
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
@@ -116,15 +129,15 @@ const CategoryPipeWireall = () => {
           <h2>Pipe & Wire Products</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="pipewireall-search-container">
           <input
             type="text"
             placeholder="Search by product type or brand..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="cat-search-input"
+            className="pipewireall-search-input"
           />
-          <button onClick={() => setSearchQuery(searchQuery)} className="cat-search-button">
+          <button onClick={() => setSearchQuery(searchQuery)} className="pipewireall-search-button">
             Search
           </button>
         </div>
@@ -207,6 +220,22 @@ const CategoryPipeWireall = () => {
             })
           )}
         </div>
+        <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
       </div>
       <Footer />
     </>

@@ -8,7 +8,7 @@ import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import './sandall.css'; 
-
+import { Snackbar } from '@mui/material';
 const CategorySandall = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +17,7 @@ const CategorySandall = () => {
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const sandRoute = `${config.apiURL}/sandRoute/sand`;
 
   useEffect(() => {
@@ -60,6 +60,10 @@ const CategorySandall = () => {
     return localStorage.getItem('userId');
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleCardClick = (sandId) => {
     navigate(`/sandview/${sandId}`);
   };
@@ -71,7 +75,15 @@ const CategorySandall = () => {
   const handleAddToFavourites = async (sandId) => {
     const userId = getUserId();
     const productId = sandId;
+    if (!userId) {
 
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
+    
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
@@ -117,15 +129,15 @@ const CategorySandall = () => {
           <h2>Sand Products</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="sandall-search-container">
           <input
             type="text"
             placeholder="Search by sand type, seller, or description..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="cat-search-input"
+            className="sandall-search-input"
           />
-          <button className="cat-search-button">
+          <button className="sandall-search-button">
             Search
           </button>
         </div>
@@ -190,6 +202,22 @@ const CategorySandall = () => {
             })
           )}
         </div>
+        <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
       </div>
       <Footer />
     </>

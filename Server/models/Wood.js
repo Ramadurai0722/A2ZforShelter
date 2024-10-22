@@ -16,7 +16,8 @@ const woodSchema = new mongoose.Schema({
   quantity: { type: String, required: true },
   price: { type: Number, required: true },
   description: { type: String, required: true },
-  images: [{ type: String, required: true }], // Store paths to uploaded images
+  category: { type: String, default: "wood" }, 
+  images: [{ type: String, required: true }], 
 }, { timestamps: true });
 
 const Wood = mongoose.model('Wood', woodSchema);

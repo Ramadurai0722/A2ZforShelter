@@ -35,7 +35,7 @@ function SellerDashboard() {
   });
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
-  const { category } = useParams(); 
+  const { category } = useParams();
 
   useEffect(() => {
     const checkTokenValidity = async () => {
@@ -212,7 +212,11 @@ function SellerDashboard() {
     <>
       <Navbar />
       <div className="dashboard-layout" style={{ display: 'flex' }}>
-        <CategorySidebar categories={categoriesData} setSelectedCategory={setSelectedCategory} />
+        <CategorySidebar 
+          categories={categoriesData} 
+          setSelectedCategory={setSelectedCategory} 
+          selectedCategory={selectedCategory} // Pass selectedCategory
+        />
         <div className="category-products" style={{ marginLeft: '20px', flex: 1 }}>
           {hasData ? renderCategoryProducts() : (
             <div

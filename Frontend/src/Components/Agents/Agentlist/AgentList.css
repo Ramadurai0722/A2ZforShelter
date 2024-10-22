@@ -1,11 +1,12 @@
 .agents-category-container {
     padding: 20px;
     margin-bottom: 40px;
+    margin-top: 100px;
 }
 
 .agents-header-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 30px;
     position: relative;
@@ -15,6 +16,52 @@
     font-size: 24px;
     color: #333;
     margin-right: 10px;
+}
+
+.agents-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px 0; 
+}
+
+.agents-search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px; 
+    font-size: 16px;
+    width: 100%; 
+    max-width: 500px;
+    transition: border-color 0.3s;
+}
+
+.agents-search-input:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+.agents-search-button {
+    padding: 12px 15px; 
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.agents-search-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.agents-search-button:active {
+    transform: translateY(0); 
 }
 
 .agents-card-container {
@@ -109,6 +156,13 @@
 
 .agents-carousel {
     margin-bottom: 15px;
+}
+.no-agents-message {
+    text-align: center;
+    color: #999;
+    font-size: 18px;
+    margin-top: 20px;
+    font-style: italic;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,10 +1,9 @@
-// models/Agent.js
 const mongoose = require('mongoose');
 
 const AgentSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // assuming you have a User model
+        ref: 'User',
         required: true,
     },
     firstName: {
@@ -30,7 +29,8 @@ const AgentSchema = new mongoose.Schema({
     productInterest: {
         type: String,
     },
-    images: [{ type: String, required: true }]
+    images: [{ type: String, required: true }],
+    category: { type: String, default: "agents" },
 }, { timestamps: true });
 
 const Agent = mongoose.model('Agent', AgentSchema);

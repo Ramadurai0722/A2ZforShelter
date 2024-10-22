@@ -8,6 +8,7 @@ import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import './pgall.css';
+import { Snackbar } from '@mui/material';
 
 const CategoryPgHostelall = () => {
   const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ const CategoryPgHostelall = () => {
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const pgHostelRoute = `${config.apiURL}/pgHostelRoute/pgHostel`;
 
   useEffect(() => {
@@ -59,13 +60,24 @@ const CategoryPgHostelall = () => {
     return localStorage.getItem('userId');
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleCardClick = (pgHostelId) => {
     navigate(`/productviewpg/${pgHostelId}`);
   };
 
   const handleAddToFavourites = async (pgHostelId) => {
     const userId = getUserId();
+    if (!userId) {
 
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
     try {
       if (favourites.includes(pgHostelId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
@@ -115,16 +127,16 @@ const CategoryPgHostelall = () => {
           <h2>PG Hostels</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="pgall-search-container">
           <input
             type="text"
             placeholder="Search by product name, seller name, or price..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
-            className="cat-search-input"
+            className="pgall-search-input"
           />
-          <button onClick={() => console.log("Search initiated: ", searchQuery)} className="cat-search-button"> 
+          <button onClick={() => console.log("Search initiated: ", searchQuery)} className="pgall-search-button"> 
             Search
           </button>
         </div>
@@ -196,6 +208,22 @@ const CategoryPgHostelall = () => {
             })
           )}
         </div>
+        <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
       </div>
       <Footer />
     </>

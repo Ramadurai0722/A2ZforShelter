@@ -1,6 +1,6 @@
 const Interior = require('../models/Interior');
 
-// Create a new Interior Post
+
 exports.createInterior = async (req, res) => {
   try {
     const {
@@ -9,13 +9,13 @@ exports.createInterior = async (req, res) => {
       email,
       phoneNumber,
       sellerAddress,
-      category,
+      type,
       products,
       price,
       description,
     } = req.body;
 
-    // Handle image uploads
+
     const images = req.files.map((file) => file.path);
 
     const interiorPost = new Interior({
@@ -24,11 +24,12 @@ exports.createInterior = async (req, res) => {
       email,
       phoneNumber,
       sellerAddress,
-      category,
+      type,
       products,
       price,
       description,
       images,
+
     });
 
     const savedPost = await interiorPost.save();
@@ -37,6 +38,7 @@ exports.createInterior = async (req, res) => {
     res.status(500).json({ message: 'Error creating interior post', error });
   }
 };
+
 exports.getAllInterior = async (req, res) => {
   try {
     const interior = await Interior.find();

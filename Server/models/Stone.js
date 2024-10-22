@@ -15,7 +15,8 @@ const stoneSchema = new mongoose.Schema({
   quantity: { type: String, default: "1 Tonne" },
   price: { type: Number, required: true },
   description: { type: String, required: true },
-  images: [{ type: String, required: true }], // Store image paths
+  category: { type: String, default: "stone" }, 
+  images: [{ type: String, required: true }], 
 }, { timestamps: true });
 
 const Stone = mongoose.model('Stone', stoneSchema);

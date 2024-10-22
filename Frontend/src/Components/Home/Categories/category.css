@@ -23,18 +23,18 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     text-decoration: none;
-    padding: 40px;
-    margin: 30px;
+    padding: 20px;
+    margin: 20px;
 }
 
 .category-icon {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
 }
 
 .category p {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 10px;
     color: #333;
 }
 
@@ -45,21 +45,21 @@
 }
 
 .firsticon {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     background-color: #f9f9f9;
 }
 
 .secondicon {
-    width: 110px;
-    height: 110px;
-    background-color: #f4f4f4;
+    width: 80px;
+    height: 80px;
+    background-color: #f9f9f9;
 }
 
 .thirdicon {
-    width: 100px;
-    height: 100px;
-    background-color: #efefef;
+    width: 80px;
+    height: 80px;
+    background-color: #f9f9f9;
 }
 
 @media (max-width: 580px) {
@@ -82,6 +82,9 @@
         width: 120px;
         height: 120px; 
     }
+    .category p{
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 1250px) {
@@ -93,7 +96,24 @@
         height: 95px;
     }
     .category p{
-        font-size: 10px;
+        font-size: 9px;
+    }
+    .firsticon {
+        width: 80px;
+        height: 80px;
+        background-color: #f9f9f9;
+    }
+    
+    .secondicon {
+        width: 80px;
+        height: 80px;
+        background-color: #f9f9f9;
+    }
+    
+    .thirdicon {
+        width: 80px;
+        height: 80px;
+        background-color: #f9f9f9;
     }
 }
 
@@ -113,11 +133,28 @@
         height: 95px;
     }
     .category p{
-        font-size: 10px;
+        font-size: 8px;
     }
 
     .category {
         margin: 20px 10px; 
+    }
+    .firsticon {
+        width: 80px;
+        height: 80px;
+        background-color: #f9f9f9;
+    }
+    
+    .secondicon {
+        width: 80px;
+        height: 80px;
+        background-color: #f9f9f9;
+    }
+    
+    .thirdicon {
+        width: 80px;
+        height: 80px;
+        background-color: #f9f9f9;
     }
 }
 
@@ -163,7 +200,7 @@
         height: 80px;
     }
     .category p{
-        font-size: 5px;
+        font-size: 9px;
     }
 
     .category {

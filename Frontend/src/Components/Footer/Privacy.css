@@ -1,16 +1,151 @@
-.privacy{
-    background-color: white;
+/* General privacy container styling */
+.pri-privacy {
+    background-color: white; /* Light background */
+    color: black;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    display: flex; /* Enable flexbox for centering */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
 }
-.privacybox {
-    background-color: rgb(5, 5, 120);
+
+/* Link styling */
+.pri-privacy a {
+    color: #4caf50; /* Green color for links */
+    text-decoration: none;
+    font-size: 13px; /* Font size consistent with previous code */
+}
+
+.pri-privacy a:hover {
+    text-decoration: underline;
+}
+
+/* Privacy box styling */
+.pri-privacybox {
+    background-color: rgba(109, 86, 178, 0.8); /* Semi-transparent background for better contrast */
+    color: white; /* Text color */
+    padding: 20px; /* Inner spacing */
+    border-radius: 10px; /* Rounded corners for better appearance */
+    max-width: 800px; /* Maximum width */
+    margin: 20px auto; /* Centering with margin */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    width: 100%; /* Full width within the max width */
+}
+
+/* Headings styling */
+.pri-privacybox h1,
+.pri-privacy h1,
+.pri-privacy h2,
+.pri-privacy h3 {
     color: white;
-    height: 300px;
-    width: 1300px;
-    margin-left: 100px;
+    margin-bottom: 10px;
 }
-.privacybox h1{
-    color: white;
+
+/* h2-specific styling */
+h2 {
+    padding-bottom: 5px;
+    margin-top: 20px;
 }
-a{
-    font-size: 13px;
+
+/* List styling */
+ul {
+    list-style-type: none; /* No bullet points */
+    padding-left: 0; /* No left padding */
+}
+
+ul li {
+    margin-bottom: 10px;
+    color: black; /* Black text for list items */
+}
+
+/* Paragraph styling */
+.pri-privacybox p {
+    color: black; /* Black text for paragraphs */
+}
+
+/* Bold text styling */
+strong {
+    color: black; /* Bold text color */
+}
+
+/* Emphasis styling */
+b {
+    color: #4caf50; /* Green for emphasis */
+}
+
+/* Table structure for rights and data categories */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Space above the table */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    border-radius: 10px; /* Rounded corners for tables */
+    overflow: hidden; /* Prevent overflow of rounded corners */
+}
+
+table td {
+    border: 2px solid #4caf50; /* Border color for table cells */
+    padding: 10px; /* Inner padding for cells */
+    text-align: left; /* Align text to the left */
+    color: white; /* Text color for table cells */
+}
+
+table th {
+    background-color: black; 
+    color: white;/* Dark background for headers */
+}
+
+table td {
+    background-color: black;
+    color: white; /* Light background for data cells */
+}
+
+/* Responsive styling */
+/* Responsive styling */
+@media (max-width: 800px) {
+    .privacybox {
+        padding: 15px; /* Reduced padding for smaller screens */
+        margin: 10px; /* Reduce margin to fit better */
+    }
+
+    .privacybox h1 {
+        font-size: 1.5em; /* Smaller heading size for tablets */
+    }
+
+    .privacybox p {
+        font-size: 0.95em; /* Slightly smaller paragraph text for readability */
+    }
+}
+
+/* Combine smaller screen media queries */
+@media (max-width: 600px) {
+    .privacybox {
+        padding: 10px; /* Further reduced padding */
+    }
+
+    .privacybox h1 {
+        font-size: 1.3em; /* Even smaller heading size for mobile */
+    }
+
+    .privacybox p {
+        font-size: 0.9em; /* Smaller paragraph text */
+    }
+}
+
+@media (max-width: 440px) {
+    .privacybox {
+        padding: 8px; /* Further reduced padding */
+        width: 100%; /* Ensure full width for very small screens */
+        margin: 0; /* Remove margin to occupy the full width */
+    }
+
+    .privacybox h1 {
+        font-size: 1.1em; /* Further reduce heading size for very small screens */
+    }
+
+    .privacybox p {
+        font-size: 0.85em; /* Smaller paragraph text for very small screens */
+    }
 }

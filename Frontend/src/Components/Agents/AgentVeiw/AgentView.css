@@ -23,27 +23,28 @@
 
 .agentviewid-card {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; 
+    align-items: center; 
     background: #fff;
     border-radius: 15px; 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     padding: 20px;
     margin-bottom: 30px;
     width: 80%;
-    max-width: 350px; 
-    max-height: 700px;
+    max-width: 700px; 
+    max-height: 800px;
 }
 
 .agentviewid-image {
-    width: 100%;
-    max-height: 300px;
+    width: 250px; 
+    height: 220px; 
     border-radius: 15px; 
-    margin-bottom: 20px;
+    margin-right: 20px; 
 }
 
 .agentviewid-info {
-    text-align: center;
+    text-align: left; 
+    flex-grow: 1; 
 }
 
 .agentviewid-info p {
@@ -60,6 +61,12 @@
 /* Responsive styles */
 @media (max-width: 768px) {
     .agentviewid-card {
-        width: 90%; /* Ensure it takes up more space on mobile */
+        flex-direction: column; 
+        align-items: center;
+        width: 90%;
+    }
+    .agentviewid-image {
+        margin-right: 0; 
+        margin-bottom: 10px; 
     }
 }

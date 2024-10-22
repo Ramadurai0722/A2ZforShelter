@@ -1,7 +1,7 @@
 // ==============================|| THEME CONFIG  ||============================== //
 
 const config = {
-  // apiURL: `https://backend.a2zforshelter.com/`,
+  // apiURL: `https://backend.a2zforshelter.com`,
 
   apiURL: `http://localhost:2002`,
 };

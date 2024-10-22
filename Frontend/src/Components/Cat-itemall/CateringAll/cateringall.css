@@ -125,6 +125,14 @@
     margin: 0 0 5px 0; 
 }
 
+
+.cateringall-carousel img {
+    height: 200px; 
+    width: 100%; 
+    object-fit: cover; 
+}
+
+
 .cateringall-like-count {
     margin-top: 10px;
     font-size: 14px;
@@ -145,16 +153,17 @@
     color: red;
 }
 
-.cat-search-container {
+
+.cateringall-search-container {
     display: flex;
     justify-content: center;
     align-items: center; 
     width: 100%;
     max-width: 600px; 
-    margin: 20px 0; 
+    margin-top: -40px;
 }
 
-.cat-search-container input {
+.cateringall-search-container input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -165,7 +174,7 @@
     transition: border-color 0.3s;
 }
 
-.cat-search-container button {
+.cateringall-search-container button {
     padding: 12px 15px; 
     width: 100px;
     margin-bottom: 27px;
@@ -178,12 +187,12 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.cat-search-container button:hover {
+.cateringall-search-container button:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
 }
 
-.cat-search-container button:active {
+.cateringall-search-container button:active {
     transform: translateY(0); 
 }
 
@@ -197,20 +206,20 @@
         font-size: 18px;
     }
 
-    .cat-search-container {
+    .cateringall-search-container {
         flex-direction: row; 
     }
 
-    .cat-search-container input {
+    .cateringall-search-container input {
         max-width: 340px; 
         margin-bottom: 10px;
     }
 
-    .cat-search-container input::placeholder {
+    .cateringall-search-container input::placeholder {
         font-size: 12px; 
     }
 
-    .cat-search-container button {
+    .cateringall-search-container button {
         width: 20%; 
         font-size: 12px;
     }
@@ -230,17 +239,17 @@
         font-size: 25px;
     }
 
-    .cat-search-container {
+    .cateringall-search-container {
         flex-direction: row; 
         align-items: center;
     }
 
-    .cat-search-container input {
+    .cateringall-search-container input {
         width: 300px; 
         margin-right: 10px; 
     }
 
-    .cat-search-container button {
+    .cateringall-search-container button {
         width: auto; 
     }
 }
@@ -259,11 +268,11 @@
         font-size: 22px;
     }
 
-    .cat-search-container input {
+    .cateringall-search-container input {
         width: 350px; 
     }
 
-    .cat-search-container button {
+    .cateringall-search-container button {
         padding: 8px 12px; 
     }
 }
@@ -282,7 +291,7 @@
         font-size: 25px;
     }
 
-    .cat-search-container input {
+    .cateringall-search-container input {
         width: 370px; 
     }
 }

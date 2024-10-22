@@ -3,36 +3,39 @@ const Agent = require('../models/Agent');
 exports.createAgent = async (req, res) => {
     console.log("agent");
     
-  try {
-    const {
-        userId,
-        firstName,
-        lastName,
-      email,
-      companyName,
-      phoneNumber,
-      productInterest,
-    } = req.body;
+    try {
+        const {
+            userId,
+            firstName,
+            lastName,
+            email,
+            companyName,
+            phoneNumber,
+            productInterest,
+        } = req.body;
 
-    const images = req.files.map((file) => file.path);
+        const images = req.files.map((file) => file.path);
 
-    const agent = new Agent({
-        userId,
-        firstName,
-        lastName,
-      email,
-      companyName,
-      phoneNumber,
-      productInterest,
-      images,
-    });
+        const agent = new Agent({
+            userId,
+            firstName,
+            lastName,
+            email,
+            companyName,
+            phoneNumber,
+            productInterest,
+            images,
+            category: "agents",
+        });
 
-    const agents = await agent.save();
-    res.status(201).json(agents);
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating stone post', error });
-  }
+        const savedAgent = await agent.save();
+        res.status(201).json(savedAgent);
+    } catch (error) {
+        res.status(500).json({ message: 'Error creating agent', error });
+    }
 };
+
+
 exports.getAllAgent = async (req, res) => {
     try {
       const agent = await Agent.find();

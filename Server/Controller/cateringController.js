@@ -1,6 +1,5 @@
 const Catering = require('../models/Catering');
 
-// Create a new Catering Post (Existing)
 exports.createCatering = async (req, res) => {
     try {
         const {
@@ -16,7 +15,6 @@ exports.createCatering = async (req, res) => {
             description,
         } = req.body;
 
-        // Handle image upload
         const images = req.files.map((file) => file.path);
 
         const cateringPost = new Catering({
@@ -31,6 +29,7 @@ exports.createCatering = async (req, res) => {
             price,
             description,
             images,
+            category: 'catering', 
         });
 
         const savedPost = await cateringPost.save();
@@ -39,6 +38,7 @@ exports.createCatering = async (req, res) => {
         res.status(500).json({ message: 'Error creating catering post', error });
     }
 };
+
 
 // Get all Catering Posts
 exports.getAllCateringPosts = async (req, res) => {

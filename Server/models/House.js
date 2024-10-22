@@ -5,7 +5,7 @@ const houseSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-      },
+    },
     type: { type: String, required: true },
     bedrooms: { type: String, required: true },
     bathrooms: { type: String, required: true },
@@ -30,7 +30,8 @@ const houseSchema = new mongoose.Schema({
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     purpose: { type: String, required: true },
-    photos: [{ type: String }], 
+    photos: [{ type: String }],
+    category: { type: String, default: "house" }, 
 }, { timestamps: true });
 
 module.exports = mongoose.model("House", houseSchema);

@@ -7,12 +7,14 @@ import config from "../../../../config";
 import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import "./house.css"; 
+import "./house.css";
 
 const CategoryHouse1 = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [favourites, setFavourites] = useState([]);
+  const [likeCounts, setLikeCounts] = useState({});
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -23,23 +25,27 @@ const CategoryHouse1 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem("authToken");
-
-        if (!token) {
-          setError("Please login");
-          setSnackbarOpen(true);
-          setLoading(false);
-          return;
-        }
-
         setLoading(true);
+        
+        // Fetch user's houses
         const response = await axios.get(
           `${config.apiURL}/houseRoute/GetUserHouse`,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
           }
         );
         setData(response.data);
+
+        // Fetch like counts
+        const counts = await Promise.all(response.data.map(house =>
+          axios.get(`${config.apiURL}/favourites/count/${house._id}`)
+        ));
+        const likeCountMap = counts.reduce((acc, curr, index) => {
+          acc[response.data[index]._id] = curr.data.count;
+          return acc;
+        }, {});
+        setLikeCounts(likeCountMap);
+        
       } catch (err) {
         setError(err.message);
       } finally {
@@ -47,12 +53,48 @@ const CategoryHouse1 = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    const fetchFavourites = async () => {
+      const userId = localStorage.getItem("userId"); 
+      try {
+        const response = await axios.get(`${config.apiURL}/favourites/all/${userId}`);
+        const userFavourites = response.data.map(fav => fav.houseId);
+        setFavourites(userFavourites);
+      } catch (err) {
+        console.error('Error fetching favourites:', err);
+      }
+    };
 
+    fetchData();
+    fetchFavourites();
+  }, []);
+  
+  
   const handleViewDetailsClick = (houseId) => {
     navigate(`/Sellerhouseview/${houseId}`);
   };
+
+  const handleAddToFavourites = async (houseId) => {
+    const userId = localStorage.getItem("userId");
+    try {
+      if (favourites.includes(houseId)) {
+        await axios.delete(`${config.apiURL}/favourites/remove`, {
+          params: { userId, productId: houseId } // Change houseId to productId
+        });
+        setFavourites((prev) => prev.filter(id => id !== houseId));
+      } else {
+        await axios.post(`${config.apiURL}/favourites/add`, { userId, productId: houseId }); // Change houseId to productId
+        setFavourites((prev) => [...prev, houseId]);
+      }
+      const { data: countData } = await axios.get(`${config.apiURL}/favourites/count/${houseId}`);
+      setLikeCounts((prevCounts) => ({
+        ...prevCounts,
+        [houseId]: countData.count
+      }));
+    } catch (err) {
+      console.error("Error updating favourites:", err);
+    }
+  };
+  
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
@@ -93,56 +135,55 @@ const CategoryHouse1 = () => {
       </div>
 
       <div className="house21-card-container">
-        {data.map((house, index) => (
-          <div
-            key={index}
-            className="house21-card"
-            onClick={() => handleViewDetailsClick(house._id)}
-          >
-            <Carousel
-              showThumbs={false}
-              infiniteLoop
-              autoPlay
-              stopOnHover
-              dynamicHeight
-              className="house21-carousel"
+        {data.map((house) => {
+          const productId = house._id;
+
+          return (
+            <div
+              key={productId}
+              className={`house21-card ${favourites.includes(productId) ? 'favourite' : ''}`}
+              onClick={() => handleViewDetailsClick(productId)}
             >
-              {house.photos.map((photo, idx) => (
-                <div key={idx}>
-                  <img
-                    src={`${config.apiURL}/${photo}`}
-                    alt={`House ${house.adTitle}`}
-                    className="house21-image"
-                  />
+              <div className="house21-card-content">
+                <div className="house21-header">
+                  <h3>{house.bedrooms} BHK</h3>
+                  <p className="house21-price" style={{ color: "green" }}>{house.price} RPS</p>
                 </div>
-              ))}
-            </Carousel>
-            <div className="house21-card-content">
-              <h3>{house.adTitle}</h3>
-              <p>{house.projectName}</p>
-              <p>
-                <strong>Location:</strong> {house.location}, {house.cityName}
-              </p>
-              <p>
-                <strong>House:</strong> {house.bedrooms} BHK
-              </p>
-              <p>
-                <strong>Bathrooms:</strong> {house.bathrooms}
-              </p>
-              <p>
-                <strong>Price:</strong> {house.price} RPS
-              </p>
-              <div className="house21-card-buttons">
-                <button
-                  onClick={() => handleViewDetailsClick(house._id)}
-                  className="house21-view-details-button"
+                <Carousel
+                  showThumbs={false}
+                  infiniteLoop
+                  autoPlay
+                  stopOnHover
+                  dynamicHeight
+                  className="house21-carousel"
                 >
-                  View Details
-                </button>
+                  {house.photos.map((photo, idx) => (
+                    <div key={idx}>
+                      <img src={`${config.apiURL}/${photo}`} alt={`House ${house.adTitle}`} />
+                    </div>
+                  ))}
+                </Carousel>
+
+                <div className="house21-like-container">
+                  <span className="house21-like-count">{likeCounts[productId] || 0} Likes</span>
+                </div>
+                <br />
+
+                <h4>{house.purpose}</h4>
+                <p>{house.projectName}</p>
+                <p>{house.adTitle}</p>
+                <p><strong>Location:</strong> {house.location}</p>
+                <p><strong>Bathrooms:</strong> {house.bathrooms}</p>
+
+                <div className="house21-card-buttons">
+                  <button onClick={() => handleViewDetailsClick(productId)} className="house21-view-details-button">
+                    View Details
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <Snackbar

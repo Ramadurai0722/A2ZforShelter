@@ -1,71 +1,207 @@
 .house21-category-container {
   padding: 20px;
+  margin-bottom: 40px;
   margin-top: 70px;
 }
 
 .house21-header-container {
-  text-align: center;
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.house21-header-container h2 {
+  font-size: 24px;
+  color: #333;
+  margin-right: 10px;
 }
 
 .house21-card-container {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
+  align-items: flex-start; 
+  position: relative;
 }
 
 .house21-card {
-  background: #e7e3e3;
-  height: 460px;
-  width: 300px;
-  margin: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  width: 270px; 
+  height: 600px; 
+  background: #f8f9fa; 
+  border: 1px solid #dee2e6; 
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
   cursor: pointer;
-  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .house21-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-8px); 
 }
 
 .house21-carousel {
-  width: 100%;
+  margin-bottom: 15px;
   height: 200px; 
+  overflow: hidden;
 }
 
-.house21-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.house21-carousel img {
+  height: 200px; 
+  width: 100%; 
+  object-fit: cover; 
 }
 
 .house21-card-content {
-  padding: 15px;
+  padding: 20px; 
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  overflow: hidden;
+}
+
+.house21-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px; 
+}
+
+.house21-header h3 {
+  font-size: 20px; 
+  color: #190ede; 
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.house21-header p {
+  font-size: 20px; 
+  font-weight: bold;
+}
+
+.house21-card-content p {
+  margin: 5px 0;
+  color: #495057; 
+  word-wrap: break-word;
+}
+
+.house21-card-content p strong {
+  color: #000;
 }
 
 .house21-card-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 10px;
 }
 
-.house21-view-details-button {
-  padding: 10px 15px;
-  background-color: #007bff; 
-  color: white;
+.house21-view-details-button{
   border: none;
-  border-radius: 5px;
+  background: transparent;
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 16px;
+  color: #007bff;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+
+.house21-like-container {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start; 
+}
+
+
+.house21-like-count {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
 }
 
 .house21-view-details-button:hover {
-  background-color: #0056b3; 
+  background-color: transparent;
+  color: #0056b3;
+}
+
+.house21-favourite-icon {
+  font-size: 24px;
+}
+
+.house21-favourite-icon.filled {
+  color: red;
 }
 
 .house21-loading-container {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+}
+
+/* Media Queries */
+@media screen and (max-width: 500px) {
+  .house21-card {
+    width: auto;
+    height: auto;
+    margin-left: -35px;
+  }
+
+  .house21-header-container h2 {
+    font-size: 18px;
+  }
+}
+@media (max-width: 800px) and (min-width: 500px)  {
+  .house21-card {
+    width: 80%;
+    height: auto;
+  }
+
+  .house21-header-container h2 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1120px) and (min-width: 900px) {
+  .house21-card {
+    width: 40%;
+    height: auto; 
+  }
+  .house21-card-content p {
+    font-size: 13px;
+  }
+  .house21-header-container h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1120px) {
+  .house21-card {
+    width: 23%;
+    height: auto; 
+  }
+  .house21-card-content p {
+    font-size: 13px;
+  }
+  .house21-header-container h2 {
+    font-size: 25px;
+  }
+}
+@media (max-width: 1300px) and (min-width: 1200px) {
+  .house21-card {
+    width: 23%;
+    height: auto; 
+  }
+  .house21-card-content p {
+    font-size: 13px;
+  }
+  .house21-header-container h2 {
+    font-size: 25px;
+  }
 }

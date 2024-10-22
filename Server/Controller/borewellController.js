@@ -2,13 +2,17 @@ const Borewell = require('../models/Borewell');
 
 exports.createBorewell = async (req, res) => {
     try {
-        const borewell = new Borewell(req.body);
+        const borewell = new Borewell({
+            ...req.body,
+            category: "borewell",
+        });
         await borewell.save();
         res.status(201).json(borewell);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
+
 
 exports.getAllBorewells = async (req, res) => {
     try {

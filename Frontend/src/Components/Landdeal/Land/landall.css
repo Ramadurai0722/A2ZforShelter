@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7; 
+    margin: 0;
+    padding: 0;
+}
+
+.landall-category-container {
+    padding: 20px; 
+    margin-bottom: 50px;
+    margin-top: 100px;
+}
+
+.landall-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px; 
+}
+
+.landall-header-container h2 {
+    font-size: 36px; 
+    color: #333;
+    font-weight: 600; 
+}
+
+.landall-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto; 
+    flex-wrap: wrap; 
+}
+
+.landall-search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px; 
+    font-size: 16px;
+    width: 100%; 
+    max-width: calc(100% - 110px);
+    transition: border-color 0.3s;
+}
+
+.landall-search-input:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+.landall-search-button {
+    padding: 12px 15px; 
+    width: 100px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.landall-search-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.landall-search-button:active {
+    transform: translateY(0); 
+}
+
+.landall-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center;
+}
+
+.landall-card {
+    width: 90%;
+    max-width: 320px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+
+.landall-card-header {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.landall-area-price {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.landall-area {
+    color: #555;
+    font-weight: bold;
+}
+
+.landall-price {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.landall-carousel-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+}
+
+.landall-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.landall-card-content h3 {
+    margin: 0 0 10px; 
+    font-size: 22px; 
+    color: #007bff; 
+    font-weight: 600; 
+}
+
+.landall-card-content p {
+    margin: 5px 0; 
+    color: #555;
+}
+
+.landall-card-buttons {
+    margin-top: auto; 
+}
+
+.landall-view-details-button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.landall-view-details-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.landall-view-details-button:active {
+    transform: translateY(0); 
+}
+
+/* Media Queries for Responsive Layout */
+@media (min-width: 1300px) {
+    .landall-card {
+        width: calc(25% - 20px); 
+    }
+}
+
+@media (max-width: 1300px) and (min-width: 1200px) {
+    .landall-card {
+        width: calc(25% - 20px);
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 1000px) {
+    .landall-card {
+        width: calc(30% - 20px); 
+    }
+}
+
+@media (max-width: 1000px) and (min-width: 800px) {
+    .landall-card {
+        width: calc(50% - 20px); 
+    }
+}
+
+@media (max-width: 800px) {
+    .landall-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .landall-search-container {
+        flex-direction: row; 
+        align-items: stretch;
+    }
+    
+    .landall-search-input {
+        margin-right: 0; 
+        max-width: 70%; 
+    }
+    
+    .landall-search-button {
+        width: 20%; 
+        margin-top: 4px;
+    }
+}

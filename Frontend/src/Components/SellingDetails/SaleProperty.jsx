@@ -1,16 +1,21 @@
 import React from "react";
 import {
   Container,
-  Box,
   Grid,
   Typography,
   List,
   ListItem,
   ListItemText,
   Divider,
+  Collapse,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
+// Define categories for listing
 const categories = [
   {
     name: "House",
@@ -38,18 +43,22 @@ const categories = [
       "Sale: Caterings",
     ],
   },
-  { name: "Insurance & Agency", subcategories: ["Agents"] },
-  { name: "Loan Availables", subcategories: ["Loan Dialer"] },
+  // Uncomment if needed
+  // { name: "Insurance & Agency", subcategories: ["Agents"] },
+  // { name: "Loan Availables", subcategories: ["Loan Dialer"] },
 ];
 
 const SaleHouse = () => {
   const [selectedCategory, setSelectedCategory] = React.useState(null);
-  const [selectedSubcategory, setSelectedSubcategory] = React.useState(null);
+  const [openCategories, setOpenCategories] = React.useState({});
   const navigate = useNavigate();
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
-    setSelectedSubcategory(null);
+    setOpenCategories((prev) => ({
+      ...prev,
+      [category]: !prev[category],
+    }));
   };
 
   const handleSubcategoryClick = (subcategory) => {
@@ -68,89 +77,102 @@ const SaleHouse = () => {
       Agents: "/agents",
       "Loan Dialer": "/Loanpost",
       "Lands & Plots": "/Landpost",
-      "BoreWell Details":"/borewellpost",
-      "Civil Engineering Details":"/civilpost",
-    
+      "BoreWell Details": "/borewellpost",
+      "Civil Engineering Details": "/civilpost",
     };
 
     if (routes[subcategory]) {
       navigate(routes[subcategory]);
-    } else {
-      setSelectedSubcategory(subcategory);
     }
   };
 
   return (
-    <Container>
-      <Typography
-        variant="h6"
-        gutterBottom
-        sx={{ fontWeight: "bold", color: "#333", paddingBottom: "20px" }}
-      >
-        CHOOSE A CATEGORY
-      </Typography>
-      <Grid container>
-        <Grid item xs={4}>
-          <List
-            sx={{ backgroundColor: "#f5f5f5", padding: 0, borderRadius: "8px" }}
-          >
-            {categories.map((category, index) => (
-              <React.Fragment key={index}>
-                <ListItem
-                  button
-                  onClick={() => handleCategoryClick(category.name)}
-                  sx={{
-                    backgroundColor:
-                      selectedCategory === category.name
-                        ? "#e0e0e0"
-                        : "transparent",
-                    "&:hover": {
-                      backgroundColor: "#e0e0e0",
-                    },
-                    padding: "10px 20px",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <ListItemText
-                    primary={category.name}
-                    primaryTypographyProps={{
-                      fontWeight:
-                        selectedCategory === category.name ? "bold" : "normal",
+    <>
+      <Navbar />
+      <Container style={{ marginTop: "120px", marginBottom: "150px" }}>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{ fontWeight: "bold", color: "#2c3e50", paddingBottom: "20px", textAlign: 'center' }}
+        >
+          CHOOSE A CATEGORY
+        </Typography>
+        <Grid container justifyContent="center">
+          <Grid item xs={12} md={6}>
+            <List
+              sx={{
+                backgroundColor: "#ecf0f1",
+                padding: 0,
+                borderRadius: "8px",
+                boxShadow: 3,
+              }}
+            >
+              {categories.map((category, index) => (
+                <React.Fragment key={index}>
+                  <ListItem
+                    button
+                    onClick={() => handleCategoryClick(category.name)}
+                    sx={{
+                      backgroundColor:
+                        selectedCategory === category.name
+                          ? "#bdc3c7"
+                          : "transparent",
+                      "&:hover": {
+                        backgroundColor: "#bdc3c7",
+                      },
+                      padding: "15px",
+                      borderRadius: "8px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
-                  />
-                </ListItem>
-                {category.subcategories.length > 0 && <Divider />}
-              </React.Fragment>
-            ))}
-          </List>
-        </Grid>
-        <Grid item xs={8} sx={{ paddingLeft: "20px" }}>
-          {selectedCategory && (
-            <>
-              <List>
-                {categories
-                  .find((category) => category.name === selectedCategory)
-                  .subcategories.map((subcategory, subIndex) => (
-                    <ListItem
-                      button
-                      key={subIndex}
-                      onClick={() => handleSubcategoryClick(subcategory)}
-                      sx={{
-                        padding: "10px 20px",
-                        "&:hover": {
-                          backgroundColor: "#e0e0e0",
-                        },
+                  >
+                    <ListItemText
+                      primary={category.name}
+                      primaryTypographyProps={{
+                        fontWeight:
+                          selectedCategory === category.name
+                            ? "bold"
+                            : "normal",
+                        textAlign: 'center',
+                        color: selectedCategory === category.name ? "#fff" : "#34495e",
                       }}
-                    >
-                      <ListItemText primary={subcategory} />
-                    </ListItem>
-                  ))}
-              </List>
-            </>
-          )}
+                    />
+                    {openCategories[category.name] ? (
+                      <ExpandLessIcon sx={{ color: "#34495e" }} />
+                    ) : (
+                      <ExpandMoreIcon sx={{ color: "#34495e" }} />
+                    )}
+                  </ListItem>
+                  <Collapse in={openCategories[category.name]} timeout="auto">
+                    <List component="div" disablePadding>
+                      {category.subcategories.map((subcategory, subIndex) => (
+                        <ListItem
+                          button
+                          key={subIndex}
+                          onClick={() => handleSubcategoryClick(subcategory)}
+                          sx={{
+                            padding: "10px 20px",
+                            "&:hover": {
+                              backgroundColor: "#d5dbdb",
+                            },
+                            justifyContent: "center",
+                          }}
+                        >
+                          <ListItemText primary={subcategory} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
+                  {index < categories.length - 1 && <Divider />}
+                </React.Fragment>
+              ))}
+            </List>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

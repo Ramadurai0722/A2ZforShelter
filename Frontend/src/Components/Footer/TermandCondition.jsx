@@ -3,34 +3,34 @@ import './Terms.css'
 import Footer from './Footer'
 function TermandCondition() {
   return (
-    <div className='termbox'>
+    <div className='res-termbox'>
         <a href='/'>Home</a>
         <h1><b>Terms and Conditions</b></h1>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>1. Acceptance of Terms.</b></h4>
-            <p> If you are not in agreement with these Terms or the terms of our  <a href='privacy' style={{fontSize:'14px',color:'blue'}}>PrivacyPolicy</a>, please discontinue your use of the site. Your use of the site operates as express consent to these Terms. Some of parts of our Services may have additional terms and conditions. Please read these additional terms and conditions before using such services. No additional terms and conditions or any other terms will serve to replace or change these Terms, unless otherwise specified.</p>
+            <p> If you are not in agreement with these Terms or the terms of our  <a href='privacy' className='res-privacy-link'>PrivacyPolicy</a>, please discontinue your use of the site. Your use of the site operates as express consent to these Terms. Some of parts of our Services may have additional terms and conditions. Please read these additional terms and conditions before using such services. No additional terms and conditions or any other terms will serve to replace or change these Terms, unless otherwise specified.</p>
         </div><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>2. Updates.</b></h4>
             <p>We strive to provide the best experience to our users, and as such, these Terms may be revised and changed by posting updated Terms on the Site. We will post updated terms on the Site, this will serve as your notification. You should visit the Site regularly in order to keep updated on the latest Terms. If you continue using the Services after the updates, your continued use will be construed as an express acceptance of the revisions. Some elements of ResumeNerd may only be offered in the desktop version of the Site and may not be, for example, available in the mobile version.
 
 </p></div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>3. Legal Capacity.</b></h4>
             <p>ResumeNerd is a general audience website for the use of adults. By using the Services you warrant that you have the requisite legal capacity to enter into the agreement contained in these Terms. Legal capacity requires you be (a) of sufficient age (16 years or older) or (b) the age of majority in your place of residency and/or (c) lawfully able to enter into contracts. You must also have mental capacity and have to be entitled to be legally bound in contract like these Terms. If you are not legally able to enter into contracts, you cannot use the Site at any time or submit any information to us.</p>
         </div><br/>
         
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>4.Accuracy of Your Information.</b></h4>
             <p>Access and use of our Services may require you to provide registration details. As a condition of use, the details you provide must be correct, current and complete. If at any time we believe that your details are incorrect or incomplete, we have the right to refuse you access to the Services. We also reserve the right to cancel or suspend your account or access.</p>
         </div><br/>
 
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>5. Privacy Notice.</b></h4>
-            <p > Your privacy is important to us. To better protect your privacy, we have created a  <a href='privacy' style={{fontSize:'14px',color:'blue'}}>PrivacyPolicy</a> with information on our online information practices and the choices you can make regarding how we collect and use your information.</p>
+            <p > Your privacy is important to us. To better protect your privacy, we have created a  <a href='privacy' className='res-privacy-link'>PrivacyPolicy</a> with information on our online information practices and the choices you can make regarding how we collect and use your information.</p>
         </div><br/>
 
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>6. Service.</b></h4>
             <p><ol>
                 <li> You are granted a right to use the Services, subject to these Terms. The right to use the Services belongs to you as an individual (not a partnership, corporate or other business entity), and is non-transferable. To have access to our Services, you must have access to the World Wide Web (the “Web”) and therefore pay any fees associated with that access. ResumeNerd will not provide any equipment necessary to connect to the Web, including but not limited to, a computer, modem, mobile device, table or other accessibility device.</li><br/>
@@ -40,38 +40,38 @@ function TermandCondition() {
                 <li>  From time to time ResumeNerd may use or refer to trademarks and/or trade names that are property of third parties. This use is not meant to represent ResumeNerd affiliation with these third parties and appear for identification purposes only.</li><br/>
                 <li>  These Terms and your rights to access, download from, and use the Service are subject to immediate termination, without notice, (i) if you breach (or ResumeNerd reasonably suspects that you have breached) any provision of these Terms; or (ii) upon ResumeNerd’s discontinuation of its dissemination or support of the Service. If such termination without notice is expressly prohibited by applicable law, then such termination will occur upon notice of any such breach. Upon termination, you must cease all use of the Service. If ResumeNerd terminates these Terms, or suspends your account for any of the reasons set forth in these Terms, ResumeNerd shall have no liability or responsibility to you, and ResumeNerd will not refund any amounts that you may have previously paid. </li><br/>
                 </ol>  </p>      </div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>7. Social Sharing Option; Resume Posting Services, and other Services</b></h4>
             <p>ResumeNerd provides various options to help you share your resume with third parties. By making use of ResumeNerds’s sharing or posting services you agree that ResumeNerd will use proprietary web-based information gathering tools to enable you to share your resume with third parties. You further agree that the wording and interpretation of your information for purposes of resume sharing services will be in ResumeNerd’s sole discretion and ResumeNerd may be able to take any decisions to include, not include or rephrase information about you as part of the resume sharing services. By using our Resume Sharing Services you’re accepting full and total responsibility for the actions ResumeNerd performs on your behalf and at your request as if you had performed those actions yourself. This includes accepting terms of use and privacy policies and other policies that ResumeNerd might be prompted to accept on third party sites prior to sharing your resume. ResumeNerd may also offer job posting and resume submission features as part of the Site in certain locations or jurisdictions. There features may only be used by individuals seeking employment and/or career information. You may check the third-party sites where we may post your information to see their terms of use and <a href='privacy' style={{fontSize:'14px',color:'blue'}}>PrivacyPolicy</a> . You further acknowledge, agree and consent that you will take full responsibility and are personally liable for any consequences arising from your use of the Social Sharing or Resume Posting Services.<br/><br/>
 You may have the option to also create and manage your own website through ResumeNerd. Once you sign up this service you agree for ResumeNerd to make use of the information you provide and make it publicly available for anyone, including third parties. You may unpublish your website at any time through your settings. Also, if your account is deleted, your website may no longer be visible. ResumeNerd will not be able to delete any previously accessed, stored, and/or copied information by third parties. Note that by publishing your information in your own website, you might receive communications by third parties either directly or through ResumeNerd. Any communications with third parties prompted by the use of your publicly available contact information is AT YOUR OWN RISK and ResumeNerd bears no responsibility. You are further solely responsible for the security of the information shared. You herby irrevocably waive any claim against ResumeNerd with respect to such communications. ResumeNerd does not provide any warranty that you will receive job alerts, communications or career opportunities by publishing your information on this website.<br/><br/>
 
 ResumeNerd will not be liable for any loss or damage (direct, indirect, punitive, actual, consequential, incidental, special, exemplary or otherwise) resulting from any use or misuse of the services provided under this section. To the extent permitted by applicable law, you agree to indemnify and hold harmless ResumeNerd and its officers, directors, employees, agents, distributors, and affiliates from and against any and all claims, demands, liabilities, costs or expenses, including reasonable legal fees, resulting from your use of the services described in this Section.</p>
         </div><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>8. Intellectual Property Rights and Trademarks and Copyrights.</b></h4>
             <p>You are allowed to use the Services and any user interphase component or content herein subject to these Terms (the “Material”). Any change or use of the Material that is not explicitly allowed in these Terms will be a violation of Copyright or Trademark law and is strictly prohibited.<br/><br/>
 
 The Service contains and/or embodies trade secrets, patented (and/or patent pending) inventions among other proprietary material and intellectual property of ResumeNerd and/or its licensors. All title and ownership rights in the Service, including but not limited to all Material and any and all copies of the Service, remain with ResumeNerd and its licensors at all times, as may be applicable. As an exception, you may copy, access, download and display Material and content displayed on the Services, as long as it is for non-commercial, personal, entertainment use on only one computer and all copyright and trademark notices are kept intact. Otherwise, the Material and content may not be copied, reproduced, republished, displayed, distributed, licensed or used in any other way without the authorization of ResumeNerd. You may not decompile, reverse engineer, disassemble or reduce the code used on or as part of the Service in order to examine the construction or copy the Services and products.</p>
         </div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>9.Your Use of Our Material.</b></h4>
             <p>You are allowed to use the Services and any user interphase component or content herein subject to these Terms (the “Material”). Any change or use of the Material that is not explicitly allowed in these Terms will be a violation of Copyright or Trademark law and is strictly prohibited.<br/><br/>
             The Service contains and/or embodies trade secrets, patented (and/or patent pending) inventions among other proprietary material and intellectual property of ResumeNerd and/or its licensors. All title and ownership rights in the Service, including but not limited to all Material and any and all copies of the Service, remain with ResumeNerd and its licensors at all times, as may be applicable. As an exception, you may copy, access, download and display Material and content displayed on the Services, as long as it is for non-commercial, personal, entertainment use on only one computer and all copyright and trademark notices are kept intact. Otherwise, the Material and content may not be copied, reproduced, republished, displayed, distributed, licensed or used in any other way without the authorization of ResumeNerd. You may not decompile, reverse engineer, disassemble or reduce the code used on or as part of the Service in order to examine the construction or copy the Services and products.</p>
         </div><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>10. User and Service Forums.</b></h4>
             <p>The expressions, materials, information and opinions expressed on our Forums (i.e. bulletin boards, chat rooms and community pages) (the “Forums”) are not those of ResumeNerd. ResumeNerd cannot monitor or take responsibility for the content of the Forums. ResumeNerd may remove or modify content on Forums at any time in ResumeNerd’s sole discretion, but has no obligation to do so. Use of the Forums is at your own risk, and will be subject to the disclaimers and limitations of liability stated below</p>
         </div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>11. Requested Submissions.</b></h4>
             <p>Some areas of the Services may request submissions from you in order to improve our offerings through promotions, surveys or other means. You must carefully read any specific rules or terms that govern these submissions, since they affect your rights. If there are no additional terms, then these Terms will apply fully to those submissions. Any material you provide to us will not be treated as confidential. We will not pay you to use any of the submissions you make on the Services.</p>
         </div><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>12. Our Use of User Provided Content.</b></h4>
             <p>Anything you provide to ResumeNerd that may or not contribute to the Services will be considered available for use, free of any obligations to you, except when additional terms state otherwise. Under no circumstances you will receive payment or any type of consideration for the use of your submissions.</p>
         
         </div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>13. User Provided Content.</b></h4>
             <p> Information you have provided or that we create for you, such as account information, resume, career and educational history, reviews, profile entries, posts, questions, career materials or other information, may not be able to be deleted once you have uploaded it. The Services include features where other members may be able to request notifications of any new public contents you publish and they may be able to comment on your comments. ResumeNerd may also use the public content in order to develop products, improve the Services, personalize site views, or market their products. If you post or upload content on the site, including personal information and resume information, or by communicating with ResumeNerd (“User Content”) you automatically and irrevocably:</p><br/>
        <p>
@@ -88,7 +88,7 @@ The Service contains and/or embodies trade secrets, patented (and/or patent pend
        <li>ResumeNerd will remove User Content if properly notified that such User Content infringes on another’s intellectual property rights. ResumeNerd reserves the right to remove User Content without prior notice.</li>
        </ul></p>
         </div><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>14. Access ResumeNerd using Credentials from Third-Party Network (“TPN”) Accounts.</b></h4>
             <p>When you access ResumeNerd using your TPN credentials you may link your TPN account and allow access to ResumeNerd. By doing this, you also:</p><br/>
             <p>
@@ -100,7 +100,7 @@ The Service contains and/or embodies trade secrets, patented (and/or patent pend
                     <li>Understand that if the TPN account or associated service becomes unavailable or ResumeNerd’s access to such TPN account is terminated by the third-party service, then TPN content will no longer be available on and through the ResumeNerd internet properties.</li><br/>
                     </ol></p>      
         </div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>15. Charges, Payments/Subscriptions.</b></h4>
             <p>
                 <ul>
@@ -112,39 +112,39 @@ The Service contains and/or embodies trade secrets, patented (and/or patent pend
             </p>          
         </div><br/>
         <p style={{marginLeft:'100px',width:'1300px'}}>EU residents: By accepting the information contained in this Terms and Conditions you also agree to receive and start using the services immediately and voluntarily lose your right to withdraw from this Terms.</p><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>16. Deletion or Suspension of your Account or User Content.</b></h4>
             <p>You may make a request to have your User Content removed by contacting our Customer Service department via email to  <a href="mailto:asglobalsofttech23@gmail.com"> asglobalsofttech23.com</a>. However, User Content will only be deleted from public viewing by deleting or canceling your account, as explained above. When you request that ResumeNerd deletes your User Content, your resume and profile will no longer be public or visible to any users through the Services. Nonetheless, if any of your User Content was accessed by others before the request for deletion, we cannot delete the information from their systems. When you cancel your account or request a deletion of your User Content from the Services, ResumeNerd may retain logs and information that is not personally identifiable about you as well as an archival copy of your information which will only be accessible by ResumeNerd to be used in record keeping and internal purposes.</p>
         </div><br/>
-        <div className='box1'>
+        <div className='res-box1'>
             <h4><b>17. Specification of Services and Pricing; Errors.</b></h4>
             <p>ResumeNerd strives to provide the best and most accurate description of all the services offered. However, we cannot warrant that service specifications, pricing or other content are complete, accurate, reliable, current or without errors. In the event of any errors relating to the pricing or specifications, we shall have the right to refuse or cancel any orders in our sole discretion Additional terms may apply.</p>
         </div><br/>
-        <div className='box2'>
+        <div className='res-box2'>
             <h4><b>18. Use of Site; Content Limitations.</b></h4>
             <p>EU residents: Your Directive 2009/24/EC of 23 April 2009 statutory rights remain unaffected. With exception to the restricted acts all actions require authorization by ResumeNerd.</p><br/>
             <p>Please make responsible use of the Services. The Services and its contents may only be used for lawful purposes and in accordance with applicable laws and regulations. You are prohibited from storing, distributing or transmitting unlawful or illegal material through the Services. You also may not collect or store personal information about other users. Storing, distributing and transmitting illegal or unlawful material exposes you to criminal and/or civil liability. If you are the recipient of a third party claim that your material is unlawful, you agree that you will bear the burden of establishing its legality. You agree that all materials publicly or privately posted and transmitted on or through our Services are the sole responsibility of the sender and ResumeNerd is not responsible. You are responsible for all the materials you upload or publicly post or transmit through the Services.</p><br/>
             <p>We require that you do not post resumes, send any emails or submit through any forums, or make available anywhere on the Services, any material which in our opinion: (a) libels, defames, invades privacy, is obscene, pornographic, racist, abusive, harassing, threatening or offensive; (b) disparages, criticizes, belittles, parodies or portrays in a negative light any person appearing in the content; (c) seeks to exploit or harm children by exposing them to age inappropriate content, asking for their personally identifiable details or otherwise; (d) infringes on the intellectual property rights or any other right of any entity or person, including their copyrights, trademarks or right of publicity; (e) is in violation of any law or regulation or may be considered to do so; (f) you do not have the right to transmit under a contractual or other relationship; (g) advocates or promotes illegal activity; (h) impersonates or misrepresents your connection to an entity or person or manipulates headers or identifiers to disguise the content’s origin; (i) solicits funds, advertisers or sponsorships; (j) includes programs that have viruses, worms or Trojan horses or any computer codes, files or programs that are designed to overload, interrupt, collapse or destroy the functionality of any hardware, software or telecommunications system; (k) disrupts the normal flow of dialogue, causes a screen to scroll faster than users are able to type or affects the way other people engage in real time interactions via the Services; (l) copies pages or images on the Services without authorization; (m) are MP3 format files; (n) is a pyramid or similar scheme; (o) is data warehousing, using any web space made available as storage for large files or amounts of data linked from other websites; (p) violates policies and regulations established by ResumeNerd regarding the use of the Services and any connected websites; or (q) contain links to other websites that contain the kind of content described above.</p><br/>
             <p>Additionally, you may not remove any sponsorship banners or material inserted by ResumeNerd anywhere on the Services and you agree not to send, create or reply to “mailbombs”, which are mailing copies of a single message to multiple users or sending large or multiple messages to a single user with malicious intent. You will also not engage in spamming, which is unsolicited emailing for commercial or other purposes. You will not engage in any other activity that will produce an adverse effect on the operation and use of the Services by any person.</p><br/>
         </div><br/>
-             <div className='box1'>
+             <div className='res-box1'>
              <h4><b>19. Release.</b></h4>
              <p>If a dispute were to arise between you and one or more users, you release ResumeNerd and its affiliates from any claims, demands, liabilities, costs or expenses and damages, actual and consequential of every kind and nature, arising out of or in any way connected with those disputes. By entering into this release, you are expressly waiving any protections to the extent permitted by law, that would otherwise limit the coverage of this release to include only claims which you know or suspect exist at the time of your agreement to this release.</p>
           </div><br/>
 
-          <div className='box2'>
+          <div className='res-box2'>
             <h4><b>20. Disclaimer of Warranties.</b></h4>
             <p> YOU UNDERSTAND AND AGREE THAT YOUR USE OF THE SERVICE IS AT YOUR OWN SOLE RISK. THE SITE AND ALL THE MATERIALS, INFORMATION, SOFTWARE, FACILITIES, SERVICES AND OTHER CONTENT IN THE SITE ARE PROVIDED “AS IS” AND “AS AVAILABLE” WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER EXPRESS, IMPLIED OR COLLATERAL. TO THE FULLEST EXTENT PERMISSIBLE PURSUANT TO APPLICABLE LAW, THE SITE, RESUMENERD AND ANY SUBSIDIARIES OR AFFILIATED COMPANIES (“PROVIDER GROUP”) DISCLAIM ALL WARRANTIES AND CONDITIONS, EXPRESS IMPLIED OR COLLATERAL, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. YOUR USE OF THIS SITE IS AT YOUR OWN RISK. THE PROVIDER GROUP DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THIS SITE WILL BE AVAILABLE, UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THE SITE OR THE SERVERS THAT MAKE THE SITE AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. THE PROVIDER GROUP DOES NOT WARRANT OR MAKE ANY REPRESENTATIONS OR CONDITIONS REGARDING THE USE OR THE RESULTS OF THE USE OF THE MATERIAL, INFORMATION, SOFTWARE, FACILITIES, SERVICES OR OTHER CONTENT ON THE SITE OR ANY WEB SITES LINKED TO THE SITE IN TERMS OF THEIR CORRECTNESS, ACCURACY, RELIABILITY, OR OTHERWISE. THE PROVIDER GROUP MAKES NO WARRANTIES OR CONDITIONS THAT YOUR USE OF THE MATERIALS, INFORMATION, SOFTWARE, FACILITIES, SERVICE OR OTHER CONTENT IN THE SITE OR ANY WEB SITE WILL NOT INFRINGE THE RIGHTS OF OTHERS AND THE PROVIDER GROUP ASSUMES NO LIABILITY OR RESPONSIBILITY FOR ERRORS OR OMISSIONS IN SUCH MATERIALS, INFORMATION, SOFTWARE, FACILITIES, SERVICE OR OTHER CONTENT OF THE SITE OR ANY OTHER WEB SITE. IF APPLICABLE LAW DOES NOT ALLOW THE EXCLUSION OF SOME OR ALL OF THE ABOVE IMPLIED WARRANTIES AND CONDITIONS, THE ABOVE EXCLUSIONS WILL APPLY TO YOU ONLY TO THE EXTENT PERMITTED BY APPLICABLE LAW. THE PROVIDER GROUP MAKES NO WARRANTY THAT ANY PARTICULAR PERSONAL COMPUTER, OR PORTABLE DEVICE WILL BE COMPATIBLE WITH THE SERVICE. IT IS YOUR SOLE RESPONSIBILITY TO ENSURE THAT YOUR SYSTEMS AND DEVICES WILL FUNCTION CORRECTLY WITH THE SERVICE.</p><br/>
             <p>IF YOU ARE ACCESSING THIS SITE FROM THE EUROPEAN UNION OR OTHER JURISDICTIONS THAT TO DO NOT RECOGNIZE DISCLAIMERS OF CERTAIN WARRANTIES, NOTHING IN THIS AGREEMENT SHALL EXCLUDE OR LIMIT LIABILITY FOR DEATH OR PERSONAL INJURY RESULTING FROM THE NEGLIGENCE OF EITHER PARTY OR THEIR CONTRACTORS, AGENTS OR EMPLOYEES.</p>
           </div><br/>
 
-          <div className='box1'>
+          <div className='res-box1'>
             <h4><b>21. Limitation of Liability.</b></h4>
             <p>THE PROVIDER GROUP DISCLAIMS ALL LIABILITY WHETHER BASED IN CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, AND DOES NOT ACCEPT ANY LIABILITY FOR ANY LOSS OR DAMAGE (DIRECT, INDIRECT, PUNITIVE, ACTUAL, CONSEQUENTIAL, INCIDENTAL, SPECIAL, EXEMPLARY OR OTHERWISE) RESULTING FROM ANY USE OR MISUSE OF, OR INABILITY TO USE, THE SITE OR ANY OTHER WEB SITE, OR THE MATERIAL, INFORMATION, SOFTWARE, PRODUCTS, FACILITIES, SERVICES OR OTHER CONTENT ON THE SITE OR ANY OTHER WEBSITE, REGARDLESS OF THE BASIS UPON WHICH LIABILITY IS CLAIMED AND EVEN IF ANY MEMBER OF THE PROVIDER GROUP HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGE. WITHOUT LIMITATION, YOU (AND NOT ANY MEMBER OF THE PROVIDER GROUP) ASSUME THE ENTIRE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION IN THE EVENT OF ANY SUCH LOSS OR DAMAGE ARISING. IF APPLICABLE LAW DOES NOT ALLOW ALL OR ANY PART OF THE ABOVE LIMITATION OF LIABILITY TO APPLY TO YOU, THE LIMITATIONS WILL APPLY TO YOU ONLY TO THE EXTENT PERMITTED BY APPLICABLE LAW.</p><br/>
           <p>SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF IMPLIED WARRANTIES OR LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO SUCH EXCLUSIONS OR LIMITATIONS MAY NOT APPLY TO YOU. TO THE EXTENT THAT IN A PARTICULAR CIRCUMSTANCE ANY DISCLAIMER OR LIMITATION OF LIMITATION ON DAMAGES OR LIABILITY SET FORTH HEREIN IS PROHIBITED BY APPLICABLE LAW, THEN, INSTEAD OF THE PROVISIONS HEREOF IN SUCH PARTICULAR CIRCUMSTANCE, RESUMENERD SHALL BE ENTITLED TO THE MAXIMUM DISCLAIMERS AND/OR LIMITATIONS ON DAMAGES AND LIABILITY AVAILABLE AT LAW AND IN EQUITY BY SUCH APPLICABLE LAW IN SUCH PARTICULAR CIRCUMSTANCE. IN NO EVENT SHALL SUCH DAMAGES OR THE TOTAL AGGREGATE LIABILITY OF RESUMENERD EXCEEDS THE FEES PAID BY YOU IN THE PRECEDING TWELVE (12) MONTHS OR TEN AMERICAN DOLLARS (USD $10), WHICHEVER IS GREATER.</p>
           </div><br/>
 
-          <div className='box2'>
+          <div className='res-box2'>
             <h4><b>22. US Residents: Binding Arbitration Agreement; Foreign Citizens; Limitation and No Class Relief; EU Residents: Out-of-court dispute resolution notification.</b></h4>
           <p> PLEASE TAKE THE TIME TO CAREFULLY REVIEW THE FOLLOWING SECTION AS IT CONTAINS IMPORTANT INFORMATION THAT MAY IMPACT YOUR LEGAL RIGHTS AND RESPONSIBILITIES, INCLUDING YOUR ABILITY TO FILE A LAWSUIT IN COURT AND HAVE A JURY CONSIDER YOUR CLAIMS. BOTH YOU AND ResumeNerd HAVE AGREED TO ENGAGE IN MANDATORY, INDIVIDUAL, BINDING ARBITRATION, AND HAVE WAIVED CLASS ACTION PROCEDURES.</p><br/>
           <p> Applicability of Dispute Resolution; Arbitration Agreement. You and ResumeNerd agree, except as provided below, that any allegation, claim, controversy, or dispute related to the Terms, ResumeNerd’s services, or products, including access and use (or lack thereof) (collectively “Dispute”), will be resolved exclusively through final, binding, and individual arbitration, not in court (except disputes within the jurisdiction of a small claims court consistent with the jurisdictional and dollar limits that may apply, as long as it is an individual dispute and not a class action). This includes any and all Disputes arising based in contract, warranty, tort, statute, regulation, ordinance, or any other legal theory or equitable basis, shall be resolved exclusively through final, binding, and individual arbitration, rather than in Court proceedings. Both Parties agree to waive any right to a jury trial and agree to only bring claims individually, not as part of any class or representative proceeding. To be clear: the term “Dispute” shall be given the broadest reasonable interpretation under the law.</p><br/>
@@ -180,13 +180,13 @@ The Service contains and/or embodies trade secrets, patented (and/or patent pend
 </p>
 </ul></div><br/>
 
-<div className='box1'>
+<div className='res-box1'>
     <h4><b>23. Indemnity.</b></h4>
     <p>You agree to indemnify and hold harmless ResumeNerd and its officers, directors, employees, agents, distributors and affiliates from and against any and all claims, demands, liabilities, costs or expenses, including reasonable legal fees, resulting from your breach of these Terms, including any of the foregoing provisions, representations, warranties or conditions, and/or from your placement or transmission of any content onto ResumeNerd’s servers, and/or from any and all use of your account.</p><br/>
 
 </div><br/>
 
-<div className='box2'>
+<div className='res-box2'>
     <h4><b>24. Security Measures.</b></h4>
     <p>The accounts and passwords you create on this Service are for individual use and should be kept confidential. You are responsible for the safeguarding of the account and password. ResumeNerd has the right to monitor your account and password and, in its sole discretion, request that you change it. If ResumeNerd believes that account and password are insecure, ResumeNerd will have the right to require this to be changed or terminate your account.</p>
 <p>You may only register yourself or a third-party which you are legally authorized to represent. If a third-party claims that a username violates their rights, ResumeNerd may remove or reclaim that username.
@@ -194,13 +194,13 @@ The Service contains and/or embodies trade secrets, patented (and/or patent pend
 </p>
 </div><br/>
 
-<div className='box1'>
+<div className='res-box1'>
 <h4><b>25. Violation of Our Security Systems and Protocols.</b></h4>
 <p>The use of the Services in order to compromise ResumeNerd’s security protocols or tamper with the system resources or accounts is prohibited. The use or distribution of instruments meant to compromise security is strictly prohibited. These instruments include, but are not limited to: password guessing programs, cracking tools or network probing tools. If you are involved in any such violation, ResumeNerd reserves the right to provide your details to the system administrators at other websites to be able to assist in resolving outstanding security incidents. Further, if you breach, or ResumeNerd reasonably suspects that you have breached any security protocols may terminate your account.</p>
 
 </div><br/>
 
-<div className='box2'>
+<div className='res-box2'>
     <h4>
         <b>26. Violations.</b>
     </h4>
@@ -216,60 +216,60 @@ The Service contains and/or embodies trade secrets, patented (and/or patent pend
 </div><br>
 </br>
 
-<div className='box1'>
+<div className='res-box1'>
     <h4><b>27. Reservation of Rights.</b></h4>
     <p>
     ResumeNerd reserves the right to, with or without notice, change or discontinue, any or all of the Services provided by ResumeNerd, temporarily or permanently. ResumeNerd also reserves the right to establish general guidelines and limitations to the use of the Services.
     </p>
 </div><br/>
-<div className='box2'>
+<div className='res-box2'>
     <h4><b>28. Compliance with Local Laws and Regulations.</b></h4>
     <p>ResumeNerd provides no representations or warranties that our Materials and content on the Services are appropriate or available for use outside of the Unites States. If you access the Services from a location not listed above, you do so at your own risk. To the extent that they are applicable, you are responsible for complying with any local laws. You also specifically agree to comply with any applicable law regarding the transmission of technical data exported from the United States or the country you reside in.</p><br/>
     <p>Our Data Protection Officer can be contacted by sending an email to Our Data Protection Officer can be contacted by sending an email to legal@resumenerd.com.</p>
 </div><br/>
 
-<div className='box1'>
+<div className='res-box1'>
     <h4><b>29.  Third-Party Links and Advertisements.</b></h4>
     <p>By using our Services, you may be linked to other websites on the Internet. These sites may contain information that some people may find offensive. ResumeNerd does not control these sites, and you acknowledge that ResumeNerd is not responsible for the content, legality, decency or any other aspect of these websites. The inclusion of these links on our Services does not imply an endorsement or association of any kind with ResumeNerd. ResumeNerd does not make any representations or warranties regarding the security of any information that these websites may request, and you irrevocably waive any claim against ResumeNerd regarding these websites. ResumeNerd encourages you to use your best judgment when providing sensitive information to any third party and to take whatever steps you deem necessary before providing any information to these websites.</p>
 </div><br/>
 
-<div className='box2'>
+<div className='res-box2'>
     <h4><b>30. Proprietary Online Services.</b></h4>
     <p>If you access any area of the Services that is accessed through a proprietary third-party online service, you will be subject to the rules, policies and guidelines of such proprietary third party online service.</p>
 </div><br/>
 
-<div className='box1'>
+<div className='res-box1'>
     <h4><b>31. Jurisdictional Statement.</b></h4>
     <p>The Content and Materials provided on the Service are included for the purpose of providing information on our services and products available in the United States and internationally.</p>
 </div><br/>
 
-<div className='box2'>
+<div className='res-box2'>
     <h4><b>32. Choice of Law; Conflicts of Law.</b></h4>
     <p>We want to make sure that your transaction is processed seamesly and for that purpose, we may serve you from multiple parts of the world. If your payment is processed by Candidate Trove LLC this transaction will be governed by the laws of the State of New York, USA without regard to the conflicts of law provisions of any state or jurisdiction, as they apply to agreement entered into and performed entirely within the state of New York, with exception of Section 23 (a) of these Terms, which will be interpreted in accordance with the FAA. If your payment was processed by Blue Market Pay ehf the laws of Iceland will apply. You agree that any action, claim or dispute with ResumeNerd or any Affiliate, arising out of or relating to these Terms, the Service, or your use of any of the foregoing will be brought exclusively in the court above stated. To the extent permitted by law, you hereby waive trial by jury and/or any defenses based upon the venue, the inconvenience of the forum, the lack of personal jurisdiction, the sufficiency of service of process or the like in any such action, suit or dispute.</p>
 </div><br/>
 
-<div className='box1'>
+<div className='res-box1'>
     <h4><b>33. Electronic Communications</b></h4>
     <p>You hereby consent to receive electronic communications, such as emails, from ResumeNerd and agree that all communications will satisfy any legal requirement that such communication would satisfy if it were in writing. The foregoing does not affect your statutory rights.</p>
 </div><br/>
 
-<div className='box2'>
+<div className='res-box2'>
     <h4><b>34. Entire Agreement.</b></h4>
     <p>These Terms, our <a href='privacy'>Privacy Policy </a>and payment authorization, together constitute the entire agreement between you and ResumeNerd with respect to its subject matter and supersede all prior and/or contemporaneous agreements and understandings, written or oral, between you and ResumeNerd with respect to the subject matter hereof. Except as expressly set forth herein, these Terms may not be amended, modified, or supplemented by the parties in any manner, except by a written instrument signed by an authorized officer of ResumeNerd.</p>
 </div><br/>
 
-<div className='box1'>
+<div className='res-box1'>
     <h4><b>35. Severability.</b></h4>
     <p>If any section of the Terms is found to be unlawful, void or unenforceable, that provision will be severable from the Terms and will not affect the enforceability of the remaining sections.</p>
 </div><br/>
 
-<div className='box2'>
+<div className='res-box2'>
     <h4> <b> 35. Help</b></h4>
     <p>The Services are operated by A2Z for Shelter. If you have any comments or complaints regarding the services, please send any and all communications to help@resumenerd.com or our mailing addresses at:
 ✔ A2Z For Shelter: 13A, Railway Mens Colony, Jothi nagar, koundampalayam, coimbatore.
 
 
-For any questions regarding: i) privacy concerns please email  <a href="mailto:asglobalsofttech23@gmail.com"> asglobalsofttech23.com</a> or ii) legal matters please email  <a href="mailto:asglobalsofttech23@gmail.com"> asglobalsofttech23.com</a> or the address above.</p>
+For any questions regarding: (i) privacy concerns please email  <a href="mailto:asglobalsofttech23@gmail.com"> asglobalsofttech23.com</a> or ii) legal matters please email  <a href="mailto:asglobalsofttech23@gmail.com"> asglobalsofttech23.com</a> or the address above.</p>
 
 <p>you must send a written notification of your decision to opt-out the following address:</p><br/>
 <p class="center-content">

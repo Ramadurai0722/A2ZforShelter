@@ -3,9 +3,9 @@ import { Form, Input, Button, Upload, Modal, Row, Col, Typography } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Snackbar, Alert } from "@mui/material";
 import axios from "axios";
-import config from "../../config"; 
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+import config from "../../../config"; 
+import Navbar from "../../Navbar/Navbar";
+import Footer from "../../Footer/Footer";
 
 const { Title } = Typography;
 

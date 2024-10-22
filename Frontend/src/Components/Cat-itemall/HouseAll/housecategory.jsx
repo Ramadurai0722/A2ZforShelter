@@ -8,6 +8,7 @@ import config from "../../../config";
 import './houseall.css';
 import Navbar from '../../Navbar/Navbar';
 import Footer from '../../Footer/Footer';
+import { Snackbar } from '@mui/material';
 
 const CategoryHouseall = () => {
   const [data, setData] = useState([]);
@@ -17,6 +18,7 @@ const CategoryHouseall = () => {
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const houseRoute = `${config.apiURL}/houseRoute/houses`;
 
@@ -63,6 +65,10 @@ const CategoryHouseall = () => {
     navigate(`/houseview/${productId}`);
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleViewDetailsClick = (productId) => {
     navigate(`/houseview/${productId}`);
   };
@@ -70,6 +76,15 @@ const CategoryHouseall = () => {
   const handleAddToFavourites = async (houseId) => {
     const userId = getUserId();
     const productId = houseId;
+
+    if (!userId) {
+
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
 
     try {
       if (favourites.includes(productId)) {
@@ -123,16 +138,16 @@ const CategoryHouseall = () => {
           <h2>House Rent & Sale</h2>
         </div>
 
-        <div className="cat-search-container">
+        <div className="houseall-search-container">
           <input
             type="text"
             placeholder="Search by title, project name, location, or price..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
-            className="cat-search-input"
+            className="houseall-search-input"
           />
-          <button onClick={handleSearch} className="cat-search-button"> 
+          <button onClick={handleSearch} className="houseall-search-button"> 
             Search
           </button>
         </div>
@@ -199,6 +214,22 @@ const CategoryHouseall = () => {
             );
           })}
         </div>
+        <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
       </div>
       <Footer />
     </>

@@ -8,6 +8,7 @@ import config from "../../../config";
 import Navbar from "../../Navbar/Navbar";
 import Footer from "../../Footer/Footer";
 import './cementall.css'; 
+import { Snackbar } from '@mui/material';
 
 const CategoryCementall = () => {
   const [data, setData] = useState([]);
@@ -17,6 +18,7 @@ const CategoryCementall = () => {
   const [likeCounts, setLikeCounts] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const cementRoute = `${config.apiURL}/cementRoutes/cement`;
 
@@ -59,6 +61,10 @@ const CategoryCementall = () => {
     return localStorage.getItem('userId');
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleCardClick = (cementId) => {
     navigate(`/cementview/${cementId}`);
   };
@@ -71,6 +77,15 @@ const CategoryCementall = () => {
     const userId = getUserId();
     const productId = cementId;
 
+ if (!userId) {
+
+      setSnackbarOpen(true);
+      setTimeout(() => {
+        navigate('/Login'); 
+      }, 1500);
+      return; 
+    }
+    
     try {
       if (favourites.includes(productId)) {
         await axios.delete(`${config.apiURL}/favourites/remove`, {
@@ -124,16 +139,16 @@ const CategoryCementall = () => {
           <h2>Cement Products</h2>
         </div>
         
-        <div className="cat-search-container">
+        <div className="cementall-search-container">
           <input
             type="text"
             placeholder="Search by brand, seller name, type, or price..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}
-            className="cat-search-input"
+            className="cementall-search-input"
           />
-          <button onClick={handleSearch} className="cat-search-button"> 
+          <button onClick={handleSearch} className="cementall-search-button"> 
             Search
           </button>
         </div>
@@ -197,6 +212,22 @@ const CategoryCementall = () => {
             );
           })}
         </div>
+        <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="You need to log in to add to favourites."
+        autoHideDuration={2000}
+        sx={{
+          '& .MuiSnackbarContent-root': {
+            backgroundColor: '#f44336', 
+            color: '#fff', 
+            borderRadius: '8px', 
+            padding: '11px',
+            fontSize: '0.8rem', 
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)', 
+          },
+        }}
+      />
       </div>
       <Footer />
     </>

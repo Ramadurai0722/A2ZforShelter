@@ -1,8 +1,5 @@
 const CementPost = require("../models/Cements");
 
-// @desc    Create a new cement post
-// @route   POST /api/cementPosts
-// @access  Public
 exports.createCementPost = async (req, res) => {
   try {
     const {
@@ -32,6 +29,7 @@ exports.createCementPost = async (req, res) => {
       price,
       images,
       description,
+      category: "cement",
     });
 
     await cementPost.save();
